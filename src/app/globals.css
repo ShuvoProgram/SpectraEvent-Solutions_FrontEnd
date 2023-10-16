@@ -75,3 +75,48 @@
     @apply bg-background text-foreground;
   }
 }
+
+.app {
+  font-family: 'Poppins';
+  @apply bg-gray-100 text-gray-500
+}
+
+a:hover {
+  @apply transition duration-200;
+  @apply text-gray-700
+}
+
+.text-gradient-blue {
+  background-color: #00a0f5;
+  background-image: linear-gradient(113.4deg, #00a0f5 0%, #00f7e6 100%);
+  background-image: conic-gradient(113.4deg, #00a0f5 0%, #00f7e6 100%);
+  background-size: 100%;
+  background-repeat: no-repeat;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.text-gradient-pink {
+  background-color: #f32fb8;
+  background-image: linear-gradient(113.4deg, #f32fb8 0%, #fdd7be 100%);
+  background-image: conic-gradient(113.4deg, #f32fb8 0%, #fdd7be 100%);
+  background-size: 100%;
+  background-repeat: no-repeat;
+
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+}
+
+.btn-orange {
+  color: #151a26;
+  font-weight: 600;
+  background-color: #fba301;
+  box-shadow: 0px 4px 15px rgba(251, 184, 1, 0.35);
+}
