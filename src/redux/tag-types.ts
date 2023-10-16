@@ -1,5 +1,5 @@
 export enum tagTypes {
-  customer = 'customer',
+  user = 'user',
   admin = 'admin',
   organization = 'organization',
   event = 'event',
@@ -11,7 +11,7 @@ export enum tagTypes {
 };
 
 export const tagTypesList = [
-  tagTypes.customer,
+  tagTypes.user,
   tagTypes.admin,
   tagTypes.organization,
   tagTypes.blog,

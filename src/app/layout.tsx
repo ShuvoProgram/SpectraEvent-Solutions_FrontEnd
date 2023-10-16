@@ -3,6 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import dynamic from 'next/dynamic'
 import Footer from '@/components/shared/Footer'
+import Providers from '@/lib/Providers'
 // import { ThemeProvider as NextThemesProvider } from "next-themes"
 // import { type ThemeProviderProps } from "next-themes/dist/types"
 
@@ -22,9 +23,11 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <Header />
-      <body className='app'>{children}</body>
-      <Footer />
+      <Providers>
+        <Header />
+        <body className='app'>{children}</body>
+        <Footer />
+      </Providers>
     </>
   )
 }
