@@ -8,8 +8,9 @@ import AvatarProfile from './Avater';
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
+    const role = 'customer'
     return (
-        <div className="z-10 w-full font-mono text-sm lg:flex">
+        <div className="fixed z-10 w-full font-mono text-sm lg:flex">
             <nav className='fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:border lg:bg-gray-200 lg:dark:bg-zinc-800/30'>
                 <div className="w-full mx-4">
                     <div className="flex mx-auto justify-between">
@@ -42,7 +43,7 @@ export default function Header() {
                                     <HiOutlineSun className="h-6 w-6 text-orange-500" />
                                 </div>
                                 <div>
-                                    <AvatarProfile />
+                                    <AvatarProfile role={role} />
                                 </div>
                                 <div>
                                     <Link href={'/login'} className="rounded-full border-solid border-2 border-gray-300 py-2 px-4 hover:bg-gray-700 hover:text-gray-100">

@@ -5,3 +5,5 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
         {children}
     </Layout>
 }
+
+export default DashboardLayout;

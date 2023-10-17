@@ -1,4 +1,5 @@
-export enum ADMIN_ROLE {
+export enum USER_ROLE {
   SUPER_ADMIN = "super_admin",
-  ADMIN = "admin"
+  ADMIN = "admin",
+  CUSTOMER = "customer"
 }
