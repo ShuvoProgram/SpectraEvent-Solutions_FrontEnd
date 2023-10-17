@@ -4,6 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 import { RxHamburgerMenu } from "react-icons/rx";
+import AvatarProfile from './Avater';
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
@@ -39,6 +40,9 @@ export default function Header() {
                                 <div className="hidden lg:flex items-center gap-2">
                                     <HiOutlineMoon className="h-6 w-6 text-sky-500" />
                                     <HiOutlineSun className="h-6 w-6 text-orange-500" />
+                                </div>
+                                <div>
+                                    <AvatarProfile />
                                 </div>
                                 <div>
                                     <Link href={'/login'} className="rounded-full border-solid border-2 border-gray-300 py-2 px-4 hover:bg-gray-700 hover:text-gray-100">
