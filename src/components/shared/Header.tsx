@@ -33,6 +33,8 @@ export default function Header() {
                                 <a href="#">Benefits</a>
                                 <a href="#">Our Classes</a>
                                 <a href="#">Contact Us</a>
+                                <a href="/checkout">Checkout</a>
+                                <a href="#">Contact Us</a>
                             </div>
                         </div>
                         {/* secondary */}
