@@ -6,6 +6,7 @@ import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
 import Story from '@/components/Home/Story';
 import Brand from '@/components/Home/Brand';
+import FeatureEvent from '@/components/Home/Feature';
 
 const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -19,6 +20,7 @@ export default function Home() {
     <>
       <Hero />
       <BannerList />
+      <FeatureEvent title='Featured Events' subtitle='Grow Today'/>
       <Story/>
       <Brand/>
     </>
