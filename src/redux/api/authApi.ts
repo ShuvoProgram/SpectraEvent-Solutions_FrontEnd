@@ -11,7 +11,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         data: loginData
       }),
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user, tagTypes.admin, tagTypes.super_admin]
     }),
     userRegister: build.mutation({
       query: (data) => ({
@@ -19,7 +19,7 @@ export const authApi = baseApi.injectEndpoints({
         method: "POST",
         data: data,
       }),
-      invalidatesTags: [tagTypes.user]
+      invalidatesTags: [tagTypes.user, tagTypes.admin, tagTypes.super_admin]
     })
   })
 });

@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    
       <Providers>
         <html lang='en'>
           <body className="app">
@@ -24,6 +24,6 @@ export default function RootLayout({
           </body>
         </html>
       </Providers>
-    </>
+    
   );
 }

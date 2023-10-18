@@ -1,13 +1,12 @@
 // import BannerList from '@/components/Home/BannerList'
 import Hero from '@/components/Home/Hero'
-import Meta from '@/hooks/Meta'
-import Image from 'next/image'
 import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
 import Story from '@/components/Home/Story';
 import Brand from '@/components/Home/Brand';
 import FeatureEvent from '@/components/Home/Feature';
 import Team from '@/components/Home/Team';
+import Blog from '@/components/Home/Blog';
 
 const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -25,6 +24,7 @@ export default function Home() {
       <Story/>
       <Team/>
       <Brand/>
+     <Blog title='Blog' subtitle='Latest Blog'/>
     </>
   )
 }

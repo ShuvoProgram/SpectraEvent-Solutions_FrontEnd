@@ -1,4 +1,5 @@
-import { Button, Col, Row } from 'antd'
+'use client'
+import { Button, Col, Row, message } from 'antd'
 import React, { useState } from 'react'
 import registraImg from '../../../public/images/signup.png'
 import Image from 'next/image'
@@ -8,26 +9,29 @@ import FormInput from '@/components/Form/FormInput';
 import { useRouter } from 'next/navigation';
 import { storeUserInfo } from '@/services/auth.service';
 import { useUserRegisterMutation } from '@/redux/api/authApi';
+import { USER_ROLE } from '@/constants/role'
 
 interface RegisterFormInputs {
     email: string;
     password: string;
+    role: string;
 }
-
 
 export default function RegistrationFrom() {
     const [userRegister] = useUserRegisterMutation();
     const router = useRouter();
 
-    const onSubmit: SubmitHandler<RegisterFormInputs> = async (data: any) => {
+
+    const onSubmit = async (data: any) => {
         console.log(data);
         try {
-            const res = await userRegister({ ...data }).unwrap();
-
+            const res = await userRegister({ ...data}).unwrap();
+            console.log(res)
             if (res?.accessToken) {
+                message.success('Successfully Registration')
+            storeUserInfo({ accessToken: res?.accessToken });
                 router.push("/");
             }
-            storeUserInfo({ accessToken: res?.accessToken });
         } catch (error: any) {
             console.error(error.message);
         }
@@ -37,7 +41,8 @@ export default function RegistrationFrom() {
             justify="center"
             align="middle"
             style={{
-                minHeight: "100vh"
+                minHeight: "100vh",
+                padding: "80px 0px"
             }}
         >
             <Col sm={12} md={16} lg={10}>
@@ -46,7 +51,35 @@ export default function RegistrationFrom() {
             <Col sm={12} md={16} lg={10}>
                 <div>
                     <Form submitHandler={onSubmit}>
-                        <div>
+                        <Row 
+                        >
+                        <Col sm={12} md={16} lg={10}
+                        style={{
+                            marginRight: '10px',
+                        }}
+                        >
+                            <FormInput
+                                name='firstName'
+                                type='text'
+                                size='large'
+                                label='First Name'
+                                required
+                            />
+                        </Col>
+                        <Col sm={12} md={16} lg={10}>
+                            <FormInput
+                                name='lastName'
+                                type='text'
+                                size='large'
+                                label='Last Name'
+                                required
+                            />
+                        </Col>
+                        <Col sm={12} md={16} lg={20}
+                        style={{
+                            marginTop: "20px"
+                        }}
+                        >
                             <FormInput
                                 name='email'
                                 type='text'
@@ -54,11 +87,13 @@ export default function RegistrationFrom() {
                                 label='Email'
                                 required
                             />
-                        </div>
-                        <div
-                            style={{
-                                margin: "15px 0px"
-                            }}
+                        </Col>
+                        <Col
+                        sm={12} md={16} lg={20}
+                        style={{
+                            marginBottom: "20px",
+                            marginTop: "20px"
+                        }}
                         >
                             <FormInput
                                 name="password"
@@ -67,7 +102,8 @@ export default function RegistrationFrom() {
                                 label="Password"
                                 required
                             />
-                        </div>
+                        </Col>
+                        </Row>
                         <Button type="primary" danger htmlType="submit">
                             Registration
                         </Button>

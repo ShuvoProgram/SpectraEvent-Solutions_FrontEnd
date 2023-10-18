@@ -1,6 +1,7 @@
 export enum tagTypes {
   user = 'user',
   admin = 'admin',
+  super_admin = 'super_admin',
   organization = 'organization',
   event = 'event',
   favorite = 'favorite',
@@ -13,6 +14,7 @@ export enum tagTypes {
 export const tagTypesList = [
   tagTypes.user,
   tagTypes.admin,
+  tagTypes.super_admin,
   tagTypes.organization,
   tagTypes.blog,
   tagTypes.event,
