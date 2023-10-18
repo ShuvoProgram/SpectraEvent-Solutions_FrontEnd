@@ -1,7 +1,6 @@
 import Header from '@/components/shared/Header';
 import './globals.css';
 import type { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 import Footer from '@/components/shared/Footer';
 import Providers from '@/lib/Providers';
 
