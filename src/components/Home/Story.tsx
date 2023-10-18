@@ -4,7 +4,7 @@ import StoryImg from '../../../public/images/story.png';
 
 function Story() {
   return (
-    <section className='pt-[100px] pb-[70px]'>
+    <section className='pt-[80px] pb-[70px]'>
         <div className='flex flex-row justify-center items-center container'>
             <Image src={StoryImg} width={515} alt='story' height={0} className='hidden lg:block mr-10'/>
             <div className='flex flex-col'>

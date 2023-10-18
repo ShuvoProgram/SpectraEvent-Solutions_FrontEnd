@@ -5,6 +5,7 @@ import Image from 'next/image'
 import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
 import Story from '@/components/Home/Story';
+import Brand from '@/components/Home/Brand';
 
 const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -19,6 +20,7 @@ export default function Home() {
       <Hero />
       <BannerList />
       <Story/>
+      <Brand/>
     </>
   )
 }
