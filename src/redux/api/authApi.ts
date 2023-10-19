@@ -18,7 +18,6 @@ export const authApi = baseApi.injectEndpoints({
         url: `${AUTH_URL}/register`,
         method: "POST",
         data: data,
-        contentType: "multipart/form-data",
       }),
       invalidatesTags: [tagTypes.user, tagTypes.admin, tagTypes.super_admin]
     }),

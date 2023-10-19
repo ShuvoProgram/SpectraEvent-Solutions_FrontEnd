@@ -18,20 +18,20 @@ interface LoginFormInputs {
 }
 
 export default function LoginFrom() {
-    const [showPass, setShowPass] = useState(false);
     const [login] = useLoginMutation();
     const router = useRouter();
 
     const onSubmit: SubmitHandler<LoginFormInputs> = async (data: any) => {
-        console.log(data);
+        // console.log(data);
         try {
             const res = await login({ ...data }).unwrap();
-
+            
             if (res?.accessToken) {
                 router.push("/");
                 message.success("User logged in successfully")
             }
             storeUserInfo({ accessToken: res?.accessToken });
+            console.log(res?.accessToken)
         } catch (error: any) {
             console.error(error.message);
         }

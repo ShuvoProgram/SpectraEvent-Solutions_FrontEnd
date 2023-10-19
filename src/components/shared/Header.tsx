@@ -2,18 +2,37 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react'
+import { AiOutlineClose } from 'react-icons/ai'
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 import { RxHamburgerMenu } from "react-icons/rx";
 import AvatarProfile from './Avater';
 import SwitchTheme from './Switch';
+import { getUserInfo, isLoggedIn, removeUserInfo } from '@/services/auth.service';
+import { useRouter } from 'next/navigation';
+import { authKey } from '@/constants/storageKey';
+import Search from './Search';
+import Favorite from './Favorite';
 
 export default function Header() {
+    const userLoggedIn = isLoggedIn();
+    const [carteOpen, setCartOpn] = useState(false)
+
     const [toggleMenu, setToggleMenu] = useState(false);
-    const role = 'customer'
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const router = useRouter();
+    const logOut = () => {
+        removeUserInfo(authKey);
+        router.push("/login");
+    };
+    const handleNav = () => {
+        setToggleMenu(!toggleMenu)
+    }
+
+    const { role } = getUserInfo() as any;
     return (
-        <div className="z-10 w-full font-mono text-sm lg:flex">
-            <nav className='left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:border lg:bg-gray-200 lg:dark:bg-zinc-800/30'>
-                <div className="w-full mx-4">
+        <div className="w-full font-mono text-sm lg:flex">
+            <nav className='flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:border lg:bg-gray-200 lg:dark:bg-zinc-800/30'>
+                <div className="w-full mx-4 sm:top-20">
                     <div className="flex mx-auto justify-between">
                         {/* Primary menu and logo */}
                         <div className="flex items-center gap-16 my-4">
@@ -38,14 +57,20 @@ export default function Header() {
                                 <a href="/about">About Us</a>
                             </div>
                         </div>
+                        {/* search component  */}
+              <div className='flex justify-center items-center gap-3'>
+                <Search />
+                <Favorite setCartOpen={setCartOpn} cartOpen={carteOpen} />
+              </div>
                         {/* secondary */}
                         <div className="flex gap-6">
                             <div className="flex xs:flex items-center gap-10">
-                                <div className="hidden lg:flex items-center gap-2">
-                                   <SwitchTheme/>
-                                </div>
+                                
                                 <div>
-                                    <AvatarProfile role={role} />
+                                    {
+                                        userLoggedIn ? <AvatarProfile role={role} logout={logOut} /> : null
+                                    }
+
                                 </div>
                                 <div>
                                     <Link href={'/login'} className="rounded-full border-solid border-2 border-gray-300 py-2 px-4 hover:bg-gray-700 hover:text-gray-100">
@@ -54,27 +79,69 @@ export default function Header() {
                                 </div>
                             </div>
                             {/* Mobile navigation toggle */}
-                            <div className="lg:hidden flex items-center">
-                                <button onClick={() => setToggleMenu(!!toggleMenu)}>
-                                    <RxHamburgerMenu className="h-6" />
-                                </button>
+                            {/* menu Icon  */}
+                            <div
+                                className='sm:hidden cursor-pointer flex justify-center items-center'
+                                onClick={handleNav}
+                            >
+                                {
+                                    toggleMenu ? <AiOutlineClose /> : <RxHamburgerMenu className="h-6" />
+                                }
                             </div>
                         </div>
                     </div>
                 </div>
-                {/* mobile navigation */}
+                {/* nav menu & close icon */}
                 <div
-                    className={`fixed z-40 w-full  bg-gray-100 overflow-hidden flex flex-col lg:hidden gap-12  origin-top duration-700 ${!toggleMenu ? "h-0" : "h-full"
-                        }`}
+                    className={
+                        toggleMenu
+                            ? 'fixed left-0 top-0 w-[65%] sm:hidden h-screen bg-[#ecf0f3] p-10 ease-in duration-500'
+                            : 'fixed left-[-100%] top-0 p-10 ease-in-out duration-500 h-screen'
+                    }
                 >
-                    <div className="px-8">
-                        <div className="flex flex-col gap-8 font-bold tracking-wider">
-                            <a href="#" className="border-l-4 border-gray-600">
-                                Features
-                            </a>
-                            <a href="#">Pricing</a>
-                            <a href="#">Download</a>
-                            <a href="#">Classic</a>
+                    {/* mobile menu list  */}
+                    <div className='flex-col py-4'>
+                        <ul>
+                            <Link href='/about'>
+                                <li
+                                    className='py-4 cursor-pointer'
+                                    onClick={() => setToggleMenu(false)}
+                                >
+                                    About
+                                </li>
+                            </Link>
+                            <Link href='/contact'>
+                                <li
+                                    className='py-4 cursor-pointer'
+                                    onClick={() => setToggleMenu(false)}
+                                >
+                                    contact
+                                </li>
+                            </Link>
+                            <Link href='/blogs'>
+                                <li
+                                    className='py-4 cursor-pointer'
+                                    onClick={() => setToggleMenu(false)}
+                                >
+                                    blogs
+                                </li>
+                            </Link>
+                            <Link href='/services'>
+                                <li
+                                    className='py-4 cursor-pointer'
+                                    onClick={() => setToggleMenu(false)}
+                                >
+                                    Services
+                                </li>
+                            </Link>
+                        </ul>
+                        <div className='w-full flex justify-evenly items-center gap-2 border-t-2 border-gray-500 mt-3 pt-3'>
+                            <div className='flex justify-center items-center'>
+                                <Search />
+                            </div>
+                            <div>
+                                {/* <Cart /> */}
+                            </div>
                         </div>
                     </div>
                 </div>

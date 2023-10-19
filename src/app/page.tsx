@@ -8,7 +8,9 @@ import FeatureEvent from '@/components/Home/Feature';
 import Blog from '@/components/Home/Blog';
 import Team from '@/components/Home/Team';
 import Category from '@/components/Home/Category';
-import Testimonial from '@/components/Home/Testimonial';
+import Header from '@/components/shared/Header';
+import Footer from '@/components/shared/Footer';
+import UpcommingEvents from '@/components/Home/UpcommingEvents';
 
 const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -19,16 +21,19 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <>
+    <div>
+    <Header />
       <Hero />
       <BannerList />
       <Category title='Events Category'/>
       <FeatureEvent title='Featured Events' subtitle='Grow Today'/>
+      <UpcommingEvents title='UpComing Events'/>
       <Story/>
       <Team/>
       <Brand/>
      <Blog title='Blog' subtitle='Latest Blog'/>
      {/* <Testimonial/> */}
-    </>
+     <Footer />
+    </div>
   )
 }

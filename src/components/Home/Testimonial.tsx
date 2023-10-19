@@ -1,65 +1,81 @@
 import Image from 'next/image'
 import React from 'react'
+import { Carousel } from 'antd'
+
+const contentStyle: React.CSSProperties = {
+  height: '160px',
+  color: '#fff',
+  lineHeight: '160px',
+  textAlign: 'center',
+  background: '#364d79',
+}
 
 function Testimonial() {
   return (
-    <section className="testimonials-section">
-        <div className="container">
-          <div className="testimonials-content">
-            <div className="testimonials-content__title">
-              <h4>Reviewed by People</h4>
-              <h2>Clients Testimonials</h2>
+    <Carousel autoplay>
+    {feedback?.data?.map((review: any) => (
+      <section
+        key={review?.id}
+        style={contentStyle}
+        className='testimonial-area relative'
+      >
+        <div className='container_slider'>
+          <div className='sec-title white-title'>
+            <h2 className='text-center text-xl md:text-2xl lg:text-3xl py-3'>
+              What Our Client’s Say
+            </h2>
+            <p className='text-sm font-sans text-center'>
+              There are many variations of passages of Lorem Ipsum available,
+              but the majority have suffered alteration in some form by
+              injected humour
+            </p>
+          </div>
+          <div className='testimonial-content owl-carousel'>
+            {/* Single Testimonial */}
+            <div className='single-testimonial'>
+              <div className='round-1 round'></div>
+              <div className='round-2 round'></div>
               <p>
-                Discover the positive impact weve made on the our clients by
-                reading through their testimonials. Our clients have experienced
-                our service and results, and theyre eager to share their
-                positive experiences with you.
+                {review?.comments}
               </p>
-            </div>
-
-            <div className="all-testimonials">
-              <div className="all-testimonials__box">
-                <span className="quotes-icon">
-                  <i className="fa-solid fa-quote-right"></i>
-                </span>
-                <p>
-                  We rented a car from this website and had an amazing
-                  experience! The booking was easy and the rental rates were
-                  very affordable.
-                </p>
-                <div className="all-testimonials__box__name">
-                  <div className="all-testimonials__box__name__profile">
-                    <Image src={"https://i.ibb.co/DbjJk0k/1517034956958.jpg"} alt="user_img" width={200} height={100}/>
-                    <span>
-                      <h4>Jones Mbogholi</h4>
-                      <p>Kenya</p>
-                    </span>
-                  </div>
+              <div className='client-info'>
+                <div className='client-video'>
+                  <a href='#'>
+                    <img
+                      src='https://i.ibb.co/DWhSr6S/play-button2.png'
+                      alt=''
+                    />
+                  </a>
                 </div>
-              </div>
-
-              <div className="all-testimonials__box box-2">
-                <span className="quotes-icon">
-                  <i className="fa-solid fa-quote-right"></i>
-                </span>
-                <p>
-                  The car was in great condition and made our trip even better.
-                  Highly recommend for this car rental website!
-                </p>
-                <div className="all-testimonials__box__name">
-                  <div className="all-testimonials__box__name__profile">
-                    <Image src={"https://i.ibb.co/DbjJk0k/1517034956958.jpg"} alt="user_img" width={200} height={100}/>
-                    <span>
-                      <h4>Solomon Odingo </h4>
-                      <p>South Sudan</p>
-                    </span>
-                  </div>
+                <div className='client-details'>
+                  <h6>{review?.name}</h6>
+                  <span>{review?.email}</span>
                 </div>
               </div>
             </div>
           </div>
         </div>
+        <div
+          style={{
+            background: `url('/plants.svg')`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'left',
+            backgroundRepeat: 'no-repeat',
+          }}
+          className='absolute w-full h-full -bottom-16 -left-10 hidden lg:block'
+        ></div>
+        <div
+          style={{
+            background: `url('/plants2.svg')`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'top right',
+            backgroundRepeat: 'no-repeat',
+          }}
+          className='absolute w-full h-full -top-64 -right-72 hidden lg:block'
+        ></div>
       </section>
+    ))}
+  </Carousel>
   )
 }
 

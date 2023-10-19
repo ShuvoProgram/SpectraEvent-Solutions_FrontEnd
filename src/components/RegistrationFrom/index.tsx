@@ -21,16 +21,12 @@ export default function RegistrationFrom() {
     const [userRegister] = useUserRegisterMutation();
     const router = useRouter();
 
-
     const onSubmit = async (data: any) => {
-        console.log(data);
         try {
             const res = await userRegister({ ...data}).unwrap();
-            console.log(res)
-            if (res?.accessToken) {
+            if (res?.email) {
                 message.success('Successfully Registration')
-            storeUserInfo({ accessToken: res?.accessToken });
-                router.push("/");
+                router.push("/login");
             }
         } catch (error: any) {
             console.error(error.message);

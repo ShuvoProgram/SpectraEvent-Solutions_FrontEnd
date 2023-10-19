@@ -3,6 +3,7 @@
 import { getErrorMessageByPropertyName } from "@/utils/schema-validator";
 import { Input } from "antd";
 import { useFormContext, Controller } from "react-hook-form";
+
 interface IInput {
     name: string;
     type?: string;
@@ -26,29 +27,17 @@ const FormInput = ({
     label,
     required,
 }: IInput) => {
-    const {
-        control,
-        formState: { errors },
-    } = useFormContext();
-
+    const { control, formState: { errors } } = useFormContext();
     const errorMessage = getErrorMessageByPropertyName(errors, name);
 
     return (
         <>
-            {required ? (
-                <span
-                    style={{
-                        color: "red",
-                    }}
-                >
-                    *
-                </span>
-            ) : null}
-            {label ? label : null}
+            {label && label}
+            {required && <span style={{ color: "red" }}>*</span>}
             <Controller
                 control={control}
                 name={name}
-                render={({ field }) =>
+                render={({ field }) => (
                     type === "password" ? (
                         <Input.Password
                             type={type}
@@ -66,9 +55,9 @@ const FormInput = ({
                             value={value ? value : field.value}
                         />
                     )
-                }
+                )}
             />
-            <small style={{ color: "red" }}>{errorMessage}</small>
+            {errorMessage && <small style={{ color: "red" }}>{errorMessage}</small>}
         </>
     );
 };
