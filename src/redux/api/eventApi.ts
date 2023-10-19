@@ -24,7 +24,7 @@ export const eventApi = baseApi.injectEndpoints({
         },
         transformResponse: (response: IEvent[], meta: IMeta) => {
             return {
-              carServices: response,
+              event: response,
               meta,
             };
           },

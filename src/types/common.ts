@@ -70,6 +70,14 @@ export interface IEvent {
   adminId:        String
 }
 
+export type IFAQ = {
+  id:        String
+  question:  String
+  answer:    String
+  createdAt: Date
+  updatedAt: Date
+}
+
 enum GENDER {
   male,
   female
