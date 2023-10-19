@@ -119,6 +119,15 @@ export type IReview = {
   blogId:    String
 }
 
+export type IBooking = {
+  id:        String
+  userId:    String
+  eventId:   String
+  date:      String
+  createdAt: Date
+  updatedAt: Date
+}
+
 enum GENDER {
   male,
   female

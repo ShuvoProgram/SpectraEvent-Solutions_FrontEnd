@@ -1,4 +1,4 @@
-import { IBlog, IFavorite, IMeta } from "@/types";
+import { IBlog, IMeta } from "@/types";
 import { tagTypes } from "../tag-types";
 import { baseApi } from "./baseApi";
 
