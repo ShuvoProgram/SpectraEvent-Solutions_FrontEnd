@@ -19,3 +19,8 @@ export type IGenericErrorMessage = {
   path: string | number;
   message: string;
 }
+
+export type TErrorMessage = {
+  message: string,
+  status: number
+}

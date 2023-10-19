@@ -1,20 +1,20 @@
-import React from 'react'
-import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
+import React, { useEffect } from 'react'
 import { Rate } from 'antd';
 
-const customIcons: Record<number, React.ReactNode> = {
-    1: <FrownOutlined />,
-    2: <FrownOutlined />,
-    3: <MehOutlined />,
-    4: <SmileOutlined />,
-    5: <SmileOutlined />,
-  };
-
 export const RatingValue = () => {
+  const [value, setValue] = React.useState(3);
+  
   return (
     <div>
-         <Rate defaultValue={3} character={({ index }: { index: number }) 
-         => customIcons[index + 1]} />
+       <Rate value={value} onHoverChange={() => setValue(value)}/>
+    </div>
+  )
+}
+
+export const Rating = () => {
+  return (
+    <div>
+      <Rate disabled defaultValue={2} />
     </div>
   )
 }

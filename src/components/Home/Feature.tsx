@@ -1,4 +1,5 @@
 import React from 'react'
+import EventCard from '../Events/EventCard';
 
 type EventListProps = {
     title: string;
@@ -15,7 +16,10 @@ function FeatureEvent({title, subtitle, hiddenEventId}: EventListProps) {
       </div>
       <div className="text-3xl text-black font-semibold">{title}</div>
 
-      <div className="mt-5 row gap">
+      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10">
+        <EventCard/>
+        <EventCard/>
+        <EventCard/>
         {/* {!isError ? (
           data
             ?.filter((event) => event._id !== hiddenEventId)

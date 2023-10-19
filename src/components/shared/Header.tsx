@@ -11,8 +11,8 @@ export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
     const role = 'customer'
     return (
-        <div className="fixed z-10 w-full font-mono text-sm lg:flex">
-            <nav className='fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:border lg:bg-gray-200 lg:dark:bg-zinc-800/30'>
+        <div className="z-10 w-full font-mono text-sm lg:flex">
+            <nav className='left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:border lg:bg-gray-200 lg:dark:bg-zinc-800/30'>
                 <div className="w-full mx-4">
                     <div className="flex mx-auto justify-between">
                         {/* Primary menu and logo */}
@@ -32,7 +32,7 @@ export default function Header() {
                                     Home
                                 </a>
                                 <a href="#">Benefits</a>
-                                <a href="#">Our Classes</a>
+                                <a href="/events">Our Events</a>
                                 <a href="#">Contact Us</a>
                                 <a href="/checkout">Checkout</a>
                                 <a href="/about">About Us</a>

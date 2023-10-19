@@ -1,54 +1,33 @@
 import { Col, Row } from 'antd'
 import React from 'react'
 import AvatarTeam from '../shared/AvatarTeam'
+import Image from 'next/image'
+import TeamCard from '../shared/TeamCard'
 
 
 function Team() {
     return (
         <section>
-            <Row>
-                <Col span={14}
-                style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    padding: '20px',
-                }}
-                >
-                    <div className="circle-orbit-container">
-
-                        {/* <!-- Circles closest to the central point --> */}
-                        <div className="inner-orbit">
-                            <div className="inner-orbit-cirlces">
-                                <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
-                            </div>
-                        </div>
-
-                        {/* <!-- Circles second closest to the central point --> */}
-                        <div className="middle-orbit">
-                            <div className="middle-orbit-cirlces">
-                            <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
-                            </div>
-                        </div>
-
-                        {/* <!-- Circles furthest away to the central point --> */}
-                        <div className="outer-orbit">
-                            <div className="outer-orbit-cirlces">
-                            <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
-                            </div>
-                        </div>
+            <div className="bg-gray-100 h-screen">
+                <div className="py-10 max-w-screen-lg mx-auto">
+                    <div className="text-center mb-16">
+                        <p className="mt-4 text-sm leading-7 text-gray-500 font-regular">
+                            THE TEAM
+                        </p>
+                        <h3 className="text-3xl sm:text-4xl leading-normal font-extrabold tracking-tight text-gray-900">
+                            Our<span className="text-indigo-600"> Team</span>
+                        </h3>
                     </div>
-                </Col>
-                <Col span={8}>
-                    <div>
-                        <h1>Meet Out Team</h1>
-                        <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
+                    <div className="grid grid-cols-3 gap-10">
+                        <TeamCard name='Shuvo' position='Manager' img='https://images.pexels.com/photos/1587014/pexels-photo-1587014.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500'/>
+                        <TeamCard name='Shuvo' position='Manager' img='https://images.pexels.com/photos/1587014/pexels-photo-1587014.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500'/>
+                        <TeamCard name='Shuvo' position='Manager' img='https://images.pexels.com/photos/1587014/pexels-photo-1587014.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500'/>
                     </div>
-                </Col>
-            </Row>
+
+                </div>
+            </div>
         </section>
     )
 }
 
-export default Team
+export default Team;

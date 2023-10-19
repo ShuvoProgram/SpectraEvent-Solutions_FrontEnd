@@ -36,9 +36,9 @@ function CheckoutForm({ eventId, ticketId, organizerId }: CheckoutFormProps) {
                     /> */}
                 </Col>
                 <Col lg={10} md={16} sm={12}>
-                    <FormDatePicker
+                    {/* <FormDatePicker
                     name='booking date'
-                    />
+                    /> */}
                 </Col>
             </Row>
             <div>
