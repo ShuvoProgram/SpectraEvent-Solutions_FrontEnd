@@ -203,8 +203,8 @@ a:hover {
   height: 225px;
   border: 2px #f377199a solid;
   border-radius: 100%;
-  -webkit-animation: spin-right 10s linear infinite;
-  animation: spin-right 10s linear infinite;
+  -webkit-animation: spin-right 25s linear infinite;
+  animation: spin-right 25s linear infinite;
 }
 
 /* ---------- Repeating styles for the inner orbiting circles ---------- */
@@ -214,8 +214,6 @@ a:hover {
   left: -6px;
   height: 10px;
   width: 10px;
-  border-radius: 100%;
-  background-color: #9F98E6;
 }
 
 /* ---------- Middle orbit - This is the circles second closest to the central point ---------- */
@@ -227,8 +225,8 @@ a:hover {
   height: 385px;
   border: 2px #f377199a solid;
   border-radius: 100%;
-  -webkit-animation: spin-right 15s linear infinite;
-  animation: spin-right 15s linear infinite;
+  -webkit-animation: spin-right 35s linear infinite;
+  animation: spin-right 35s linear infinite;
 }
 
 /* ---------- Repeating styles for the inner orbiting circles ---------- */
@@ -238,8 +236,6 @@ a:hover {
   left: 17px;
   height: 20px;
   width: 20px;
-  border-radius: 100%;
-  background-color: #4A437F;
 }
 
 /* ---------- Outer orbit - This is the circles furthest away from the central point ---------- */
@@ -251,8 +247,8 @@ a:hover {
   height: 505px;
   border: 2px #f377199a solid;
   border-radius: 100%;
-  -webkit-animation: spin-right 20s linear infinite;
-  animation: spin-right 20s linear infinite;
+  -webkit-animation: spin-right 40s linear infinite;
+  animation: spin-right 40s linear infinite;
 }
 
 /* ---------- Repeating styles for the outer orbiting circles ---------- */
@@ -262,8 +258,6 @@ a:hover {
   left: 125px;
   height: 30px;
   width: 30px;
-  border-radius: 100%;
-  background-color: #00FFCA;
 }
 
 /* ---------- Animation ---------- */
@@ -372,4 +366,19 @@ a:hover {
 .like-text {
 	font-size: small;
 	margin-left: 10px;
+}
+
+
+/* ----------Antd------------- */
+#components-tooltip-demo-placement .ant-btn {
+  margin-left: 0;
+  margin-right: 8px;
+  margin-bottom: 8px;
+  width: 70px;
+  text-align: center;
+  padding: 0;
+}
+#components-tooltip-demo-placement .ant-btn {
+  margin-left: 8px;
+  margin-right: 0;
 }

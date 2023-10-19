@@ -1,13 +1,11 @@
 import { Col, Row } from 'antd'
 import React from 'react'
+import AvatarTeam from '../shared/AvatarTeam'
+
 
 function Team() {
     return (
         <section>
-            <div className='mx-auto'>
-
-            </div>
-
             <Row>
                 <Col span={14}
                 style={{
@@ -22,24 +20,30 @@ function Team() {
 
                         {/* <!-- Circles closest to the central point --> */}
                         <div className="inner-orbit">
-                            <div className="inner-orbit-cirlces">text</div>
+                            <div className="inner-orbit-cirlces">
+                                <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
+                            </div>
                         </div>
 
                         {/* <!-- Circles second closest to the central point --> */}
                         <div className="middle-orbit">
-                            <div className="middle-orbit-cirlces">text</div>
+                            <div className="middle-orbit-cirlces">
+                            <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
+                            </div>
                         </div>
 
                         {/* <!-- Circles furthest away to the central point --> */}
                         <div className="outer-orbit">
-                            <div className="outer-orbit-cirlces"></div>
+                            <div className="outer-orbit-cirlces">
+                            <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
+                            </div>
                         </div>
-
                     </div>
                 </Col>
                 <Col span={8}>
                     <div>
                         <h1>Meet Out Team</h1>
+                        <AvatarTeam teamImg={`https://i.ibb.co/DbjJk0k/1517034956958.jpg`} name='john'/>
                     </div>
                 </Col>
             </Row>

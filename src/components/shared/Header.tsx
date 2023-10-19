@@ -5,6 +5,7 @@ import React, { useState } from 'react'
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 import { RxHamburgerMenu } from "react-icons/rx";
 import AvatarProfile from './Avater';
+import SwitchTheme from './Switch';
 
 export default function Header() {
     const [toggleMenu, setToggleMenu] = useState(false);
@@ -41,8 +42,7 @@ export default function Header() {
                         <div className="flex gap-6">
                             <div className="flex xs:flex items-center gap-10">
                                 <div className="hidden lg:flex items-center gap-2">
-                                    <HiOutlineMoon className="h-6 w-6 text-sky-500" />
-                                    <HiOutlineSun className="h-6 w-6 text-orange-500" />
+                                   <SwitchTheme/>
                                 </div>
                                 <div>
                                     <AvatarProfile role={role} />
