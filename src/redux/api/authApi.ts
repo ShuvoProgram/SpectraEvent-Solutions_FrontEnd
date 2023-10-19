@@ -18,8 +18,17 @@ export const authApi = baseApi.injectEndpoints({
         url: `${AUTH_URL}/register`,
         method: "POST",
         data: data,
+        contentType: "multipart/form-data",
       }),
       invalidatesTags: [tagTypes.user, tagTypes.admin, tagTypes.super_admin]
+    }),
+    changePassword: build.mutation({
+        query: (data) => ({
+          url: `${AUTH_URL}/change-password`,
+          method: "POST",
+          data: data
+        }),
+        invalidatesTags: [tagTypes.user, tagTypes.admin, tagTypes.super_admin]
     })
   })
 });

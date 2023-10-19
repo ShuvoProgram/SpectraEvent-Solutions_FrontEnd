@@ -8,6 +8,7 @@ import FeatureEvent from '@/components/Home/Feature';
 import Blog from '@/components/Home/Blog';
 import Team from '@/components/Home/Team';
 import Category from '@/components/Home/Category';
+import Testimonial from '@/components/Home/Testimonial';
 
 const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -27,6 +28,7 @@ export default function Home() {
       <Team/>
       <Brand/>
      <Blog title='Blog' subtitle='Latest Blog'/>
+     {/* <Testimonial/> */}
     </>
   )
 }
