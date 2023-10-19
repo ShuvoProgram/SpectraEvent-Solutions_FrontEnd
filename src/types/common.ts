@@ -78,6 +78,17 @@ export type IFAQ = {
   updatedAt: Date
 }
 
+export type IORGANIZATION ={
+  id:             String
+  name:           String
+  image:          String
+  event:          Event[]
+  createdAt:      Date
+  updatedAt:      Date
+  // AvailableEvent: AvailableEvent
+  adminId:        String
+}
+
 enum GENDER {
   male,
   female
