@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# SpectraEventSolutions
 
-## Getting Started
+An Event management website
 
-First, run the development server:
+## Project feature
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1- User can see Event, event details and see related event</br>
+2- Logged in user can booked event, Review of event and leave a feedback</br>
+3- User can filter Event by Search and see Booking in Favorite</br>
+4- User can sort event by Price and Category</br>
+5- User and Admin can maintain a Dashboard</br>
+6- From Dashboard User can manage his booked event, feedbacks and profile option</br>
+7- From Dashboard Admin can manage all booking event, feedbacks, user permission and profile option</br>
+8- Site is fully responsive</br>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `Technology used:`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+𝑭𝒓𝒐𝒏𝒕 𝑬𝒏𝒅: Next JS, TypeScript, Ant Design, Tailwind CSS, Redux Toolkit, RTK Query, React Hook Form</br>
+𝑩𝒂𝒄𝒌 𝑬𝒏𝒅: TypeScript, Node Js, Express Js, Prisma, postgresSql. </br>
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### `Live link`
 
-## Learn More
+https://github.com/hasanulhasan/teaching-torch
 
-To learn more about Next.js, take a look at the following resources:
+### `Back End`
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+https://github.com/hasanulhasan/teaching-torch-backend
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+<!-- </br></br>
+## Try as Admin  </br>
+Email: hasanulkarimh@gmail.com </br>
+Password: 123456 </br>
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Try as User  </br>
+Email: gdbd1971@gmail.com </br>
+Password: 123456 </br> -->

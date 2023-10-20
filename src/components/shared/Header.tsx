@@ -5,13 +5,16 @@ import React, { useState } from 'react'
 import { AiOutlineClose } from 'react-icons/ai'
 import { HiOutlineMoon, HiOutlineSun } from "react-icons/hi2";
 import { RxHamburgerMenu } from "react-icons/rx";
-import AvatarProfile from './Avater';
+// import AvatarProfile from './Avater';
 import SwitchTheme from './Switch';
 import { getUserInfo, isLoggedIn, removeUserInfo } from '@/services/auth.service';
 import { useRouter } from 'next/navigation';
 import { authKey } from '@/constants/storageKey';
 import Search from './Search';
-import Favorite from './Favorite';
+import Favorite from './Favorite'; 
+import dynamic from 'next/dynamic';
+
+const AvatarProfile = dynamic(() => import('./Avater'), { ssr: false });
 
 export default function Header() {
     const userLoggedIn = isLoggedIn();
