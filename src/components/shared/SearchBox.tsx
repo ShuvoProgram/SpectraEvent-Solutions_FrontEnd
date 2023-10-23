@@ -21,13 +21,13 @@ const SearchBox = ({ open, setOpen }: any) => {
   return (
     <>
       <div
-        className={`w-full transition-all duration-300 h-screen fixed top-0 left-0 bg-white justify-center ${customWidth}  z-50 flex`}
+        className={`w-full transition-all duration-300 h-[300px] fixed top-0 left-0 bg-white justify-center ${customWidth}  z-50 flex`}
       >
         <div className='w-full h-full'>
           {/* close icon  */}
           <span
             onClick={() => setOpen(!open)}
-            className='absolute top-5 right-5'
+            className='absolute top-1 right-5'
           >
             <AiOutlineCloseCircle className='text-3xl hover:text-red-500' />
           </span>

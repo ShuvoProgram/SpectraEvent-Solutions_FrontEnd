@@ -10,7 +10,7 @@ function EventDetailsPage() {
     let content = null;
     if (isLoading) content = <Loading/>;
     if (!isLoading && isError) content = <p className='text-lg text-destructive text-center'>There is an error</p>;
-    if (!isLoading && !isError && event) {content = <ProductDetails key={event._id} event={event}/>}
+    // if (!isLoading && !isError && event) {content = <ProductDetails key={event._id} event={event}/>}
   return (
     <div>
         {content}

@@ -2,16 +2,21 @@ import React from 'react'
 import { Col, Row } from 'antd';
 import BlogCard from '@/components/Blog/BlogCard';
 import BreadCrumb from '@/components/shared/BreadCrumb';
+import { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: `SpectraEvent-Solutions | Blog`,
+  description: 'Best Event Management Website',
+}
 
-function page() {
+function BlogPage() {
   const items = {
     label: 'Blog',
     link: '/blog'
   }
   return (
-    <div className='pt-28 px-4 pb-8'>
-     <div className=''>
+    <div className='pt-10 px-4 pb-8'>
+     <div className='flex items-center justify-center'>
      <BreadCrumb 
       items={[
         {
@@ -21,7 +26,7 @@ function page() {
       ]}
       />
      </div>
-      <div className="mt-5 grid grid-cols-1 lg:grid-cols-4 md:grid-cols-4 gap-4">
+      <div className="mt-5 grid grid-cols-1 lg:grid-cols-3 md:grid-cols-3 gap-4">
       <BlogCard 
       author='shuvo'
        title='john' 
@@ -59,4 +64,4 @@ function page() {
   )
 }
 
-export default page
+export default BlogPage;

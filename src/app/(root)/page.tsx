@@ -1,4 +1,3 @@
-// import BannerList from '@/components/Home/BannerList'
 import Hero from '@/components/Home/Hero'
 import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
@@ -12,7 +11,7 @@ import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import UpcommingEvents from '@/components/Home/UpcommingEvents';
 
-const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
+// const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
 export const metadata: Metadata = {
   title: `SpectraEvent-Solutions | Home`,
@@ -22,9 +21,9 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div>
-    <Header />
+    {/* <Header /> */}
       <Hero />
-      <BannerList />
+      {/* <BannerList /> */}
       <Category title='Events Category'/>
       <FeatureEvent title='Featured Events' subtitle='Grow Today'/>
       <UpcommingEvents title='UpComing Events'/>
@@ -32,8 +31,7 @@ export default function Home() {
       <Team/>
       <Brand/>
      <Blog title='Blog' subtitle='Latest Blog'/>
-     {/* <Testimonial/> */}
-     <Footer />
+     {/* <Footer /> */}
     </div>
   )
 }

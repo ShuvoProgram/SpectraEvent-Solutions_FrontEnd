@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import { Avatar, Button, Dropdown, Menu } from 'antd';
+import { Avatar, Button, Dropdown, Menu, Popover } from 'antd';
 import type { MenuProps } from 'antd';
 // import { MenuBarItem } from '@/constants/menuBarItem';
 import {
@@ -10,8 +10,16 @@ import {
     LogoutOutlined
 } from "@ant-design/icons";
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+import { removeUserInfo } from '@/services/auth.service';
+import { authKey } from '@/constants/storageKey';
 
-export default function AvatarProfile({ role, logOut }: any) {
+export default function AvatarProfile({ role }: any) {
+    const router = useRouter();
+    const logOut = () => {
+        removeUserInfo(authKey);
+        router.push("/login");
+    };
    
     const defaultMenuItem = [
         {
@@ -25,8 +33,8 @@ export default function AvatarProfile({ role, logOut }: any) {
             icon: <AppstoreOutlined />,
         },
         {
-            label: <Button onClick={logOut}>Log Out</Button>,
-            key: `logout`,
+            label: <Button onClick={logOut} type='text' danger>Log Out</Button>,
+            key: "0",
             icon: <LogoutOutlined />,
         },
     ];

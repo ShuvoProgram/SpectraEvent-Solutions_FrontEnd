@@ -3,14 +3,14 @@ import Header from "@/components/shared/Header"
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-    title: `SpectraEvent-Solutions | Blog`,
-    description: 'Best Event Management Website',
-  }
+  title: 'Event Page',
+  description: 'Build To Better',
+}
 
-export default function BlogLayout( {children}: {  children: React.ReactNode }) {
+export default function EventLayout( {children}: {  children: React.ReactNode }) {
   return (
     <div>
-        <Header />
+        <Header/>
         {children}
         <Footer/>
     </div>

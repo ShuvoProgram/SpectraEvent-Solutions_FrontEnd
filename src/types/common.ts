@@ -137,3 +137,9 @@ export interface IUser {
   data?: any;
   meta?: any;
 }
+
+export interface IHasSider {
+  hasSider?: boolean;
+  collapsed: boolean;
+  setCollapsed: (value: boolean) => void;
+}

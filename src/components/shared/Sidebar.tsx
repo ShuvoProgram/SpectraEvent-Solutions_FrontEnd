@@ -1,57 +1,83 @@
 "use client"
-import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
-const { Sider } = Layout;
-// import { sidebarItems } from '@/constant/sidebarItems';
-import { useAppSelector } from "@/redux/hooks";
-// import IUser from '@/Types';
-// import { useGetUsersQuery } from '@/redux/features/userApi';
+import { Layout, Menu } from 'antd';
 import { DashboardOutlined } from '@ant-design/icons';
 import { sidebarItems } from '@/constants/sidebarItems';
+import { getUserInfo } from '@/services/auth.service';
+import { IHasSider } from '@/types';
 
-const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
-//   const {user, isLoading, isError} = useAppSelector(state=> state.user)
-//   const {data, isLoading:dbUserLoading, isError: dbUserIsError} = useGetUsersQuery(null)
-//   const allUsers:IUser[] = data?.data
-//   let role:string
+const { Sider } = Layout;
 
-//   if (!isLoading && !isError && !dbUserLoading && !dbUserLoading && !dbUserIsError  && user?.email && allUsers?.length > 0){
-//     allUsers.find( dbUser => {
+const Sidebar = ({ collapsed, setCollapsed }: any) => {
+  // const [collapsed, setCollapsed] = useState(false);
+  const { role } = getUserInfo() as any;
 
-//       if(dbUser.email === user?.email && dbUser.role === 'admin'){
-//         role = 'admin'
-//       }
-//   })}
-  
+  const renderLogo = () => {
+    if (collapsed) {
+      return (
+        <DashboardOutlined
+          style={{
+            fontWeight: 'bold',
+            background: '#ffff',
+            color: 'orange',
+          }}
+        />
+      );
+    }
+
+    return (
+      <p
+        style={{
+          color: '#F76F01',
+          margin: '25px 0',
+          textTransform: 'uppercase',
+          fontSize: '1rem',
+        }}
+      >
+        SpectraEvent-Solutions
+      </p>
+    );
+  };
+
   return (
     <Sider
-     style={{
-      overflow: 'auto',
-      height: '100vh',
-      position: 'sticky',
-      left: 0,
-      top: 0,
-      bottom: 0
-     }}
-     width={280}
-     collapsible
-     collapsed={collapsed} 
-     onCollapse={(value) => setCollapsed(value)}>
-        <div className="demo-logo-vertical" />
-        <div style={{
+      style={{
+        background: '#ffff',
+        overflow: 'auto',
+        height: '100vh',
+        position: 'sticky',
+        left: 0,
+        top: 0,
+        bottom: 0,
+      }}
+      trigger={null}
+      width={280}
+      collapsible
+      collapsed={collapsed}
+      onCollapse={setCollapsed}
+    >
+      <div className="demo-logo-vertical" />
+      <div
+        style={{
           color: 'white',
           fontSize: '1.5rem',
           textAlign: 'center',
           fontWeight: 'bold',
-          marginBottom: '1rem',
-          marginTop: '1rem'
-        }}>
-          {
-            collapsed? <><DashboardOutlined style={{fontWeight: 'bold'}} /></> : <>Dashboard</>
-          }
-        </div>
-        <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={sidebarItems()} />
+          marginBottom: '5rem',
+          marginTop: '1rem',
+        }}
+      >
+        {renderLogo()}
+      </div>
+      <Menu
+        defaultSelectedKeys={['1']}
+        mode="inline"
+        items={sidebarItems(role)}
+        style={{
+          background: '#ffff',
+          color: 'GrayText',
+        }}
+      />
     </Sider>
   );
 };

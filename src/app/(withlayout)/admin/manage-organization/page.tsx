@@ -1,3 +1,4 @@
+'use client'
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import { useDeleteOrganizationMutation, useGetAllOrganizationQuery } from '@/redux/api/organizationApi';
 import { useDebounced } from '@/redux/hooks';

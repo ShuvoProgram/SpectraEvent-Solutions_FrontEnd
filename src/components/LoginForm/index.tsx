@@ -31,7 +31,6 @@ export default function LoginFrom() {
                 message.success("User logged in successfully")
             }
             storeUserInfo({ accessToken: res?.accessToken });
-            console.log(res?.accessToken)
         } catch (error: any) {
             console.error(error.message);
         }

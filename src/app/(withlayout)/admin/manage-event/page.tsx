@@ -1,3 +1,4 @@
+'use client'
 import { useGetAllEventQuery } from '@/redux/api/eventApi';
 import { useDebounced } from '@/redux/hooks';
 import React, { useState } from 'react'

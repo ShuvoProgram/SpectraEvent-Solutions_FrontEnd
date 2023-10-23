@@ -6,10 +6,9 @@ import {CommentOutlined, LogoutOutlined, TableOutlined, UserOutlined, UserSwitch
 import Link from "next/link";
 import { useAppDispatch } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
+import { USER_ROLE } from "./role";
 // role: string
-export const sidebarItems = () => {
-  const dispatch = useAppDispatch();
-  const router = useRouter();
+export const sidebarItems = (role: string) => {
 
   const handleLogout = async ()=> {
     // await signOut(auth).then(() => {
@@ -22,22 +21,25 @@ export const sidebarItems = () => {
 
   const defaultSidebarItems: MenuProps["items"] = [
     {
-      label: <Link href={`/customer`}>Dashboard</Link>,
+      label: <Link href={`/${role}`}>Dashboard</Link>,
       key: "profile",
       icon: <UserOutlined />
     },
+   
+  ];
+  const userSidebarItem: MenuProps["items"] = [
     {
-      label: <Link href={`/profile/manage-booking`}>Manage Bookings</Link>,
+      label: <Link href={`/${role}/manage-booking`}>Manage Bookings</Link>,
       icon: <TableOutlined />,
       key: `/manage-booking`,
     },
     {
-      label: <Link href={`/profile/favorite`}>Favorite</Link>,
+      label: <Link href={`/${role}/favorite`}>Favorite</Link>,
       icon: <CommentOutlined />,
       key: `/favorite`,
     },
     {
-      label: <Link href={`/customer/profile`}>Profile</Link>,
+      label: <Link href={`/${role}/profile`}>Profile</Link>,
       icon: <CommentOutlined />,
       key: `/profile`,
     },
@@ -46,40 +48,40 @@ export const sidebarItems = () => {
       icon: <LogoutOutlined style={{color: 'red'}} />,
       key: `/logout`,
     }
-  ];
+  ]
   const adminSideBarItems: MenuProps["items"] = [
     {
-      label: <Link href={`/admin`}>Dashboard</Link>,
+      label: <Link href={`/${role}`}>Dashboard</Link>,
       key: "admin",
       icon: <UserOutlined />
     },
     {
-      label: <Link href={`/admin/manage-booking`}>Customer Booking</Link>,
+      label: <Link href={`/${role}/manage-booking`}>Customer Booking</Link>,
       icon: <TableOutlined />,
       key: `/manage-booking`,
     },
     {
-      label: <Link href={`/admin/manage-customer`}>Manage Customer</Link>,
+      label: <Link href={`/${role}/manage-customer`}>Manage Customer</Link>,
       icon: <CommentOutlined />,
       key: `/manage-customer`,
     },
     {
-      label: <Link href={`/admin/manage-event`}>Manage Event</Link>,
+      label: <Link href={`/${role}/manage-event`}>Manage Event</Link>,
       icon: <UserSwitchOutlined />,
       key: `/manage-event`,
     },
     {
-      label: <Link href={`/admin/manage-organization`}>Manage Organization</Link>,
+      label: <Link href={`/${role}/manage-organization`}>Manage Organization</Link>,
       icon: <UserSwitchOutlined />,
       key: `/manage-organization`,
     }, 
     {
-        label: <Link href={`/admin/blog`}>Blog</Link>,
+        label: <Link href={`/${role}/blog`}>Blog</Link>,
         key: "/blog",
         icon: <UserOutlined />
       },
     {
-        label: <Link href={`/admin/faq`}>FAQ</Link>,
+        label: <Link href={`/${role}/faq`}>FAQ</Link>,
         key: "/faq",
         icon: <UserOutlined />
       },
@@ -90,8 +92,10 @@ export const sidebarItems = () => {
     },
   ];
 
-  if('admin' === 'admin'){
-    return adminSideBarItems;
+  if(role === USER_ROLE.CUSTOMER){
+    return userSidebarItem;
+  } else if (role === USER_ROLE.ADMIN) {
+    return adminSideBarItems
   }
   else{
     return defaultSidebarItems;
