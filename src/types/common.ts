@@ -128,7 +128,7 @@ export type IBooking = {
   updatedAt: Date
 }
 
-enum GENDER {
+export enum GENDER {
   male,
   female
 }
