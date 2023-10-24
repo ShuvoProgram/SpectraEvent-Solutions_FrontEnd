@@ -74,8 +74,9 @@ export type IFAQ = {
   id:        String
   question:  String
   answer:    String
-  createdAt: Date
-  updatedAt: Date
+  createdAt: String;
+  updatedAt: String;
+  deletedAt?: null;
 }
 
 export type IORGANIZATION ={

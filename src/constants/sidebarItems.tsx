@@ -76,13 +76,13 @@ export const sidebarItems = (role: string) => {
       key: `/manage-organization`,
     }, 
     {
-        label: <Link href={`/${role}/blog`}>Blog</Link>,
-        key: "/blog",
+        label: <Link href={`/${role}/manage-blog`}>Blog</Link>,
+        key: "/manage-blog",
         icon: <UserOutlined />
       },
     {
-        label: <Link href={`/${role}/faq`}>FAQ</Link>,
-        key: "/faq",
+        label: <Link href={`/${role}/manage-faq`}>FAQ</Link>,
+        key: "/manage-faq",
         icon: <UserOutlined />
       },
     {

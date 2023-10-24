@@ -12,13 +12,11 @@ function CreateFaq() {
   const router = useRouter();
 
   const onSubmit = async (data: any) => {
-    console.log(data);
     try {
       const res = await createFaq({ ...data}).unwrap();
-      console.log(res)
       if (res) {
           message.success('Successfully Created FAQ')
-          router.push("/");
+          router.push("/admin/manage-faq");
       }
   } catch (error: any) {
       console.error(error.message);
