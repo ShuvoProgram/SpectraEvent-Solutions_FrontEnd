@@ -62,6 +62,10 @@ function ManageFaq() {
         dataIndex: "question",
       },
       {
+        title: "Answer",
+        dataIndex: "answer",
+      },
+      {
         title: "CreatedAt",
         dataIndex: "createdAt",
         render: function (data: any) {
@@ -78,9 +82,11 @@ function ManageFaq() {
                 <Button
                   style={{
                     margin: "0px 5px",
+                    backgroundColor: "#00A9FF"
                   }}
                   onClick={() => console.log(data)}
                   type="primary"
+
                 >
                   <EditOutlined />
                 </Button>

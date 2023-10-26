@@ -60,7 +60,7 @@ function UpdateFaq({id}: IDProps) {
         </Col>
       </Row>
       <Button type="primary" danger htmlType="submit">
-        Add FAQ
+        Update FAQ
       </Button>
     </Form>
   </div>

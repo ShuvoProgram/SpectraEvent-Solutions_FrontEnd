@@ -1,3 +1,4 @@
+'use client'
 import { useDeleteBlogMutation, useGetAllBlogQuery } from '@/redux/api/blogApi';
 import { useDebounced } from '@/redux/hooks';
 import { Button, Input, message } from 'antd';

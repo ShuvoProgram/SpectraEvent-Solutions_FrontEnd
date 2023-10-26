@@ -1,3 +1,4 @@
+"use client"
 import Form from '@/components/Form/Form';
 import FormDatePicker from '@/components/Form/FormDatePicker';
 import FormInput from '@/components/Form/FormInput';

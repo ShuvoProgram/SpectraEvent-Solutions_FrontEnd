@@ -1,7 +1,12 @@
-'use client';
 import AddBlog from '@/components/Dashboard/Admin/Manage-Blog/AddBlog';
 import BreadCrumb from '@/components/shared/BreadCrumb';
+import { Metadata } from 'next';
 import React from 'react'
+
+// export const metadata: Metadata = {
+//   title: `SpectraEvent-Solutions | Create Blog`,
+//   description: 'Best Event Management Website',
+// }
 
 function CreateBlogPage() {
   return (

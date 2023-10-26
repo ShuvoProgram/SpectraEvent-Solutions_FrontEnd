@@ -42,11 +42,6 @@ export const sidebarItems = (role: string) => {
       label: <Link href={`/${role}/profile`}>Profile</Link>,
       icon: <CommentOutlined />,
       key: `/profile`,
-    },
-    {
-      label: <p onClick={()=> handleLogout()} style={{color: 'red'}}>Logout</p>,
-      icon: <LogoutOutlined style={{color: 'red'}} />,
-      key: `/logout`,
     }
   ]
   const adminSideBarItems: MenuProps["items"] = [
@@ -76,20 +71,15 @@ export const sidebarItems = (role: string) => {
       key: `/manage-organization`,
     }, 
     {
-        label: <Link href={`/${role}/manage-blog`}>Blog</Link>,
+        label: <Link href={`/${role}/manage-blog`}>Manage Blog</Link>,
         key: "/manage-blog",
         icon: <UserOutlined />
       },
     {
-        label: <Link href={`/${role}/manage-faq`}>FAQ</Link>,
+        label: <Link href={`/${role}/manage-faq`}>Manage FAQ</Link>,
         key: "/manage-faq",
         icon: <UserOutlined />
-      },
-    {
-      label: <p onClick={()=> handleLogout()} style={{color: 'red'}}>Logout</p>,
-      icon: <LogoutOutlined style={{color: 'red'}} />,
-      key: `/logout`,
-    },
+      }
   ];
 
   if(role === USER_ROLE.CUSTOMER){
