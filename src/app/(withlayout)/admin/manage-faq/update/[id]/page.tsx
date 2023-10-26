@@ -1,5 +1,4 @@
 import UpdateFaq from '@/components/Dashboard/Admin/Manage-Faq/UpdateFaq';
-import BreadCrumb from '@/components/shared/BreadCrumb';
 import { Metadata } from 'next';
 import React from 'react'
 
@@ -14,17 +13,8 @@ type IDProps = {
 };
 function UpdatePage({params}: IDProps) {
   const {id} = params;
-  console.log(id)
   return (
     <div>
-        <BreadCrumb
-        items={[
-          {
-            label: "admin",
-            link: "/admin",
-          },
-        ]}
-      />
       <UpdateFaq id={id}/>
     </div>
   )

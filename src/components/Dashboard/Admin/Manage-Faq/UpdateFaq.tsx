@@ -2,6 +2,7 @@
 import Form from '@/components/Form/Form';
 import FormInput from '@/components/Form/FormInput';
 import FormTextArea from '@/components/Form/FormTextArea';
+import BreadCrumb from '@/components/shared/BreadCrumb';
 import { useGetSingleFaqQuery, useUpdateFaqMutation } from '@/redux/api/faqApi'
 import { Button, Col, Row, message } from 'antd';
 import React from 'react';
@@ -37,6 +38,15 @@ function UpdateFaq({id}: IDProps) {
       marginTop: "10px",
     }}
   >
+    <BreadCrumb
+      
+      items={[
+        {
+          label: "admin",
+          link: "/admin",
+        },
+      ]}
+    />
     <p style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>
       Create FAQ
     </p>

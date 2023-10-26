@@ -37,7 +37,7 @@ export const organizationApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.organization],
     }),
-    updateEvent: build.mutation({
+    updateOrganization: build.mutation({
         query: (data) => ({
             url: `${ORGANIZATION_URL}/${data.id}`,
             method: "PATCH",
@@ -57,8 +57,8 @@ export const organizationApi = baseApi.injectEndpoints({
 
 export const { 
   useCreateOrganizationMutation,
+  useDeleteOrganizationMutation,
   useGetAllOrganizationQuery,
   useGetSingleOrganizationQuery,
-  useUpdateEventMutation,
-  useDeleteOrganizationMutation,
+  useUpdateOrganizationMutation
     } = organizationApi;

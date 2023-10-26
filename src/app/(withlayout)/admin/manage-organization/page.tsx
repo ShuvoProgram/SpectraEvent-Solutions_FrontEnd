@@ -40,7 +40,9 @@ function OrganizationPage() {
   }
 
   const { data, isLoading } = useGetAllOrganizationQuery({ ...query });
-  const categories = data?.organization?.organization
+
+  const categories = data?.organization;
+  // console.log(categories)
     const meta = data?.organization?.meta;
    const handleDelete = async (id: string) => {
     message.loading("Deleting.....");
@@ -62,12 +64,11 @@ function OrganizationPage() {
         dataIndex: "image",
     },
     {
-        title: "AvailableEvent",
-        dataIndex: "availableEvent",
-    },
-    {
         title: "Admin Name",
         dataIndex: "admin",
+        render: function (data: any){
+
+        }
     },
     {
         title: "Created at",
@@ -82,7 +83,7 @@ function OrganizationPage() {
         render: function (data: any) {
             return (
                 <div className="flex">
-                    <Link href={`/admin/category/update/${data.id}`}>
+                    <Link href={`/admin/manage-organization/update/${data.id}`}>
                         <button className="bg-violet-600 text-white font-bold py-1 px-2 rounded mr-2">
                             <EditOutlined />
                         </button>
@@ -113,7 +114,15 @@ const resetFilters = () => {
 };
 
   return (
-    <div>
+    <div
+    style={{
+      border: "1px solid #d9d9d9",
+      borderRadius: "5px",
+      padding: "15px",
+      marginBottom: "10px",
+      marginTop: "10px",
+    }}
+    >
         <BreadCrumb
          items={[
             {
@@ -122,7 +131,7 @@ const resetFilters = () => {
             },
           ]}
         />
-         <ActionBar title="Tour Category List">
+         <ActionBar title="Event Organization List">
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#4338ca" }} />}
                     placeholder="Search Category ......"

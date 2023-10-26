@@ -1,3 +1,4 @@
+"use client"
 import { useCreateEventMutation } from '@/redux/api/eventApi';
 import React from 'react'
 import { Button, Col, Row, message } from "antd";
@@ -44,7 +45,15 @@ function EventCreatePage() {
       };
       const base = "admin";
   return (
-    <div>
+    <div
+    style={{
+      border: "1px solid #d9d9d9",
+      borderRadius: "5px",
+      padding: "15px",
+      marginBottom: "10px",
+      marginTop: "10px",
+    }}
+    >
         <BreadCrumb
         items={[
           { label: `${base}`, link: `/${base}` },
@@ -54,7 +63,7 @@ function EventCreatePage() {
       <h1>Create Event</h1>
       <Form submitHandler={onSubmit}>
         <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
-          <Col span={6} style={{ margin: "10px 0" }}>
+          <Col span={24} style={{ margin: "10px 0" }}>
             <FormInput name="title" label="Title" size='large'/>
           </Col>
           <Col span={6} style={{ margin: "10px 0" }}>

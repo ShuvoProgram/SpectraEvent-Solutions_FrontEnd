@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import { useGetAllEventQuery } from '@/redux/api/eventApi';
 import { useDebounced } from '@/redux/hooks';
 import React, { useState } from 'react'
@@ -6,6 +6,7 @@ import {
     DeleteOutlined,
     EditOutlined,
     ReloadOutlined,
+    SearchOutlined,
     EyeOutlined,
   } from "@ant-design/icons";
 import { IEvent, IORGANIZATION } from '@/types';
@@ -41,8 +42,8 @@ function EventPage() {
 
   const {data, isLoading} = useGetAllEventQuery({...query});
 
-  const events = data?.event;
-  const meta = data?.meta;
+  const events = data?.event?.event;
+  const meta = data?.event?.meta;
   console.log(events);
 
   const columns = [
@@ -142,29 +143,29 @@ function EventPage() {
           ]}
         />
         <ActionBar title="Event List">
-        <Input
-          size="large"
-          placeholder="Search"
-          onChange={(e) => setSearchTerm(e.target.value)}
-          style={{
-            width: "20%",
-          }}
-        />
-        <div>
-          <Link href="/admin/manage-event/create">
-            <Button type="primary">Create</Button>
+                <Input
+                    addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
+                    placeholder="Search ......"
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                    }}
+                />
+                {(!!sortBy || !!sortOrder || !!searchTerm) && (
+                    <button
+                        onClick={resetFilters}
+                        className="bg-orange-600 px-4 py-2 ml-2 text-white rounded font-semibold float-right"
+                    >
+                        <ReloadOutlined />
+                    </button>
+                )}
+                <Link href="/admin/manage-event/create">
+            <Button type="primary" style={{
+              backgroundColor: "#54B435",
+              margin: "0px 10px"
+            }}>Create</Button>
           </Link>
-          {(!!sortBy || !!sortOrder || !!searchTerm) && (
-            <Button
-              style={{ margin: "0px 5px" }}
-              type="primary"
-              onClick={resetFilters}
-            >
-              <ReloadOutlined />
-            </Button>
-          )}
-        </div>
-      </ActionBar>
+                
+            </ActionBar>
 
       <UMTable
         loading={isLoading}

@@ -11,7 +11,15 @@ export const metadata: Metadata = {
 function ManageFaqPage() {
 
   return (
-    <>
+    <div
+    style={{
+      border: "1px solid #d9d9d9",
+      borderRadius: "5px",
+      padding: "15px",
+      marginBottom: "10px",
+      marginTop: "10px",
+    }}
+    >
       <BreadCrumb
       
         items={[
@@ -22,7 +30,7 @@ function ManageFaqPage() {
         ]}
       />
       <ManageFaq/>
-    </>
+    </div>
   )
 }
 

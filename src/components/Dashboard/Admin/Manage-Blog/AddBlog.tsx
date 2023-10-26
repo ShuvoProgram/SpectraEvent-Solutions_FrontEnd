@@ -3,8 +3,8 @@ import Form from '@/components/Form/Form';
 import FormDatePicker from '@/components/Form/FormDatePicker';
 import FormInput from '@/components/Form/FormInput';
 import QuillEditor from '@/components/Form/QuillEditor';
+import BreadCrumb from '@/components/shared/BreadCrumb';
 import { useCreateBlogMutation } from '@/redux/api/blogApi'
-import { getUserInfo } from '@/services/auth.service';
 import { Button, Col, Row, message } from 'antd';
 import React from 'react'
 
@@ -23,7 +23,23 @@ function AddBlog() {
         }
     };
   return (
-    <div>
+    <div
+    style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "5px",
+        padding: "15px",
+        marginBottom: "10px",
+        marginTop: "10px",
+      }}
+    >
+         <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: "/admin",
+                    },
+                ]}
+            />
             <h1 className="py-5 text-lg font-bold">Create New Blogs</h1>
             <div>
                 <Form submitHandler={onSubmit}>

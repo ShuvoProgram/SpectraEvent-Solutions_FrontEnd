@@ -1,17 +1,27 @@
-import { useState } from "react";
+import MangeCustomer from "@/components/Dashboard/Admin/Manage-Customer/MangeCustomer";
+import BreadCrumb from "@/components/shared/BreadCrumb";
 
 const ManageCustomerList = () => {
-    const query: Record<string, any> = {};
-
-    const [page, setPage] = useState<number>(1);
-    const [size, setSize] = useState<number>(10);
-    const [sortBy, setSortBy] = useState<string>("");
-    const [sortOrder, setSortOrder] = useState<string>("");
-    const [searchTerm, setSearchTerm] = useState<string>("");
-    
-
+   
 return(
-    <div>
+    <div
+    style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "5px",
+        padding: "15px",
+        marginBottom: "10px",
+        marginTop: "10px",
+      }}
+    >
+          <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: "/admin",
+                    },
+                ]}
+            />
+            <MangeCustomer/>
     </div>
 )
 };

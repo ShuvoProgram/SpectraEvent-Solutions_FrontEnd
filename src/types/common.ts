@@ -139,6 +139,11 @@ export interface IUser {
   meta?: any;
 }
 
+export type IDProps = {
+  params: any;
+};
+
+
 export interface IHasSider {
   hasSider?: boolean;
   collapsed: boolean;

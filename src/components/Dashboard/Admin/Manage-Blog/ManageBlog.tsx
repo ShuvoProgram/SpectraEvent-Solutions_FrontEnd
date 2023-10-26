@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useDeleteBlogMutation, useGetAllBlogQuery } from '@/redux/api/blogApi';
 import { useDebounced } from '@/redux/hooks';
 import { Button, Input, message } from 'antd';
@@ -14,6 +14,7 @@ import {
 } from "@ant-design/icons";
 import UMTable from '@/components/shared/UMTable';
 import ActionBar from '@/components/shared/ActionBar';
+import BreadCrumb from '@/components/shared/BreadCrumb';
 
 function ManageBlog() {
     const query: Record<string, any> = {};
@@ -127,8 +128,24 @@ function ManageBlog() {
     };
  
   return (
-    <div>
-        <ActionBar title="News List">
+    <div
+    style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "5px",
+        padding: "15px",
+        marginBottom: "10px",
+        marginTop: "10px",
+      }}
+    >
+        <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: "/admin",
+                    },
+                ]}
+            />
+        <ActionBar title="Blog List">
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#4338ca" }} />}
                     placeholder="Search ......"
