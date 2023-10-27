@@ -14,6 +14,7 @@ import dayjs from "dayjs";
 import React, { useState } from 'react'
 import ActionBar from '@/components/shared/ActionBar';
 import UMTable from '@/components/shared/UMTable';
+import BreadCrumb from '@/components/shared/BreadCrumb';
 
 function MangeCustomer() {
     const query: Record<string, any> = {};
@@ -93,13 +94,26 @@ function MangeCustomer() {
                             </button>
                         </Link>
                         <Link href={`/admin/manage-customer/update/${data.id}`}>
-                            <button className="bg-orange-500 text-white font-bold py-1 px-2 rounded mr-2">
-                                <EditOutlined />
-                            </button>
+                        <Button
+                  style={{
+                    margin: "0px 5px",
+                    backgroundColor: "#00A9FF"
+                  }}
+                  onClick={() => console.log(data)}
+                  type="primary"
+
+                >
+                  <EditOutlined />
+                </Button>
                         </Link>
-                        <button onClick={() => deleteHandler(data?.id)} className="bg-red-500 text-white font-bold py-1 px-2 rounded mr-2">
-                            <DeleteOutlined />
-                        </button>
+                        <Button
+                onClick={() => deleteHandler(data?.id)}
+                type="primary"
+                danger
+              >
+                <DeleteOutlined />
+              </Button>
+                       
                     </>
                 );
             },
@@ -123,7 +137,23 @@ function MangeCustomer() {
     };
 
   return (
-    <div>
+    <div
+    style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "5px",
+        padding: "15px",
+        marginBottom: "10px",
+        marginTop: "10px",
+      }}
+    >
+          <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: "/admin",
+                    },
+                ]}
+            />
          <ActionBar title="Customer List">
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}

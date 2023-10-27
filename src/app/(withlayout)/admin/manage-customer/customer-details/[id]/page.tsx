@@ -1,25 +1,16 @@
 import CustomerDetails from '@/components/Dashboard/Admin/Manage-Customer/CustomerDetails';
-import ActionBar from '@/components/shared/ActionBar';
-import BreadCrumb from '@/components/shared/BreadCrumb';
 import { IDProps } from '@/types';
+import { Metadata } from 'next';
 import React from 'react'
+
+export const metadata: Metadata = {
+  title: `SpectraEvent-Solutions | Customer Details`,
+  description: 'Best Event Management Website',
+}
 
 function CustomerProfilePage({ params }: IDProps) {
   return (
     <div>
-        <BreadCrumb
-                items={[
-                    {
-                        label: "Admin",
-                        link: "/admin",
-                    },
-                    {
-                        label: "User",
-                        link: "/admin/user",
-                    },
-                ]}
-            />
-            <ActionBar title="Customer" />
             <CustomerDetails params={params}/>
     </div>
   )

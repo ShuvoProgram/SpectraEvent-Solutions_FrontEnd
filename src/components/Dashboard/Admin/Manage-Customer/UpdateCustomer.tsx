@@ -1,5 +1,6 @@
 import Form from '@/components/Form/Form';
 import FormInput from '@/components/Form/FormInput';
+import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
 import { useGetSingleCustomerQuery, useUpdateCustomerMutation } from '@/redux/api/userApi';
 import { IDProps } from '@/types'
@@ -25,7 +26,27 @@ function UpdateCustomer({ params }: IDProps) {
         }
     };
   return (
-    <div>
+    <div
+    style={{
+        border: "1px solid #d9d9d9",
+        borderRadius: "5px",
+        padding: "15px",
+        marginBottom: "10px",
+        marginTop: "10px",
+      }}
+    >
+          <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: "/admin",
+                    },
+                    {
+                        label: "Manage-Customer",
+                        link: "/admin/manage-customer",
+                    },
+                ]}
+            />
          <h1 className="py-5 text-lg font-bold">Update Customer</h1>
          <div>
          {/* defaultValues={defaultValues} */}

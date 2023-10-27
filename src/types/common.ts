@@ -109,6 +109,14 @@ export type IBlog = {
     review:      IReview[]
 }
 
+export type ILocation = {
+  id:          String
+    title:       String
+    createdAt:   Date
+    updatedAt:   Date
+    event: IEvent[]
+}
+
 export type IReview = {
   id:        String
   userId:    String 

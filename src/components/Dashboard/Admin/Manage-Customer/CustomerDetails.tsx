@@ -1,4 +1,6 @@
 "use client";
+import ActionBar from '@/components/shared/ActionBar';
+import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
 import { useGetSingleCustomerQuery } from '@/redux/api/userApi';
 import { IDProps } from '@/types'
@@ -17,7 +19,29 @@ function CustomerDetails({params}: IDProps) {
         return <Spinner/>
     }
   return (
-    <section className="pt-16 bg-blueGray-50">
+    <div
+    style={{
+      border: "1px solid #d9d9d9",
+      borderRadius: "5px",
+      padding: "15px",
+      marginBottom: "10px",
+      marginTop: "10px",
+    }}
+    >
+      <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: "/admin",
+                    },
+                    {
+                        label: "User",
+                        link: "/admin/user",
+                    },
+                ]}
+            />
+            <ActionBar title="Customer" />
+            <div className="pt-16 bg-blueGray-50">
     <div className="w-full px-4 mx-auto">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
         <div className="px-6">
@@ -95,7 +119,9 @@ data?.profileImage ? (
         </div>
       </div>
     </div>
-    </section>
+    </div>
+    </div>
+  
   )
 }
 
