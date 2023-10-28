@@ -1,3 +1,4 @@
+"use client";
 import Form from '@/components/Form/Form';
 import FormInput from '@/components/Form/FormInput';
 import BreadCrumb from '@/components/shared/BreadCrumb';
@@ -25,6 +26,10 @@ function UpdateCustomer({ params }: IDProps) {
             message.error(err.message);
         }
     };
+
+
+
+
   return (
     <div
     style={{
@@ -56,35 +61,35 @@ function UpdateCustomer({ params }: IDProps) {
                         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                             <Col
                                 className="gutter-row mb-4"
-                                span={12}
+                                span={8}
                             >
                                 <FormInput
                                     type="text"
-                                    name="name"
+                                    name="firstName"
                                     size="large"
-                                    label="Name"
+                                    label="First Name"
                                 />
                             </Col>
                             <Col
                                 className="gutter-row mb-4"
-                                span={12}
+                                span={8}
                             >
                                 <FormInput
                                     type="text"
-                                    name="email"
+                                    name="middleName"
                                     size="large"
-                                    label="Email"
+                                    label="Middle Name"
                                 />
                             </Col>
                             <Col
                                 className="gutter-row mb-4"
-                                span={12}
+                                span={8}
                             >
                                 <FormInput
-                                    type="password"
-                                    name="password"
+                                    type="text"
+                                    name="lastName"
                                     size="large"
-                                    label="Password"
+                                    label="Last Name"
                                 />
                             </Col>
                             <Col

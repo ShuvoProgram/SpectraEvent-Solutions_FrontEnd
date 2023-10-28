@@ -97,7 +97,7 @@ export default function Header({ hasSider, collapsed,  setCollapsed}: IHasSider)
                  <Button
             type="text"
             icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
+            // onClick={() => setCollapsed(!collapsed)}
             style={{
               fontSize: '16px',
               width: 64,

@@ -151,9 +151,8 @@ export type IDProps = {
   params: any;
 };
 
-
 export interface IHasSider {
   hasSider?: boolean;
-  collapsed: boolean;
-  setCollapsed: (value: boolean) => void;
+  collapsed?: boolean;
+  setCollapsed?: (collapsed: boolean) => void;
 }

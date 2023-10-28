@@ -8,8 +8,8 @@ import { IHasSider } from '@/types';
 
 const { Sider } = Layout;
 
-const Sidebar = ({ collapsed, setCollapsed }: any) => {
-  // const [collapsed, setCollapsed] = useState(false);
+const Sidebar = () => {
+  const [collapsed, setCollapsed] = useState(false);
   const { role } = getUserInfo() as any;
 
   const renderLogo = () => {
@@ -50,11 +50,11 @@ const Sidebar = ({ collapsed, setCollapsed }: any) => {
         top: 0,
         bottom: 0,
       }}
-      trigger={null}
+      // trigger={null}
       width={280}
       collapsible
       collapsed={collapsed}
-      onCollapse={setCollapsed}
+      onCollapse={(value) => setCollapsed(value)}
     >
       <div className="demo-logo-vertical" />
       <div

@@ -170,12 +170,12 @@ function MangeCustomer() {
                         <ReloadOutlined />
                     </button>
                 )}
-                <Link href="/admin/user/create">
+                {/* <Link href="/admin/user/create">
                 <Button type="primary" style={{
               backgroundColor: "#54B435",
               margin: "0px 10px"
             }}>Create</Button>
-                </Link>
+                </Link> */}
             </ActionBar>
             <UMTable
                 loading={isLoading}

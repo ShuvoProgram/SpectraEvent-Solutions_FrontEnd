@@ -16,6 +16,7 @@ import { IEvent, IORGANIZATION } from '@/types';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import ActionBar from '@/components/shared/ActionBar';
 import UMTable from '@/components/shared/UMTable';
+import { useGetSingleOrganizationQuery } from '@/redux/api/organizationApi';
 
 function ManageEvent() {
     const query: Record<string, any> = {};
@@ -41,17 +42,13 @@ function ManageEvent() {
     }
   
     const {data, isLoading} = useGetAllEventQuery({...query});
+    
   
-    const events = data?.event?.event;
+    const events = data?.event?.data;
     const meta = data?.event?.meta;
     console.log(events);
   
     const columns = [
-      {
-        title: "Id",
-        dataIndex: "eventId",
-        sorter: true,
-      },
       {
         title: "Title",
         render: function (data: IEvent) {
@@ -59,19 +56,40 @@ function ManageEvent() {
         },
       },
       {
-        title: "organizationId",
-        dataIndex: "organizationId",
-      },
-      {
         title: "Organization",
-        dataIndex: "Organization",
-        render: function (data: IORGANIZATION) {
-          return <>{data?.name}</>;
+        render: function (data: any) {
+          return {
+            children: data?.organization?.name,
+            props: {
+              colSpan: 1,
+            },
+          };
         },
       },
       {
         title: "price",
         dataIndex: "price",
+    
+      },
+      {
+        title: "Is Booked",
+        render: function (data: IEvent) {
+          return (
+            <>
+            {data.isBooked ? (
+              <p>Booked</p>
+            ) : (
+              <p>Available</p>
+            )}
+            </>
+          );
+        },
+      },
+      
+      {
+        title: "maxCapacity",
+        dataIndex: "maxCapacity",
+      
       },
       {
         title: "Created at",
@@ -82,21 +100,16 @@ function ManageEvent() {
         sorter: true,
       },
       {
-        title: "maxCapacity",
-        dataIndex: "maxCapacity",
-      },
-      {
         title: "Action",
-        dataIndex: "id",
         render: function (data: any) {
           return (
             <>
-              <Link href={`/admin/manage-event/details/${data.id}`}>
+              <Link href={`/admin/manage-event/view/${data.id}`}>
                 <Button onClick={() => console.log(data)} type="primary">
                   <EyeOutlined />
                 </Button>
               </Link>
-              <Link href={`/admin/manage-event/edit/${data.id}`}>
+              <Link href={`/admin/manage-event/update/${data.id}`}>
                 <Button
                   style={{
                     margin: "0px 5px",

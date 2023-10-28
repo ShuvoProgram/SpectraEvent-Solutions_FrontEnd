@@ -9,7 +9,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
 function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const [collapsed, setCollapsed] = useState(false);
+  // const [collapsed, setCollapsed] = useState(false);
     const userLoggedIn = isLoggedIn();
     const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,7 +22,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
       }, [router, isLoading, userLoggedIn]);
   return (
     <Layout>
-      <Header hasSider={true} collapsed={collapsed} setCollapsed={setCollapsed}/>
+      <Header hasSider={true}/>
       <Layout hasSider>
       <Sidebar />
       <Contents>{children}</Contents>

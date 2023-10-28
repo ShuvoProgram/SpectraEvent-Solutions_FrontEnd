@@ -1,24 +1,26 @@
-"use client";
-import React, { useState } from 'react'
-import { Button, Col, Row, message } from "antd";
-import { useCreateEventMutation } from '@/redux/api/eventApi';
-import { useGetAllOrganizationQuery } from '@/redux/api/organizationApi';
-import BreadCrumb from '@/components/shared/BreadCrumb';
+"use client"
 import Form from '@/components/Form/Form';
 import FormInput from '@/components/Form/FormInput';
 import FormSelectField, { SelectOptions } from '@/components/Form/FormSelectedField';
-import UploadImage from '@/components/shared/UploadImage';
 import QuillEditor from '@/components/Form/QuillEditor';
-import { useGetAllLocationQuery } from '@/redux/api/locationApi';
-import axios from 'axios';
-import { UploadChangeParam, UploadFile, UploadProps } from 'antd/es/upload';
+import BreadCrumb from '@/components/shared/BreadCrumb';
+import Spinner from '@/components/shared/Spinner';
+import { useGetSingleEventQuery, useUpdateEventMutation } from '@/redux/api/eventApi';
+import { useGetAllLocationQuery, useGetSingleLocationQuery } from '@/redux/api/locationApi';
+import { useGetAllOrganizationQuery, useGetSingleOrganizationQuery } from '@/redux/api/organizationApi';
+import { IDProps } from '@/types'
+import { Button, Col, Row, message } from 'antd';
 import { useRouter } from 'next/navigation';
+import React from 'react'
 
-function CreateEvent() {
-    const [createEvent] = useCreateEventMutation();
+function EventUpdate({params}: IDProps) {
+    const {id} = params;
     const router = useRouter();
-    const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const { data, isLoading } = useGetAllOrganizationQuery({
+    const { data, isLoading } = useGetSingleEventQuery(id);
+    const [updateEvent] = useUpdateEventMutation();
+
+
+    const { data: organizationData } = useGetAllOrganizationQuery({
         limit: 100,
         page: 1,
     });
@@ -26,7 +28,7 @@ function CreateEvent() {
         limit: 100,
         page: 1
     })
-    const organization = data?.organization;
+    const organization = organizationData?.organization;
     const organizationOptions = organization?.map((Or) => {
         return {
             label: Or?.name,
@@ -42,54 +44,38 @@ function CreateEvent() {
         }
     })
 
-    const handleChange: UploadProps["onChange"] = async (
-        info: UploadChangeParam<UploadFile>
-      ) => {
-        const image = info.file.originFileObj;
-        const formData = new FormData();
-        formData.append("image", image as Blob);
-        try {
-          const response = await axios.post(
-            `https://api.imgbb.com/1/upload`,
-                formData,
-                {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                    params: {
-                        key: process.env.NEXT_PUBLIC_IMGBB_KEY,
-                    },
-                    }
-          );
-    
-          setImageUrl(response.data.data.display_url);
-        } catch (error) {
-          console.error("Error uploading image to ImageBB:", error);
-        }
-      };
-
+    if(isLoading) {
+        return <Spinner/>
+    }
 
     const onSubmit = async (values: any) => {
-        values.eventImg = imageUrl;
-        values.price = parseInt(values.price);
-        values.maxCapacity = parseInt(values.maxCapacity);
-        // console.log(values)
-        message.loading("Creating...");
+        message.loading("Updating...");
         try {
-            const res = await createEvent(values).unwrap();
-            console.log(res);
-            if (res?.id) {
-                message.success("Event added successfully");
-                router.push('/admin/manage-event')
-            }
+            values.price = parseInt(values.price);
+        values.maxCapacity = parseInt(values.maxCapacity);
+         const res = await updateEvent({ ...values }).unwrap();
+         if(res?.id){
+             message.success("Event updated successfully!");
+             router.push('/admin/manage-event')
+         }
         } catch (err: any) {
-            // console.error(err.message);
             message.error(err.message);
         }
     };
+
+       // @ts-ignore
+       const defaultValues = {
+        title: data?.title || "",
+        locationId: data?.locationId || "",
+        organizationId: data?.organizationId || "",
+        price: data?.price || "",
+        maxCapacity: data?.maxCapacity || "",
+        description: data?.description || "",
+        facility: data?.facility || "",
+    };
     const base = "admin";
-    return (
-        <div
+  return (
+    <div
             style={{
                 border: "1px solid #d9d9d9",
                 borderRadius: "5px",
@@ -105,10 +91,17 @@ function CreateEvent() {
                 ]}
             />
             <h1>Create Event</h1>
-            <Form submitHandler={onSubmit}>
+            <Form submitHandler={onSubmit} defaultValues={defaultValues}>
                 <Row>
                     <Col xs={24} sm={24} md={24} lg={24} style={{ margin: "10px 0" }}>
                         <FormInput name="title" label="Title" size='large' />
+                    </Col>
+                   
+                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
+                        <FormInput name="price" label="Price" size='large' />
+                    </Col>
+                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
+                        <FormInput name="maxCapacity" label="MaxCapacity" size='large' />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                         <FormSelectField
@@ -119,7 +112,7 @@ function CreateEvent() {
                             placeholder='Select'
                         />
                     </Col>
-                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
+                    <Col>
                     <FormSelectField
                             name="locationId"
                             label="Location"
@@ -129,19 +122,10 @@ function CreateEvent() {
                         />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
-                        <FormInput name="price" label="Price" size='large' />
-                    </Col>
-                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
-                        <FormInput name="maxCapacity" label="MaxCapacity" size='large' />
-                    </Col>
-                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                     <QuillEditor
                             name='facility'
                             label='Facility'
                         />
-                    </Col>
-                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 0" }}>
-                        <UploadImage label='Image' name="image" imageUrl={imageUrl} handleChange={handleChange}/>
                     </Col>
                     <Col xs={24} sm={24} md={24} lg={24} style={{ margin: "10px 0" }}>
                         <QuillEditor
@@ -151,11 +135,11 @@ function CreateEvent() {
                     </Col>
                 </Row>
                 <Button type="primary" htmlType="submit">
-                    Create Event
+                    Update Event
                 </Button>
             </Form>
         </div>
-    )
+  )
 }
 
-export default CreateEvent
+export default EventUpdate

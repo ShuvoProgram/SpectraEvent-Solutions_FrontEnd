@@ -1,20 +1,27 @@
 'use client'
 import { LoadingOutlined, PlusOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
+import { Form, message, Upload } from "antd";
 import type { UploadChangeParam } from "antd/es/upload";
 import type { RcFile, UploadFile, UploadProps } from "antd/es/upload/interface";
 import Image from "next/image";
 import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 
-const getBase64 = (img: RcFile, callback: (url: string) => void) => {
-  const reader = new FileReader();
-  reader.addEventListener("load", () => callback(reader.result as string));
-  reader.readAsDataURL(img);
+type InputUpload = {
+  label: string;
+  name: string;
+  loading?: boolean;
+  handleChange: (info: any) => void;
+  imageUrl: string | null;
+  required?: boolean;
+  message?: string;
+  size?: string;
+  placeholder?: string;
 };
 
+
 const beforeUpload = (file: RcFile) => {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png" || file.type === "image/gif" || file.type === "image/jpg";
   if (!isJpgOrPng) {
     message.error("You can only upload JPG/PNG file!");
   }
@@ -25,32 +32,35 @@ const beforeUpload = (file: RcFile) => {
   return isJpgOrPng && isLt2M;
 };
 
-type ImageUploadProps = {
-  name: string;
-};
 
-const UploadImage = ({ name }: ImageUploadProps) => {
+const UploadImage = ({ 
+  label,
+  name,
+  required,
+  message,
+  imageUrl,
+  handleChange,
+ }: InputUpload) => {
   const [loading, setLoading] = useState(false);
-  const [imageUrl, setImageUrl] = useState<string>();
   const { setValue } = useFormContext();
 
-  const handleChange: UploadProps["onChange"] = (
-    info: UploadChangeParam<UploadFile>
-  ) => {
-    if (info.file.status === "uploading") {
-      setLoading(true);
-      return;
-    }
-    if (info.file.status === "done") {
-      // Get this url from response in real world.
-      setValue(name, info.file.originFileObj);
-      getBase64(info.file.originFileObj as RcFile, (url) => {
-        setLoading(false);
-        setImageUrl(url);
-      });
-    }
-  };
-
+  // const handleChange: UploadProps["onChange"] = (
+  //   info: UploadChangeParam<UploadFile>
+  // ) => {
+  //   if (info.file.status === "uploading") {
+  //     setLoading(true);
+  //     return;
+  //   }
+  //   if (info.file.status === "done") {
+  //     // Get this url from response in real world.
+  //     setValue(name, info.file.originFileObj);
+  //     getBase64(info.file.originFileObj as RcFile, (url) => {
+  //       setLoading(false);
+  //       setImageUrl(url);
+  //     });
+  //   }
+  // };
+// console.log(imageUrl)
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}
@@ -59,7 +69,17 @@ const UploadImage = ({ name }: ImageUploadProps) => {
   );
 
   return (
-    <>
+    <div style={{margin: "0 4px"}}>
+      <Form.Item
+       label={label}
+       name={name}
+       rules={[
+         {
+           required: required,
+           message: message,
+         },
+       ]}
+      >
       <Upload
         name={name}
         listType="picture-card"
@@ -81,7 +101,9 @@ const UploadImage = ({ name }: ImageUploadProps) => {
           uploadButton
         )}
       </Upload>
-    </>
+      </Form.Item>
+      
+    </div>
   );
 };
 
