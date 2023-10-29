@@ -89,9 +89,9 @@ function MangeCustomer() {
                 return (
                     <>
                         <Link href={`/admin/manage-customer/customer-details/${data.id}`}>
-                            <button className="bg-orange-500 text-white font-bold py-1 px-2 rounded mr-2">
-                                <EyeOutlined />
-                            </button>
+                        <Button onClick={() => console.log(data)} type="primary">
+                  <EyeOutlined />
+                </Button>
                         </Link>
                         <Link href={`/admin/manage-customer/update/${data.id}`}>
                         <Button

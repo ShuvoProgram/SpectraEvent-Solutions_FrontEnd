@@ -9,9 +9,9 @@ import {
   } from "@ant-design/icons";
   import dayjs from "dayjs";
   import Link from 'next/link';
-  import { Button, Input } from 'antd';
+  import { Button, Input, message } from 'antd';
 import { useDebounced } from '@/redux/hooks';
-import { useGetAllEventQuery } from '@/redux/api/eventApi';
+import { useDeleteEventMutation, useGetAllEventQuery } from '@/redux/api/eventApi';
 import { IEvent } from '@/types';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import ActionBar from '@/components/shared/ActionBar';
@@ -25,6 +25,7 @@ function ManageEvent() {
     const [sortBy, setSortBy] = useState<string>("");
     const [sortOrder, setSortOrder] = useState<string>("");
     const [searchTerm, setSearchTerm] = useState<string>("");
+    const [deleteEvent] = useDeleteEventMutation();
   
     query["limit"] = size;
     query["page"] = page;
@@ -45,6 +46,16 @@ function ManageEvent() {
   
     const events = data?.event?.data;
     const meta = data?.event?.meta;
+
+    const handleDelete = async (id: string) => {
+      message.loading("Deleting.....");
+      try {
+        await deleteEvent(id);
+        message.success("Event Deleted successfully");
+    } catch (err: any) {
+        message.error(err.message);
+    }
+    };
   
     const columns = [
       {
@@ -113,7 +124,7 @@ function ManageEvent() {
                   <EditOutlined />
                 </Button>
               </Link>
-              <Button onClick={() => console.log(data)} type="primary" danger>
+              <Button onClick={() => handleDelete(data?.id)} type="primary" danger>
                 <DeleteOutlined />
               </Button>
             </>

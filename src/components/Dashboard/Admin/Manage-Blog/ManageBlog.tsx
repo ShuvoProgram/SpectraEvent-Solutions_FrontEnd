@@ -147,7 +147,7 @@ function ManageBlog() {
             />
         <ActionBar title="Blog List">
                 <Input
-                    addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#4338ca" }} />}
+                    addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search ......"
                     onChange={(e) => {
                         setSearchTerm(e.target.value);

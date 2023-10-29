@@ -12,14 +12,7 @@ const ProfilePage = () => {
 
     return (
         <>
-        <BreadCrumb
-            items={[
-                {
-                    label: "Profile",
-                    link: "/user/profile",
-                }
-            ]}
-        />
+       
         <Profile/>
     </>
     )

@@ -10,6 +10,7 @@ import Category from '@/components/Home/Category';
 import Header from '@/components/shared/Header';
 import Footer from '@/components/shared/Footer';
 import UpcommingEvents from '@/components/Home/UpcommingEvents';
+import { isLoggedIn } from '@/services/auth.service';
 
 // const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -21,6 +22,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div>
+      
     {/* <Header /> */}
       <Hero />
       {/* <BannerList /> */}

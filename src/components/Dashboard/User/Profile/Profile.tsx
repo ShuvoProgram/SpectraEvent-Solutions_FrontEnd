@@ -1,4 +1,5 @@
-// "use client"
+"use client"
+import BreadCrumb from '@/components/shared/BreadCrumb'
 import Spinner from '@/components/shared/Spinner'
 import { useGetProfileQuery } from '@/redux/api/userApi'
 import { EditOutlined, UserOutlined } from '@ant-design/icons'
@@ -15,7 +16,22 @@ function Profile() {
     }
   return (
     
-    <section className="pt-16 bg-blueGray-50">
+    <div 
+    style={{
+      border: "1px solid #d9d9d9",
+      borderRadius: "5px",
+      padding: "15px",
+      marginBottom: "10px",
+    }}
+    >
+       <BreadCrumb
+            items={[
+                {
+                    label: "Profile",
+                    link: "/user/profile",
+                }
+            ]}
+        />
     <div className="w-full px-4 mx-auto">
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
         <div className="px-6">
@@ -93,7 +109,7 @@ data?.profileImage ? (
         </div>
       </div>
     </div>
-    </section>
+    </div>
   )
 }
 

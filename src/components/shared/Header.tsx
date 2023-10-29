@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { AiOutlineClose } from 'react-icons/ai';
@@ -12,8 +12,9 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
   } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Button, Row, Space, Spin } from 'antd';
 import { IHasSider } from '@/types';
+import { useRouter } from 'next/navigation';
 
 const AvatarProfile = dynamic(() => import('./Avater'), { ssr: false });
 
@@ -43,6 +44,7 @@ const LinkItems = [
 
 export default function Header({ hasSider, collapsed,  setCollapsed}: IHasSider) {
   const userLoggedIn = isLoggedIn();
+  const router = useRouter();
   const [cartOpen, setCartOpen] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
   const { role } = getUserInfo() as any;

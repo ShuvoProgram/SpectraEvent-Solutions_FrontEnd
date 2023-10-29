@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { Button, Col, Row, message } from "antd";
 import { useCreateEventMutation } from '@/redux/api/eventApi';
-import { useGetAllOrganizationQuery } from '@/redux/api/categoryApi';
+import { useGetAllCategoryQuery } from '@/redux/api/categoryApi';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import Form from '@/components/Form/Form';
 import FormInput from '@/components/Form/FormInput';
@@ -18,7 +18,7 @@ function CreateEvent() {
     const [createEvent] = useCreateEventMutation();
     const router = useRouter();
     const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const { data, isLoading } = useGetAllOrganizationQuery({
+    const { data, isLoading } = useGetAllCategoryQuery({
         limit: 100,
         page: 1,
     });
@@ -26,15 +26,15 @@ function CreateEvent() {
         limit: 100,
         page: 1
     })
-    const organization = data?.organization;
-    const organizationOptions = organization?.map((Or) => {
+    const category = data?.Category;
+    const categoryOptions = category?.map((Or) => {
         return {
             label: Or?.name,
             value: Or?.id,
         };
     });
 
-    const Vanue = VanueData?.Vanue?.data;
+    const Vanue = VanueData?.vanue?.data;
     const VanueOptions = Vanue?.map((Or) => {
         return {
             label: Or?.title,
@@ -73,7 +73,7 @@ function CreateEvent() {
     const onSubmit = async (values: any) => {
         values.eventImg = imageUrl;
         values.price = parseInt(values.price);
-        values.maxCapacity = parseInt(values.maxCapacity);
+        values.people = parseInt(values.people);
         // console.log(values)
         message.loading("Creating...");
         try {
@@ -113,16 +113,16 @@ function CreateEvent() {
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                         <FormSelectField
-                            name="organizationId"
-                            label="Organization"
+                            name="CategoryId"
+                            label="Category"
                             size='large'
-                            options={organizationOptions as SelectOptions[]}
+                            options={categoryOptions as SelectOptions[]}
                             placeholder='Select'
                         />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                     <FormSelectField
-                            name="VanueId"
+                            name="vanueId"
                             label="Vanue"
                             size='large'
                             options={VanueOptions as SelectOptions[]}
@@ -133,7 +133,7 @@ function CreateEvent() {
                         <FormInput name="price" label="Price" size='large' />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
-                        <FormInput name="maxCapacity" label="MaxCapacity" size='large' />
+                        <FormInput name="people" label="People" size='large' />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                     <QuillEditor
@@ -151,7 +151,7 @@ function CreateEvent() {
                         />
                     </Col>
                 </Row>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" danger>
                     Create Event
                 </Button>
             </Form>

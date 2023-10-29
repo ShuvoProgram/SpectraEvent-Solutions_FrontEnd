@@ -12,15 +12,6 @@ function ProfileUpdatePage() {
  
   return (
     <>
-    <BreadCrumb
-            items={[
-                {
-                    label: "update profile",
-                    link: "/user/profile",
-                }
-            ]}
-        />
-      
       <UpdateProfile/>
     </>
   )
