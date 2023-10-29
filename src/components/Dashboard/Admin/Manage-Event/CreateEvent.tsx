@@ -2,14 +2,14 @@
 import React, { useState } from 'react'
 import { Button, Col, Row, message } from "antd";
 import { useCreateEventMutation } from '@/redux/api/eventApi';
-import { useGetAllOrganizationQuery } from '@/redux/api/organizationApi';
+import { useGetAllOrganizationQuery } from '@/redux/api/categoryApi';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import Form from '@/components/Form/Form';
 import FormInput from '@/components/Form/FormInput';
 import FormSelectField, { SelectOptions } from '@/components/Form/FormSelectedField';
 import UploadImage from '@/components/shared/UploadImage';
 import QuillEditor from '@/components/Form/QuillEditor';
-import { useGetAllLocationQuery } from '@/redux/api/locationApi';
+import { useGetAllVanueQuery } from '@/redux/api/vanueApi';
 import axios from 'axios';
 import { UploadChangeParam, UploadFile, UploadProps } from 'antd/es/upload';
 import { useRouter } from 'next/navigation';
@@ -22,7 +22,7 @@ function CreateEvent() {
         limit: 100,
         page: 1,
     });
-    const {data: locationData} = useGetAllLocationQuery({
+    const {data: VanueData} = useGetAllVanueQuery({
         limit: 100,
         page: 1
     })
@@ -34,14 +34,15 @@ function CreateEvent() {
         };
     });
 
-    const location = locationData?.location?.data;
-    const locationOptions = location?.map((Or) => {
+    const Vanue = VanueData?.Vanue?.data;
+    const VanueOptions = Vanue?.map((Or) => {
         return {
             label: Or?.title,
             value: Or?.id,
         }
     })
 
+    
     const handleChange: UploadProps["onChange"] = async (
         info: UploadChangeParam<UploadFile>
       ) => {
@@ -121,10 +122,10 @@ function CreateEvent() {
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                     <FormSelectField
-                            name="locationId"
-                            label="Location"
+                            name="VanueId"
+                            label="Vanue"
                             size='large'
-                            options={locationOptions as SelectOptions[]}
+                            options={VanueOptions as SelectOptions[]}
                             placeholder='Select'
                         />
                     </Col>

@@ -1,5 +1,5 @@
 "use client";
-import { useDeleteLocationMutation, useGetAllLocationQuery } from '@/redux/api/locationApi';
+import { useDeleteVanueMutation, useGetAllVanueQuery } from '@/redux/api/vanueApi';
 import { useDebounced } from '@/redux/hooks';
 import { Button, Input, message } from 'antd';
 import React, { useState } from 'react'
@@ -15,7 +15,7 @@ import BreadCrumb from '@/components/shared/BreadCrumb';
 import ActionBar from '@/components/shared/ActionBar';
 import UMTable from '@/components/shared/UMTable';
 
-function ManageLocation() {
+function ManageVanue() {
     const query: Record<string, any> = {};
 
     const [page, setPage] = useState<number>(1);
@@ -23,7 +23,7 @@ function ManageLocation() {
     const [sortBy, setSortBy] = useState<string>("");
     const [sortOrder, setSortOrder] = useState<string>("");
     const [searchTerm, setSearchTerm] = useState<string>("");
-    const [deleteLocation] = useDeleteLocationMutation();
+    const [deleteVanue] = useDeleteVanueMutation();
   
     query["limit"] = size;
     query["page"] = page;
@@ -40,17 +40,17 @@ function ManageLocation() {
       query["searchTerm"] = debouncedTerm;
     }
   
-    const {data, isLoading} = useGetAllLocationQuery({...query});
+    const {data, isLoading} = useGetAllVanueQuery({...query});
   
-    const location = data?.location?.data;
+    const Vanue = data?.vanue?.data;
     const meta = data?.meta?.meta;
 
     const handleDelete = async (id: string) => {
       message.loading("Deleting......")
       try {
-        const res = await deleteLocation(id);
+        const res = await deleteVanue(id);
         if (res) {
-          message.success('Successfully Deleted Location');
+          message.success('Successfully Deleted Vanue');
           setPage(1);
         }
       } catch (err: any) {
@@ -59,7 +59,7 @@ function ManageLocation() {
     }
     const columns = [
       {
-        title: "Location Title",
+        title: "Vanue Title",
         dataIndex: "title",
       },
       {
@@ -75,7 +75,7 @@ function ManageLocation() {
         render: function (data: any) {
           return (
             <>
-              <Link href={`/admin/manage-location/update/${data?.id}`}>
+              <Link href={`/admin/manage-vanue/update/${data?.id}`}>
                 <Button
                   style={{
                     margin: "0px 5px",
@@ -136,7 +136,7 @@ function ManageLocation() {
             },
           ]}
         />
-            <ActionBar title="Location List">
+            <ActionBar title="Vanue List">
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search ......"
@@ -152,7 +152,7 @@ function ManageLocation() {
                         <ReloadOutlined />
                     </button>
                 )}
-                <Link href="/admin/manage-location/create">
+                <Link href="/admin/manage-vanue/create">
             <Button type="primary" style={{
               backgroundColor: "#54B435",
               margin: "0px 10px"
@@ -164,7 +164,7 @@ function ManageLocation() {
       <UMTable
         loading={isLoading}
         columns={columns}
-        dataSource={location}
+        dataSource={Vanue}
         pageSize={size}
         totalPages={meta?.total}
         showSizeChanger={true}
@@ -176,4 +176,4 @@ function ManageLocation() {
   )
 }
 
-export default ManageLocation
+export default ManageVanue

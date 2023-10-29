@@ -5,9 +5,9 @@ import FormSelectField, { SelectOptions } from '@/components/Form/FormSelectedFi
 import QuillEditor from '@/components/Form/QuillEditor';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
+import { useGetAllCategoryQuery } from '@/redux/api/categoryApi';
 import { useGetSingleEventQuery, useUpdateEventMutation } from '@/redux/api/eventApi';
-import { useGetAllLocationQuery, useGetSingleLocationQuery } from '@/redux/api/locationApi';
-import { useGetAllOrganizationQuery, useGetSingleOrganizationQuery } from '@/redux/api/organizationApi';
+import { useGetAllVanueQuery, useGetSingleVanueQuery } from '@/redux/api/vanueApi';
 import { IDProps } from '@/types'
 import { Button, Col, Row, message } from 'antd';
 import { useRouter } from 'next/navigation';
@@ -20,24 +20,24 @@ function EventUpdate({params}: IDProps) {
     const [updateEvent] = useUpdateEventMutation();
 
 
-    const { data: organizationData } = useGetAllOrganizationQuery({
+    const { data: categoryData } = useGetAllCategoryQuery({
         limit: 100,
         page: 1,
     });
-    const {data: locationData} = useGetAllLocationQuery({
+    const {data: VanueData} = useGetAllVanueQuery({
         limit: 100,
         page: 1
     })
-    const organization = organizationData?.organization;
-    const organizationOptions = organization?.map((Or) => {
+    const category = categoryData?.Category;
+    const categoryOptions = category?.map((Or) => {
         return {
             label: Or?.name,
             value: Or?.id,
         };
     });
 
-    const location = locationData?.location?.data;
-    const locationOptions = location?.map((Or) => {
+    const Vanue = VanueData?.vanue?.data;
+    const VanueOptions = Vanue?.map((Or) => {
         return {
             label: Or?.title,
             value: Or?.id,
@@ -52,7 +52,7 @@ function EventUpdate({params}: IDProps) {
         message.loading("Updating...");
         try {
             values.price = parseInt(values.price);
-        values.maxCapacity = parseInt(values.maxCapacity);
+        values.people = parseInt(values.people);
          const res = await updateEvent({ ...values }).unwrap();
          if(res?.id){
              message.success("Event updated successfully!");
@@ -66,10 +66,10 @@ function EventUpdate({params}: IDProps) {
        // @ts-ignore
        const defaultValues = {
         title: data?.title || "",
-        locationId: data?.locationId || "",
+        VanueId: data?.VanueId || "",
         organizationId: data?.organizationId || "",
         price: data?.price || "",
-        maxCapacity: data?.maxCapacity || "",
+        people: data?.people || "",
         description: data?.description || "",
         facility: data?.facility || "",
     };
@@ -101,27 +101,27 @@ function EventUpdate({params}: IDProps) {
                         <FormInput name="price" label="Price" size='large' />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
-                        <FormInput name="maxCapacity" label="MaxCapacity" size='large' />
+                        <FormInput name="people" label="People" size='large' />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                         <FormSelectField
-                            name="organizationId"
-                            label="Organization"
+                            name="CategoryId"
+                            label="Category"
                             size='large'
-                            options={organizationOptions as SelectOptions[]}
-                            placeholder='Select'
-                        />
-                    </Col>
-                    <Col>
-                    <FormSelectField
-                            name="locationId"
-                            label="Location"
-                            size='large'
-                            options={locationOptions as SelectOptions[]}
+                            options={categoryOptions as SelectOptions[]}
                             placeholder='Select'
                         />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
+                    <FormSelectField
+                            name="vanueId"
+                            label="Vanue"
+                            size='large'
+                            options={VanueOptions as SelectOptions[]}
+                            placeholder='Select'
+                        />
+                    </Col>
+                    <Col xs={24} sm={24} md={24} lg={24} style={{ margin: "10px 10px" }}>
                     <QuillEditor
                             name='facility'
                             label='Facility'
@@ -134,7 +134,7 @@ function EventUpdate({params}: IDProps) {
                         />
                     </Col>
                 </Row>
-                <Button type="primary" htmlType="submit">
+                <Button type="primary" htmlType="submit" danger>
                     Update Event
                 </Button>
             </Form>

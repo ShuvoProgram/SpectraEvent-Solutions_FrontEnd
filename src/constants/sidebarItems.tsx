@@ -61,9 +61,9 @@ export const sidebarItems = (role: string) => {
       key: `/manage-customer`,
     },
     {
-      label: <Link href={`/${role}/manage-location`}>Manage Location</Link>,
+      label: <Link href={`/${role}/manage-vanue`}>Manage Vanue</Link>,
       icon: <CommentOutlined />,
-      key: `/manage-location`,
+      key: `/manage-vanue`,
     },
     {
       label: <Link href={`/${role}/manage-event`}>Manage Event</Link>,
@@ -71,9 +71,9 @@ export const sidebarItems = (role: string) => {
       key: `/manage-event`,
     },
     {
-      label: <Link href={`/${role}/manage-organization`}>Manage Organization</Link>,
+      label: <Link href={`/${role}/manage-category`}>Manage Category</Link>,
       icon: <UserSwitchOutlined />,
-      key: `/manage-organization`,
+      key: `/manage-category`,
     }, 
     {
         label: <Link href={`/${role}/manage-blog`}>Manage Blog</Link>,

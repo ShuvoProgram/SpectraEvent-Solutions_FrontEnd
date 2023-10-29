@@ -2,7 +2,7 @@
 import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import UMTable from '@/components/shared/UMTable';
-import { useDeleteOrganizationMutation, useGetAllOrganizationQuery } from '@/redux/api/organizationApi';
+import { useDeleteCategoryMutation, useGetAllCategoryQuery } from '@/redux/api/categoryApi';
 import { useDebounced } from '@/redux/hooks';
 import {
   DeleteOutlined,
@@ -10,12 +10,12 @@ import {
   SearchOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { Button, Input, message } from 'antd';
+import { Avatar, Button, Input, message } from 'antd';
 import dayjs from "dayjs";
 import Link from 'next/link';
 import React, { useState } from 'react'
 
-function ManageOrganization() {
+function ManageCategory() {
   const query: Record<string, any> = {};
 
   const [page, setPage] = useState<number>(1);
@@ -23,7 +23,7 @@ function ManageOrganization() {
   const [sortBy, setSortBy] = useState<string>("");
   const [sortOrder, setSortOrder] = useState<string>("");
   const [searchTerm, setSearchTerm] = useState<string>("");
-const [deleteOrganization] = useDeleteOrganizationMutation();
+const [deleteCategory] = useDeleteCategoryMutation();
 
 query["limit"] = size;
 query["page"] = page;
@@ -40,15 +40,15 @@ if (!!debouncedSearchTerm) {
 }
 
 
-const { data, isLoading } = useGetAllOrganizationQuery({ ...query });
+const { data, isLoading } = useGetAllCategoryQuery({ ...query });
 
-const categories = data?.organization;
+const categories = data?.Category;
 // console.log(categories)
-  const meta = data?.organization?.meta;
+  const meta = data?.Category?.meta;
  const handleDelete = async (id: string) => {
   message.loading("Deleting.....");
   try {
-    await deleteOrganization(id);
+    await deleteCategory(id);
     message.success("Category Deleted successfully");
 } catch (err: any) {
     message.error(err.message);
@@ -57,19 +57,15 @@ const categories = data?.organization;
 
 const columns = [
   {
-      title: "Organization Name",
+      title: "Category Name",
       dataIndex: "name",
   },
   {
-      title: "Organization Image",
-      dataIndex: "image",
-  },
-  {
-      title: "Admin Name",
-      dataIndex: "admin",
-      render: function (data: any){
-
-      }
+      title: "Category Image",
+      render: function (data: any) {
+        // return <img src={data?.profilePicture} alt="profile" width="50px" height="50px" />
+        return <Avatar shape="square" size={50} src={data?.image} />;
+      },
   },
   {
       title: "Created at",
@@ -84,7 +80,7 @@ const columns = [
       render: function (data: any) {
           return (
               <div className="flex">
-                  <Link href={`/admin/manage-organization/update/${data.id}`}>
+                  <Link href={`/admin/manage-category/update/${data.id}`}>
                   <Button
                   style={{
                     margin: "0px 5px",
@@ -144,9 +140,9 @@ setSearchTerm("");
             },
           ]}
         />
-         <ActionBar title="Event Organization List">
+         <ActionBar title="Event Category List">
                 <Input
-                    addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#4338ca" }} />}
+                    addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search Category ......"
                     onChange={(e) => {
                         setSearchTerm(e.target.value);
@@ -160,7 +156,7 @@ setSearchTerm("");
                         <ReloadOutlined />
                     </button>
                 )}
-                <Link href="/admin/manage-organization/create">
+                <Link href="/admin/manage-category/create">
                 <Button type="primary" style={{
               backgroundColor: "#54B435",
               margin: "0px 10px"
@@ -182,4 +178,4 @@ setSearchTerm("");
   )
 }
 
-export default ManageOrganization
+export default ManageCategory

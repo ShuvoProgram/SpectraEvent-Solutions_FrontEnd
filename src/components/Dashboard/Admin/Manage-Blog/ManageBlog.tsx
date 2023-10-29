@@ -48,7 +48,7 @@ function ManageBlog() {
             const res = await deleteBlog({ id }).unwrap();
             if (res) {
                 message.success('Successfully Deleted Blog')
-                window.location.reload();
+                window.Vanue.reload();
             }
         } catch (error: any) {
             console.error(error.message);

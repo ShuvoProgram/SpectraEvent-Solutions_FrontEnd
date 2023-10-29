@@ -2,8 +2,6 @@
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
 import { useGetSingleEventQuery } from '@/redux/api/eventApi';
-import { useGetSingleLocationQuery } from '@/redux/api/locationApi';
-import { useGetAllOrganizationQuery, useGetSingleOrganizationQuery } from '@/redux/api/organizationApi';
 import { IDProps } from '@/types';
 import { Col, Row } from 'antd';
 import React from 'react';
@@ -12,16 +10,13 @@ import {GroupOutlined, ProjectOutlined } from "@ant-design/icons"
 function EventDetails({params}: IDProps) {
     const {id} = params;
     const { data, isLoading } = useGetSingleEventQuery(id);
-   
-    const {data: organizationData} = useGetSingleOrganizationQuery(data?.organizationId);
-    const {data: locationData} = useGetSingleLocationQuery(data?.locationId);
     // const {data: adminData} = useGetSingleAdminQuery(data?.adminId);
 
     if(isLoading) {
       return <Spinner/>
   }
 
-    console.log(data);
+    // console.log(data);
 
   return (
     <div
@@ -50,7 +45,7 @@ function EventDetails({params}: IDProps) {
             </Col>
             <Col sm={24} md={10} lg={12} style={{ margin: "10px 0", display: "flex", alignItems: "center"}}>
             <GroupOutlined className='mr-2'/>
-            <p className='text-lg'>Event Organization Name: {organizationData?.name}</p>
+            <p className='text-lg'>Event Category Name: {data?.Category?.name}</p>
             </Col>
             <Col sm={24} md={10} lg={12} style={{ margin: "10px 0" }}>
             <div className='text-lg flex'>Event Booked: {
@@ -62,7 +57,10 @@ function EventDetails({params}: IDProps) {
             }</div>
             </Col>
             <Col sm={24} md={10} lg={12} style={{ margin: "10px 0" }}>
-            <p className='text-lg'>Event Location: {locationData?.title}</p>
+            <p className='text-lg'>Event Vanue: {data?.Vanue?.title}</p>
+            </Col>
+            <Col sm={24} md={10} lg={12} style={{ margin: "10px 0" }}>
+            <p className='text-lg'>Event Created Admin: {data?.Admin?.email}</p>
             </Col>
             <Col sm={24} md={10} lg={12} style={{ margin: "10px 0" }}>
             <p className='text-lg'>Event Budget: {data?.price}</p>
@@ -89,7 +87,3 @@ function EventDetails({params}: IDProps) {
 }
 
 export default EventDetails
-
-function sanitizeHtml(description: any) {
-  throw new Error('Function not implemented.');
-}

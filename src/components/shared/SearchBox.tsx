@@ -59,7 +59,7 @@ const SearchBox = ({ open, setOpen }: any) => {
                         Category: <span className='font-bold'>Standard</span>
                       </p>
                       <p className='text-sm font-sans text-[#6c757d] mb-3'>
-                        Location: <span className='font-bold'>Dhaka</span>
+                        Vanue: <span className='font-bold'>Dhaka</span>
                       </p>
                       <span className='px-5 rounded border-2 border-[#0d99e5] text-[#0d99e5]'>
                         $250

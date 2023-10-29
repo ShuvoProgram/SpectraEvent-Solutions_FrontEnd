@@ -12,11 +12,10 @@ import {
   import { Button, Input } from 'antd';
 import { useDebounced } from '@/redux/hooks';
 import { useGetAllEventQuery } from '@/redux/api/eventApi';
-import { IEvent, IORGANIZATION } from '@/types';
+import { IEvent } from '@/types';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import ActionBar from '@/components/shared/ActionBar';
 import UMTable from '@/components/shared/UMTable';
-import { useGetSingleOrganizationQuery } from '@/redux/api/organizationApi';
 
 function ManageEvent() {
     const query: Record<string, any> = {};
@@ -46,7 +45,6 @@ function ManageEvent() {
   
     const events = data?.event?.data;
     const meta = data?.event?.meta;
-    console.log(events);
   
     const columns = [
       {
@@ -56,14 +54,9 @@ function ManageEvent() {
         },
       },
       {
-        title: "Organization",
+        title: "Category Name",
         render: function (data: any) {
-          return {
-            children: data?.organization?.name,
-            props: {
-              colSpan: 1,
-            },
-          };
+          return <>{data?.Category?.name}</>;
         },
       },
       {
@@ -87,8 +80,8 @@ function ManageEvent() {
       },
       
       {
-        title: "maxCapacity",
-        dataIndex: "maxCapacity",
+        title: "People",
+        dataIndex: "people",
       
       },
       {

@@ -1,4 +1,4 @@
-import ManageOrganization from '@/components/Dashboard/Admin/Manage-Organization/ManageOrganization';
+import ManageOrganization from '@/components/Dashboard/Admin/Manage-Category/ManageCategory';
 import { Metadata } from 'next';
 import React from 'react';
 

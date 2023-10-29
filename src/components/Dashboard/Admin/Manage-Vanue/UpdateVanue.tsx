@@ -3,7 +3,7 @@ import Form from '@/components/Form/Form';
 import FormInput from '@/components/Form/FormInput';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
-import { useGetSingleLocationQuery, useUpdateLocationMutation } from '@/redux/api/locationApi';
+import { useGetSingleVanueQuery, useUpdateVanueMutation } from '@/redux/api/vanueApi';
 import { Button, Col, Row, message } from 'antd';
 import React from 'react'
 
@@ -11,10 +11,10 @@ type IDProps = {
     id: string;
   };
 
-function UpdateLocation({id}: IDProps) {
-    const {data: locationData, isLoading} = useGetSingleLocationQuery(id);
+function UpdateVanue({id}: IDProps) {
+    const {data: VanueData, isLoading} = useGetSingleVanueQuery(id);
    
-    const [updateLocation] = useUpdateLocationMutation();
+    const [updateVanue] = useUpdateVanueMutation();
 
     if(isLoading) {
         return <Spinner/>
@@ -22,16 +22,16 @@ function UpdateLocation({id}: IDProps) {
 
     const onSubmit = async (values: any) => {
         try {
-          const res = await updateLocation({...values}).unwrap();
+          const res = await updateVanue({...values}).unwrap();
             if(res?.id) {
-              message.success("Location Successfully Updated!");
+              message.success("Vanue Successfully Updated!");
             }
         } catch (error: any) {
             console.error(error.message)
         }
     };
     const defaultValue = {
-    title: locationData?.title || "",
+    title: VanueData?.title || "",
     }
   return (
     <div
@@ -52,7 +52,7 @@ function UpdateLocation({id}: IDProps) {
       ]}
     />
     <p style={{ fontSize: "18px", fontWeight: "500", margin: "5px 0px" }}>
-    Update Location
+    Update Vanue
     </p>
     <Form submitHandler={onSubmit} defaultValues={defaultValue}>
       <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
@@ -61,17 +61,17 @@ function UpdateLocation({id}: IDProps) {
             name='title'
             type='text'
             size='large'
-            label='Location Title'
+            label='Vanue Title'
             required
           />
         </Col>
       </Row>
       <Button type="primary" danger htmlType="submit">
-        Update Location
+        Update Vanue
       </Button>
     </Form>
     </div>
   )
 }
 
-export default UpdateLocation
+export default UpdateVanue

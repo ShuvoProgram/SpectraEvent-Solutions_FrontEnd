@@ -63,7 +63,6 @@ const Sidebar = () => {
           fontSize: '1.5rem',
           textAlign: 'center',
           fontWeight: 'bold',
-          marginBottom: '5rem',
           marginTop: '1rem',
         }}
       >

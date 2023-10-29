@@ -79,7 +79,7 @@ export type IFAQ = {
   deletedAt?: null;
 }
 
-export type IORGANIZATION ={
+export type ICategory ={
   id:             String
   name:           String
   image:          String
@@ -109,7 +109,7 @@ export type IBlog = {
     review:      IReview[]
 }
 
-export type ILocation = {
+export type IVanue = {
   id:          String
     title:       String
     createdAt:   Date
