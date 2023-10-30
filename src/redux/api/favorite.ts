@@ -24,7 +24,7 @@ export const favoriteApi = baseApi.injectEndpoints({
         },
         transformResponse: (response: IFavorite[], meta: IMeta) => {
             return {
-              faq: response,
+              fav: response,
               meta,
             };
           },

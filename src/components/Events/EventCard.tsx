@@ -1,9 +1,16 @@
 "use client"
-import { Rate } from 'antd';
+import { useCreateFavoriteMutation } from '@/redux/api/favorite';
+import { isLoggedIn } from '@/services/auth.service';
+// import { decodedToken } from '@/utils/jwt';
+// import { getFromLocalStorage } from '@/utils/local-storage';
+import { Rate, message } from 'antd';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
-function EventCard({title, category, imageUrl, price, description, review, vanue}: any) {
+function EventCard({title, category, imageUrl, price, description, review, vanue, href, id}: any) {
+    const userLoggedIn = isLoggedIn();
+    const [createFavorite] = useCreateFavoriteMutation();
    const desc = description ? description.slice(0, 500) : "";
    const totalReview = Array.isArray(review) ? review.length : 0;
     // Calculate the sum of ratings
@@ -14,20 +21,41 @@ function EventCard({title, category, imageUrl, price, description, review, vanue
     // Calculate the average rating
     const averageRating = totalReview > 0 ? sumOfRatings / totalReview : 0;
 
+    const handleFavorite = async (id: String) => {
+        const data = {
+            eventId: id
+        }
+       
+        try {
+            if(!userLoggedIn) {
+                message.error("You must be logged in to continue")
+            } else {
+                const res = await createFavorite({...data}).unwrap()
+                if(res.id) {
+                    message.success("Favorite was successfully created")
+                } else {
+                    message.error("Internal error occurred")
+                }
+            }
+        } catch (error: any) {
+            message.error("Already has favorite list")
+        }
+    }
+
   return (
-    <div className="p-2 py-5 bg-purple-100 text-center transform duration-500 hover:-translate-y-2 cursor-pointer shadow-lg w-[330px] mx-auto">
+    <div className="p-2 py-5 bg-purple-100 text-center transform duration-500 hover:-translate-y-2 shadow-lg w-[330px] mx-auto">
 
     <div className="absolute mt-3 ml-3">
         <button className="h-6 bg-[#E74040] text-white px-3 text-sm rounded font-medium">{category}</button>
     </div>
 
-    <div className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.3rem]">
+    <button className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.3rem]" onClick={() => handleFavorite(id)}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
             className="h-6 w-6">
             <path strokeLinecap="round" strokeLinejoin="round"
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
         </svg>
-    </div>
+    </button>
     <div className="rounded-md">
         <Image src={imageUrl} width={320} height={150} alt='test'/>
     </div>
@@ -37,9 +65,9 @@ function EventCard({title, category, imageUrl, price, description, review, vanue
     <Rate disabled defaultValue={averageRating} />
     <span>( {totalReview} Reviews )</span>
             </div>
-        <div className="max-w-fit">
+        <Link href={`${href}`} className="max-w-fit">
             <p className="text-2xl text-[#252B42] tracking-wider ">{title}</p>
-        </div>
+        </Link>
 
         <div className="max-w-fit">
             <p className="text-sm text-[#252B42] tracking-wider ">Venue: {vanue}</p>

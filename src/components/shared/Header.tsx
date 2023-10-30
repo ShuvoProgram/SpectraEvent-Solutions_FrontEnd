@@ -15,6 +15,7 @@ import {
 import { Button, Row, Space, Spin } from 'antd';
 import { IHasSider } from '@/types';
 import { useRouter } from 'next/navigation';
+import { useGetAllFavoriteQuery } from '@/redux/api/favorite';
 
 const AvatarProfile = dynamic(() => import('./Avater'), { ssr: false });
 
@@ -48,11 +49,12 @@ export default function Header({ hasSider, collapsed,  setCollapsed}: IHasSider)
   const [cartOpen, setCartOpen] = useState(false);
   const [toggleMenu, setToggleMenu] = useState(false);
   const { role } = getUserInfo() as any;
+  const {data, refetch} = useGetAllFavoriteQuery({})
+  
 
   const handleNav = () => {
     setToggleMenu(!toggleMenu);
   };
-
   const renderNavLinks = () => {
     return LinkItems.map((item, index) => (
       <Link href={item.path} key={index}>
@@ -77,7 +79,7 @@ export default function Header({ hasSider, collapsed,  setCollapsed}: IHasSider)
             <div className="flex gap-6">
               <div className="flex xs:flex items-center gap-10">
                 <Search />
-                <Favorite setCartOpen={setCartOpen} cartOpen={cartOpen} />
+                <Favorite setCartOpen={setCartOpen} cartOpen={cartOpen} count={data?.fav?.length}/>
                 <div>
                   {userLoggedIn ? (
                     <AvatarProfile role={role} />

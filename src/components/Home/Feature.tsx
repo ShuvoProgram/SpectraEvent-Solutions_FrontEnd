@@ -39,7 +39,8 @@ function FeatureEvent({title, subtitle, hiddenEventId}: EventListProps) {
                     price={event?.price || ""}
                     review={event?.Review || ""}
                     imageUrl={event?.eventImg || ""}
-                    href={`/detail/${event?.id}` || ""}
+                    href={`/events/${event?.id}` || ""}
+                    id={event?.id || ""}
                   />
                 ) : (
                   <Skeleton avatar paragraph={{ rows: 4 }} />

@@ -1,21 +1,31 @@
+"use client";
 import Loading from '@/app/loading';
-import { useGetAllEventQuery } from '@/redux/api/eventApi';
-import { useParams } from 'next/navigation';
-import React from 'react'
+import Event from '@/components/Events/Event';
+import { useGetSingleEventQuery } from '@/redux/api/eventApi';
+import { IDProps } from '@/types';
+import { useRouter } from 'next/router';
+import React from 'react';
 
-function EventDetailsPage() {
-    const id:any = useParams();
-    const {data, isLoading, isError} = useGetAllEventQuery(id?.id);
-    const event = data?.event;
-    let content = null;
-    if (isLoading) content = <Loading/>;
-    if (!isLoading && isError) content = <p className='text-lg text-destructive text-center'>There is an error</p>;
-    // if (!isLoading && !isError && event) {content = <ProductDetails key={event._id} event={event}/>}
+function EventDetailsPage({params}: IDProps) {
+  const { id } = params;
+  const { data, isLoading, isError } = useGetSingleEventQuery(id);
+  let content = null;
+
+  if (isLoading) {
+    content = <Loading />;
+  } else if (isError) {
+    content = <p className='text-lg text-destructive text-center'>There is an error</p>;
+  } else {
+    content = (
+      <Event data={data}/>
+    );
+  }
+
   return (
     <div>
-        {content}
+      {content}
     </div>
-  )
+  );
 }
 
 export default EventDetailsPage;
