@@ -44,11 +44,20 @@ export const bloodGroupOptions = [
   },
 ];
 
-export enum bookingStatus {
-  COMPLETE = "COMPLETE",
-  CONFIRMED = "CONFIRMED",
-  CANCELLED = "CANCELLED"
-}
+export const bookingStatus = [
+  {
+    label: "Pending",
+    value: "pending"
+  },
+  {
+    label: "Confirmed",
+    value: "confirmed"
+  },
+  {
+    label: "Cancelled",
+    value: "cancelled"
+  }
+]
 
 export enum paymentStatus {
   COMPLETE = "COMPLETE",

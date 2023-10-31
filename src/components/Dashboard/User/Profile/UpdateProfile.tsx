@@ -17,10 +17,10 @@ function UpdateProfile() {
   const onSubmit = async (values: any) => {
     try {
       console.log(values);
-      // const res = await updateProfile({ ...values }).unwrap();
-      // if (res?.id) {
-      //   message.success("User Successfully Updated!");
-      // }
+      const res = await updateProfile(values).unwrap();
+      if (res?.id) {
+        message.success("User Successfully Updated!");
+      }
     } catch (error: any) {
       console.error(error.message)
     }

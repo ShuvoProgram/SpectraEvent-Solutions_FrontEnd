@@ -41,7 +41,7 @@ export const bookingApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${BOOKING_URL}/${data.id}`,
             method: "PATCH",
-            data
+           data
         }),
         invalidatesTags: [tagTypes.booking]
     }),
@@ -56,6 +56,7 @@ export const bookingApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${BOOKING_URL}/confirm-booking/${data.id}`,
             method: "PATCH",
+            data
         }),
         invalidatesTags: [tagTypes.booking]
     }),

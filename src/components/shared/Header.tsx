@@ -55,6 +55,12 @@ export default function Header({ hasSider, collapsed,  setCollapsed}: IHasSider)
   const handleNav = () => {
     setToggleMenu(!toggleMenu);
   };
+
+  // useEffect(() => {
+  //   if (userLoggedIn) {
+  //     refetch();
+  //   }
+  // }, [userLoggedIn, refetch])
   const renderNavLinks = () => {
     return LinkItems.map((item, index) => (
       <Link href={item.path} key={index}>
