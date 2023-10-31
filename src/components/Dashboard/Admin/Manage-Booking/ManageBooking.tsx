@@ -76,9 +76,10 @@ const bookings = data?.booking?.data;
       title: "Booking Status",
       dataIndex: "status",
       render: function (data: any) {
+        console.log(data)
         return data === "pending" ? (
           <strong style={{ color: "orange" }}>Pending</strong>
-        ) : data === "confirm" ? (
+        ) : data === "confirmed" ? (
           <strong style={{ color: "green" }}>Confirm</strong>
         ) : (
           <strong
@@ -86,25 +87,7 @@ const bookings = data?.booking?.data;
               color: "red",
             }}
           >
-            Rejected
-          </strong>
-        );
-      },
-    },
-    {
-      title: "Payment Status",
-      render: function (data: any) {
-        return data?.status === "pending" ? (
-          <strong style={{ color: "orange" }}>Pending</strong>
-        ) : data?.status === "accepted" ? (
-          <strong style={{ color: "yellowgreen" }}>Paid</strong>
-        ) : (
-          <strong
-            style={{
-              color: "red",
-            }}
-          >
-            Unpaid
+           Cancel
           </strong>
         );
       },

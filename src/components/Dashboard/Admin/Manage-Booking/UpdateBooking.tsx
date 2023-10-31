@@ -1,9 +1,9 @@
 "use client";
-import Form from '@/components/Form/Form';
-import FormSelectField from '@/components/Form/FormSelectedField';
+import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
-import { bookingStatus } from '@/constants/global';
-import { useConfirmBookingMutation, useGetSingleBookingQuery, useUpdateBookingMutation} from '@/redux/api/bookingApi';
+import { useCancelBookingMutation, useConfirmBookingMutation, useGetSingleBookingQuery, useUpdateBookingMutation} from '@/redux/api/bookingApi';
+import { useGetSingleCategoryQuery } from '@/redux/api/categoryApi';
+import { useGetSingleVanueQuery } from '@/redux/api/vanueApi';
 import { getUserInfo } from '@/services/auth.service';
 import { IDProps } from '@/types'
 import { Button, Col, Row, message } from 'antd';
@@ -11,22 +11,23 @@ import React from 'react'
 
 function UpdateBooking({params}: IDProps) {
     const {id} = params;
-
+    const { role } = getUserInfo() as any;
     const {data, isLoading, refetch} = useGetSingleBookingQuery(id);
-   console.log(data);
-
-   const [updateBooking] = useUpdateBookingMutation();
+    const {data: categoryData} = useGetSingleCategoryQuery(data?.Event?.CategoryId);
+    const {data: venueData} = useGetSingleVanueQuery(data?.Event?.vanueId);
+  
    const [confirmBooking] = useConfirmBookingMutation();
+   const [cancelBooking] = useCancelBookingMutation();
    if(isLoading) {
     return <Spinner/>
    }
-   const onConfirmBooking = async (data: any) => {
-    message.loading("Update booking...")
+   const handleCancelBooking = async (data: any) => {
+    message.loading("Cancel booking...")
     try {
-        const res = await updateBooking({data, id}).unwrap();
+        const res = await cancelBooking({id: data}).unwrap();
         console.log(res)
         if(res.id) {
-          message.success("Booking confirm successfully");
+          message.success("Booking cancel successfully");
           refetch();
         }
     } catch (error: any) {
@@ -36,42 +37,115 @@ function UpdateBooking({params}: IDProps) {
 
    const handleConfirmBooking = async (data: any) => {
     message.loading("Confirm booking...")
-    console.log(data?.id)
-    // try {
-    //     const res = await confirmBooking(data?.id).unwrap();
-    //     console.log(res)
-    //     if(res.id) {
-    //       message.success("Booking confirm successfully");
-    //       refetch();
-    //     }
-    // } catch (error: any) {
-    //     message.error(error.message)
-    // }
+    try {
+        const res = await confirmBooking({id: data}).unwrap();
+        console.log(res)
+        if(res.id) {
+          message.success("Booking confirm successfully");
+          refetch();
+        }
+    } catch (error: any) {
+        message.error(error.message)
+    }
    }
-
+   console.log(data);
+  console.log(venueData)
   return (
-    <div>
-      <h1>Update Booking</h1>
-      {/* <Form submitHandler={onConfirmBooking}>
-      <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
-          <Col span={8} style={{ margin: "10px 0" }}>
-            <p>Current Booking Status: {data?.status}</p>
-          </Col>
-        </Row>
-
-        <Row gutter={{ xs: 24, xl: 8, lg: 8, md: 24 }}>
-          <Col span={8} style={{ margin: "10px 0" }}>
-            <h1>Booking Status: </h1>
-            <FormSelectField
-            name='status'
-            label='Booking Status'
-            options={bookingStatus}
+    <div
+    style={{
+      border: "1px solid #d9d9d9",
+      borderRadius: "5px",
+      padding: "15px",
+      marginBottom: "10px",
+      marginTop: "10px",
+    }}
+    >
+       <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: `/${role}`,
+                    },
+                    {
+                        label: "Manage-Customer",
+                        link: `/${role}/manage-customer`,
+                    },
+                ]}
             />
+      <h1 className='text-xl font-bold my-5'>Booking Information</h1>
+      <Row>
+        <Col md={12}>
+        <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Event Name: {data?.Event?.title}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Event Category: {categoryData?.name}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Event Venue: {venueData?.title}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Event people: {data?.Event?.people}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Event price: {data?.Event?.price}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Status: {data?.status}</p>
+          </Col>
+         
+        </Col>
+          <Col md={12}>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Customer Name: {data?.user?.firstName} {data?.user?.middleName} {data?.user?.lastName}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Customer Email: {data?.user?.email}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Customer Contact No: {data?.user?.contactNo}</p>
+          </Col>
+          <Col md={24} style={{ margin: "10px 0" }}>
+            <p >Current Booking Customer Address: {data?.user?.address}</p>
+          </Col>
+          </Col>
+          <Col span={8} 
+          style={{ 
+            margin: "10px 0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+           }}
+          >
+            <h1>Booking Status: </h1>
+            <Button 
+            type='primary'
+            onClick={() => handleConfirmBooking(data?.id)}
+            style={{
+              marginLeft: "10px"
+            }}
+            >Confirm Booking</Button>
+          </Col>
+          <Col span={8} 
+          style={{ 
+            margin: "10px 0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+           }}
+          >
+            <h1>Booking Status: </h1>
+            <Button
+            type='primary'
+             onClick={() => handleCancelBooking(data?.id)}
+            style={{
+              marginLeft: "10px"
+            }}
+            danger
+            >Cancel Booking</Button>
           </Col>
         </Row>
-        <Button type='primary' htmlType='submit'>Confirm Booking</Button>
-      </Form> */}
-      <Button onClick={() => handleConfirmBooking(data?.id)}>Confirm Booking</Button>
+      
     </div>
   )
 }
