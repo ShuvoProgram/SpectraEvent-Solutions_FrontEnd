@@ -3,6 +3,7 @@ import React from 'react'
 import EventCard from '../Events/EventCard';
 import { useGetAllEventQuery } from '@/redux/api/eventApi';
 import { Skeleton } from 'antd';
+import SectionTitle from '../shared/SectionTitle';
 
 type EventListProps = {
     title: string;
@@ -16,12 +17,9 @@ function FeatureEvent({title, subtitle, hiddenEventId}: EventListProps) {
   const events = data?.event?.data;
  
   return (
-    <section className="grow-today">
+    <section className="py-14">
     <div className="container">
-      <div className="sub-title mb-1" id="grow-today">
-        <span className="text-gradient-pink">{subtitle}</span>
-      </div>
-      <div className="text-3xl text-black font-semibold">{title}</div>
+     <SectionTitle title='Our Events'/>
       {!isError ? (
           //filter for event on isBooked
         events?.filter((event: any) => {
@@ -29,7 +27,7 @@ function FeatureEvent({title, subtitle, hiddenEventId}: EventListProps) {
         })
             .slice(0, 3)
             .map((event:any) => (
-              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 mt-10" key={event.id}>
+              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-10 mt-10" key={event.id}>
                 {!isLoading ? (
                   <EventCard
                     title={event?.title || ""}

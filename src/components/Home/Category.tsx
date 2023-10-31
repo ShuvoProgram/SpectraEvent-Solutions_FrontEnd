@@ -1,23 +1,36 @@
+"use client";
 import React from 'react'
 import CategoryCard from '../Category/CategoryCard';
+import SectionTitle from '../shared/SectionTitle';
+import { useGetAllCategoryQuery } from '@/redux/api/categoryApi';
+import Spinner from '../shared/Spinner';
 
-type EventListProps = {
-    title: string;
-    subtitle?: string;
-    hiddenEventId?: string;
-  };
-
-function Category({title, subtitle, hiddenEventId}: EventListProps) {
+function Category() {
+  const {data, isLoading, isError} = useGetAllCategoryQuery({})
+  if(isLoading){
+    return <Spinner/>
+  }
+  if(isError){
+    return (
+      <div className='text-red-600 text-center text-2xl font-serif'>Data was Failed</div>
+    )
+  }
+  console.log(data?.Category)
   return (
-    <section className="grow-today">
+    <section className="py-14">
     <div className="container">
-      <div className="sub-title mb-1" id="grow-today">
-        <span className="text-gradient-pink">{subtitle}</span>
-      </div>
-      <div className="text-3xl text-black font-semibold">{title}</div>
-
+      <SectionTitle title='Event Category'/>
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10">
-        <CategoryCard href='/' categoryImg='https://i.ibb.co/b36rWjT/1.png'/>
+        {
+          data?.Category?.map((category: any) => (
+            <CategoryCard
+            key={ category.id}
+              href={`/category/${category.id}`}
+              categoryImg={category.image}
+              name={category.name}
+            />
+          ))
+        }
       </div>
     </div>
   </section>

@@ -43,13 +43,13 @@ function EventCard({title, category, imageUrl, price, description, review, vanue
     }
 
   return (
-    <div className="p-2 py-5 bg-purple-100 text-center transform duration-500 hover:-translate-y-2 shadow-lg w-[330px] mx-auto">
+    <div className="p-2 py-5 text-center transform duration-500 hover:-translate-y-2 shadow-lg w-[280px] mx-auto">
 
     <div className="absolute mt-3 ml-3">
-        <button className="h-6 bg-[#E74040] text-white px-3 text-sm rounded font-medium">{category}</button>
+        <button className="h-6 bg-[#FF5B22] text-white px-2 text-xs rounded font-medium">{category}</button>
     </div>
 
-    <button className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.3rem]" onClick={() => handleFavorite(id)}>
+    <button className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.7rem]" onClick={() => handleFavorite(id)}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
             className="h-6 w-6">
             <path strokeLinecap="round" strokeLinejoin="round"
@@ -57,20 +57,21 @@ function EventCard({title, category, imageUrl, price, description, review, vanue
         </svg>
     </button>
     <div className="rounded-md">
-        <Image src={imageUrl} width={320} height={150} alt='test'/>
+        <Image src={imageUrl} width={270} height={150} alt='test'/>
     </div>
 
-    <div className="flex flex-col space-y-2.5 mt-8 px-5">
+    <div className="flex flex-col space-y-2.5 mt-4 px-2">
     <div className="flex justify-center flex-col">
     <Rate disabled defaultValue={averageRating} />
     <span>( {totalReview} Reviews )</span>
             </div>
-        <Link href={`${href}`} className="max-w-fit">
-            <p className="text-2xl text-[#252B42] tracking-wider ">{title}</p>
+        <Link href={`${href}`} className="">
+            <p className="text-lg text-[#252B42] tracking-wider text-center">{title}</p>
         </Link>
 
-        <div className="max-w-fit">
-            <p className="text-sm text-[#252B42] tracking-wider ">Venue: {vanue}</p>
+        <div className="flex justify-between">
+            <span className="text-base">Venue: {vanue}</span>
+            <span className="text-base">Price: $ {price}</span>
         </div>
 
         <div className="max-w-fit">
@@ -78,7 +79,7 @@ function EventCard({title, category, imageUrl, price, description, review, vanue
         </div>
 
         <div className="max-w-fit">
-            <p className="text-2xl text-[#737373] font-medium">$ {price}</p>
+            
         </div>
     </div>
 </div>

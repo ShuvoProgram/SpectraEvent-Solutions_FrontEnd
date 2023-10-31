@@ -156,3 +156,7 @@ export interface IHasSider {
   collapsed?: boolean;
   setCollapsed?: (collapsed: boolean) => void;
 }
+
+export type SectionTitle = {
+  title: string;
+}
