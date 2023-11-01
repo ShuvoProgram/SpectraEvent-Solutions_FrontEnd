@@ -1,12 +1,11 @@
 import React from 'react';
-import { Space, Spin } from 'antd';
+import { Space } from 'antd';
+import Spinner from '@/components/Loading/Spinner';
 
 const Loading = () => {
   return (
   <Space direction="vertical" style={{ width: '100%', marginTop: '300px' }}>
-      <Spin size="large">
-        <div className="content" />
-      </Spin>
+      <Spinner/>
   </Space>
   )
 }
