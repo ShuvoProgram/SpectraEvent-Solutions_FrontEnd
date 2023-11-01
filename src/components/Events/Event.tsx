@@ -1,9 +1,9 @@
 import React from 'react'
-import Review from './Review'
 import Image from 'next/image'
 import { CalendarOutlined, EnvironmentOutlined, GroupOutlined } from '@ant-design/icons';
 import { Col, Row } from 'antd';
 import EventBookCard from './EventBookCard';
+import Reviews from '../shared/Reviews';
 
 interface IWork {
   work: []
@@ -47,22 +47,10 @@ function Event({data}: any) {
       <EventBookCard price={data?.price} id={data?.id}/>
       </Col>
     </Row>
-   
-
-    <div className="my-10 rounded-lg bg-gray-50 py-3 shadow-md dark:bg-gray-700">
-      <table className="w-full">
-        <tbody>
-          {/* {work.attributes.map((attribute, index) => (
-            <tr key={index}>
-              <td className="w-48 px-4 py-2 font-semibold">{attribute.name}</td>
-              <td>{attribute.value}</td>
-            </tr>
-          ))} */}
-        </tbody>
-      </table>
-    </div>
-    <Review/>
   </div>
+ <div className='container py-14'>
+ <Reviews/>
+ </div>
     </div>
   )
 }

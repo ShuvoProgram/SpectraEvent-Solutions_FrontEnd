@@ -29,8 +29,8 @@ const LinkItems = [
     path: '/about',
   },
   {
-    name: 'Services',
-    path: '/services',
+    name: 'Events',
+    path: '/events',
   },
   {
     name: 'Blog',

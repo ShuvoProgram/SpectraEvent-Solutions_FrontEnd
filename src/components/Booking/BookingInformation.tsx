@@ -1,9 +1,9 @@
 "use client";
 import { useGetSingleEventQuery } from '@/redux/api/eventApi'
 import React from 'react'
-import Spinner from '../shared/Spinner';
 import Image from 'next/image';
 import { Rate } from 'antd';
+import Spinner from '../Loading/Spinner';
 
 function BookingInformation({ id }: any) {
     const { data, isLoading } = useGetSingleEventQuery(id);
