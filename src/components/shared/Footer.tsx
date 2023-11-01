@@ -23,10 +23,10 @@ const footerFeatureLinks = [
     },
 ]
 
-const footerLearnLinks = [
+const footerLinks = [
     {
-        name: 'Gift Cards',
-        href: '/'
+        name: 'Privacy-Policy',
+        href: '/privacy-policy'
     },
     {
         name: 'Newsletter',
@@ -42,24 +42,6 @@ const footerLearnLinks = [
     },
 ]
 
-const footerCompanyLinks = [
-    {
-        name: 'Jobs',
-        href: '/'
-    },
-    {
-        name: 'API',
-        href: '/'
-    },
-    {
-        name: 'Press',
-        href: '/'
-    },
-    {
-        name: 'Sitemap',
-        href: '/'
-    },
-]
 
 const socialMedia = [
     {
@@ -125,7 +107,7 @@ export default function Footer() {
                         <ul className="w-full md:w-1/3 mb-10 md:mb-0">
                             <li className="font-bold text-sm md:text-base">Information</li>
                             {
-                                footerLearnLinks.map((learn, idx) => (
+                                footerLinks.map((learn, idx) => (
                                     <li className="text-sm md:text-base" key={idx}><Link href={learn.href}>{learn.name}</Link></li>
                                 ))
                             }

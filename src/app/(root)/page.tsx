@@ -8,6 +8,8 @@ import Team from '@/components/Home/Team';
 import Category from '@/components/Home/Category';
 import UpcommingEvents from '@/components/Home/UpcommingEvents';
 import HeroSection from '@/components/Home/HeroSection';
+import ClientReview from '@/components/Home/ClientReview';
+import FeedbackForm from '@/components/Home/FeedbackForm';
 
 // const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -27,7 +29,9 @@ export default function Home() {
       <Story/>
       <Team/>
       <Brand/>
+      <ClientReview/>
      <Blog title='Blog' subtitle='Latest Blog'/>
+     <FeedbackForm/>
     </div>
   )
 }

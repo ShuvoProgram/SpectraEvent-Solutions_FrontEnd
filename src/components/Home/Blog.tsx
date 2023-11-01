@@ -1,5 +1,6 @@
 import React from 'react'
 import BlogCard from '../Blog/BlogCard';
+import SectionTitle from '../shared/SectionTitle';
 
 type BlogListProps = {
     title: string;
@@ -9,14 +10,10 @@ type BlogListProps = {
 
 function Blog({title, subtitle, hiddenBlogId}: BlogListProps) {
   return (
-    <section className="grow-today">
-        <div className="container">
-        <div className="sub-title mb-1" id="grow-today">
-        <span className="text-gradient-pink">{subtitle}</span>
-      </div>
-      <div className="text-3xl text-black font-semibold">{title}</div>
-      <div className="mt-5 row gap">
-      <div className="col-12 col-md-6 col-lg-4">
+    <section className="py-14">
+     <div className="container">
+      <SectionTitle title='Blog'/>
+      <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-10">
       <BlogCard 
       author='shuvo'
        title='john' 
@@ -26,8 +23,7 @@ function Blog({title, subtitle, hiddenBlogId}: BlogListProps) {
        likeCount={12} 
        link={`/`}/>
       </div>
-        </div>
-       </div>
+      </div>
     </section>
   )
 }

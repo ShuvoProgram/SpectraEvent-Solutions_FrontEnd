@@ -3,7 +3,8 @@ import React from 'react'
 import CategoryCard from '../Category/CategoryCard';
 import SectionTitle from '../shared/SectionTitle';
 import { useGetAllCategoryQuery } from '@/redux/api/categoryApi';
-import Spinner from '../shared/Spinner';
+import Spinner from '../Loading/Spinner';
+
 
 function Category() {
   const {data, isLoading, isError} = useGetAllCategoryQuery({})
