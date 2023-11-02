@@ -49,7 +49,7 @@ function Event({data}: any) {
     </Row>
   </div>
  <div className='container py-14'>
- <Reviews/>
+ <Reviews id={data.id}/>
  </div>
     </div>
   )

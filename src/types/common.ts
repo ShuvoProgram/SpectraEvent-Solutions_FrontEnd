@@ -161,3 +161,14 @@ export interface IHasSider {
 export type SectionTitle = {
   title: string;
 }
+
+export const isConfirm = [
+  {
+    label: "true",
+    value: true
+  },
+  {
+    label: "false",
+    value: false
+  }
+]

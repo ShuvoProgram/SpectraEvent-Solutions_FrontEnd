@@ -11,7 +11,7 @@ import React from 'react';
 function EventCard({title, category, imageUrl, price, description, review, vanue, href, id}: any) {
     const userLoggedIn = isLoggedIn();
     const [createFavorite] = useCreateFavoriteMutation();
-   const desc = description ? description.slice(0, 500) : "";
+   const desc = description ? description.slice(0, 437) : "";
    const totalReview = Array.isArray(review) ? review.length : 0;
     // Calculate the sum of ratings
     const sumOfRatings = Array.isArray(review)

@@ -13,6 +13,7 @@ import { useGetAllVanueQuery } from '@/redux/api/vanueApi';
 import axios from 'axios';
 import { UploadChangeParam, UploadFile, UploadProps } from 'antd/es/upload';
 import { useRouter } from 'next/navigation';
+import { isConfirm } from '@/types';
 
 function CreateEvent() {
     const [createEvent] = useCreateEventMutation();
@@ -33,15 +34,21 @@ function CreateEvent() {
             value: Or?.id,
         };
     });
-
+// @ts-ignore
     const Vanue = VanueData?.vanue?.data;
-    const VanueOptions = Vanue?.map((Or) => {
+    const VanueOptions = Vanue?.map((Or: { title: any; id: any; }) => {
         return {
             label: Or?.title,
             value: Or?.id,
         }
     })
 
+    const confirmOption = isConfirm.map((Or: {label: any, value: any}) => {
+        return {
+            label: Or?.label,
+            value: Or?.value
+        }
+    })
     
     const handleChange: UploadProps["onChange"] = async (
         info: UploadChangeParam<UploadFile>
@@ -134,6 +141,15 @@ function CreateEvent() {
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                         <FormInput name="people" label="People" size='large' />
+                    </Col>
+                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
+                    <FormSelectField
+                            name="isComingSoon"
+                            label="isComingSoon"
+                            size='large'
+                            options={confirmOption as SelectOptions[]}
+                            placeholder='Select'
+                        />
                     </Col>
                     <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
                     <QuillEditor
