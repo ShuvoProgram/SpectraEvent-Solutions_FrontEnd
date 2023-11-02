@@ -4,7 +4,7 @@ import CategoryCard from '../Category/CategoryCard';
 import SectionTitle from '../shared/SectionTitle';
 import { useGetAllCategoryQuery } from '@/redux/api/categoryApi';
 import Spinner from '../Loading/Spinner';
-
+import Link from 'next/link';
 
 function Category() {
   const {data, isLoading, isError} = useGetAllCategoryQuery({})
@@ -16,7 +16,7 @@ function Category() {
       <div className='text-red-600 text-center text-2xl font-serif'>Data was Failed</div>
     )
   }
-  console.log(data?.Category)
+
   return (
     <section className="py-14">
     <div className="container">
@@ -33,6 +33,9 @@ function Category() {
           ))
         }
       </div>
+     <div className='w-full flex items-center justify-center '>
+     <Link href={`/category`} className='p-4 bg-[#FF5B22] rounded-md text-white hover:text-white font-serif'>Get All Category</Link>
+     </div>
     </div>
   </section>
   )

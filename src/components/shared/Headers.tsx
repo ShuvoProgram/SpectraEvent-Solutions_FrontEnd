@@ -65,7 +65,9 @@ function Headers() {
       </span>
       <div className="flex md:gap-6 sm:pr-20">
               <div className="flex xs:flex items-center gap-4 md:gap-10 lg:gap-10">
-                <Favorite setCartOpen={setCartOpen} cartOpen={cartOpen} count={data?.fav?.length}/>
+                <Link href={`/user/favorite`}>
+                <Favorite count={data?.fav?.length}/>
+                </Link>
                 <div>
                   {userLoggedIn ? (
                     <AvatarProfile role={role} />

@@ -1,7 +1,7 @@
 "use client"
 import Contents from '@/components/shared/Contents';
 import Footer from '@/components/shared/Footer';
-import Header from '@/components/shared/Header';
+import Headers from '@/components/shared/Headers';
 import Sidebar from '@/components/shared/Sidebar';
 import { isLoggedIn } from '@/services/auth.service';
 import { Layout } from 'antd';
@@ -22,7 +22,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
       }, [router, isLoading, userLoggedIn]);
   return (
     <Layout>
-      <Header hasSider={true}/>
+      <Headers />
       <Layout hasSider>
       <Sidebar />
       <Contents>{children}</Contents>

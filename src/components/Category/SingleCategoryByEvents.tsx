@@ -5,7 +5,7 @@ import { IDProps } from '@/types'
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react'
 import Spinner from '../Loading/Spinner';
-import { Col, Pagination, PaginationProps, Row, Skeleton } from 'antd';
+import { Col, Empty, Pagination, PaginationProps, Row, Skeleton } from 'antd';
 import EventCard from '../Events/EventCard';
 
 function SingleCategoryByEvents({params}: IDProps) {
@@ -39,6 +39,7 @@ function SingleCategoryByEvents({params}: IDProps) {
   }
 
   const { data, isLoading, refetch, isError } = useGetAllEventQuery({ ...query });
+  // @ts-ignore
   const events = data?.event?.data;
   const meta = data?.meta;
 
@@ -63,7 +64,10 @@ const resetFilter = () => {
 if(isLoading) {
     return <Spinner/>
 }
-console.log(events);
+
+const getCategoryByEvent = events.filter((items: any) => items.CategoryId === id)
+
+
   return (
     <div
     className='container'
@@ -90,33 +94,42 @@ console.log(events);
             </span>
         </h1>
         {!isError ? (
-          //filter for event on isBooked
-        events?.filter((event: any) => {
-          return event.isBooked === false;
-        })
-            .slice(0, 3)
-            .map((event:any) => (
-              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-10 my-10" key={event.id}>
-                {!isLoading ? (
-                  <EventCard
-                    title={event?.title || ""}
-                    category={event?.Category?.name || ""}
-                    description={event?.description || ""}
-                    vanue={event?.Vanue?.title || ""}
-                    price={event?.price || ""}
-                    review={event?.Review || ""}
-                    imageUrl={event?.eventImg || ""}
-                    href={`/events/${event?.id}` || ""}
-                    id={event?.id || ""}
-                  />
-                ) : (
-                  <Skeleton avatar paragraph={{ rows: 4 }} />
-                )}
-              </div>
-            ))
+  // Filter for events with isBooked === false
+  getCategoryByEvent
+    ?.filter((event: any) => {
+      return event.isBooked === false;
+    })
+    .slice(0, 3)
+    .map((event: any) => (
+      <div
+        className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-10 my-10"
+        key={event.id}
+      >
+        {!isLoading ? (
+          <EventCard
+            title={event?.title || ''}
+            category={event?.Category?.name || ''}
+            description={event?.description || ''}
+            vanue={event?.Vanue?.title || ''}
+            price={event?.price || ''}
+            review={event?.Review || ''}
+            imageUrl={event?.eventImg || ''}
+            href={`/events/${event?.id}` || ''}
+            id={event?.id || ''}
+          />
         ) : (
-          <p>Failed to fetch event list.</p>
+          <Skeleton avatar paragraph={{ rows: 4 }} />
         )}
+      </div>
+    ))
+) : (
+  <p>Failed to fetch event list.</p>
+)}
+
+{/* Check if there is no data to display */}
+{!isError && getCategoryByEvent?.length === 0 && !isLoading && (
+  <Empty/>
+)}
         <Row style={{
             margin: "20px 0",
             display: "flex",

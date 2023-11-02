@@ -6,15 +6,14 @@ import React from 'react'
 export const metadata: Metadata = {
     title: `SpectraEvent-Solutions | Profile`,
     description: 'Best Event Management Website',
-  }
+}
 
 const ProfilePage = () => {
 
     return (
         <>
-       
-        <Profile/>
-    </>
+            <Profile />
+        </>
     )
 }
 

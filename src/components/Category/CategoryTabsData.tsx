@@ -1,9 +1,6 @@
 import React from 'react'
 import EventCard from '../Events/EventCard'
 import { useGetAllEventQuery } from '@/redux/api/eventApi'
-import Spinner from '../Loading/Spinner'
-import { Skeleton } from 'antd'
-
 function CategoryTabsData({data}: any) {
     const {data: eventData, isLoading, isError} = useGetAllEventQuery({
         variables: {
@@ -13,8 +10,9 @@ function CategoryTabsData({data}: any) {
     // if(isLoading) {
     //     return <Spinner/>
     // }
-
-    const events = eventData?.event?.data
+// @ts-ignore
+    const events = eventData?.event?.data;
+    console.log(events)
   return (
     <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
        {!isError ? (
