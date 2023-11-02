@@ -50,7 +50,7 @@ const Sidebar = () => {
         top: 0,
         bottom: 0,
       }}
-      // trigger={null}
+      trigger={null}
       width={280}
       collapsible
       collapsed={collapsed}

@@ -155,7 +155,7 @@ export type IDProps = {
 export interface IHasSider {
   hasSider?: boolean;
   collapsed?: boolean;
-  setCollapsed?: (collapsed: boolean) => void;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export type SectionTitle = {

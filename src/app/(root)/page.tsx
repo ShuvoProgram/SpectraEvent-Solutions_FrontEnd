@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import { Metadata } from 'next';
 import Story from '@/components/Home/Story';
 import Brand from '@/components/Home/Brand';
@@ -10,7 +9,6 @@ import UpcommingEvents from '@/components/Home/UpcommingEvents';
 import HeroSection from '@/components/Home/HeroSection';
 import ClientReview from '@/components/Home/ClientReview';
 import FeedbackForm from '@/components/Home/FeedbackForm';
-import Test from '@/components/Home/Test';
 
 // const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 

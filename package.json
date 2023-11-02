@@ -22,6 +22,7 @@
     "react": "^18",
     "react-day-picker": "^8.9.0",
     "react-dom": "^18",
+    "react-hamburger-menus": "^1.0.16",
     "react-hook-form": "^7.47.0",
     "react-icons": "^4.11.0",
     "react-quill": "^2.0.0",
