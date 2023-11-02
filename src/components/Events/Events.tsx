@@ -10,71 +10,92 @@ import EventCard from './EventCard';
 
 function Events() {
   // const {data, isLoading} = useGetAllEventQuery({})
-  const {data: VanueData} = useGetAllVanueQuery({})
   const query: Record<string, any> = {};
+  const { data: VanueData } = useGetAllVanueQuery({})
   const [searchResult, setSearchResult] = useState<string>("");
-const [venueSelect, setVenueSelect] = useState<any>(null);
-const [minPrice, setMinPrice] = useState('')
-const [maxPrice, setMaxPrice] = useState('')
+  const [venueSelect, setVenueSelect] = useState<any>(null);
+  const [minPrice, setMinPrice] = useState(0)
+  const [maxPrice, setMaxPrice] = useState(0)
 
-const debouncedSearchTerm = useDebounced({
-  searchQuery: searchResult,
-  delay: 600,
-});
-if (!!debouncedSearchTerm) {
-  query["searchTerm"] = debouncedSearchTerm;
-}
-query["Vanue"] = venueSelect;
-query["minPrice"] = minPrice;
-query["maxPrice"] = maxPrice;
+  const debouncedSearchTerm = useDebounced({
+    searchQuery: searchResult,
+    delay: 600,
+  });
+  if (!!debouncedSearchTerm) {
+    query["searchTerm"] = debouncedSearchTerm;
+  }
+  query["Vanue"] = venueSelect;
 
-const onVenueChange = (newValue: number) => {
-  setVenueSelect(newValue);
-};
+  //condtion implement
+  if (maxPrice > 0) {
+    query["minPrice"] = minPrice;
+  }
+  if (minPrice > 0) {
+    query["maxPrice"] = maxPrice;
+  }
 
-  const {data, isLoading, isError} = useGetAllEventQuery({...query})
+  const onVenueChange = (newValue: string) => {
+    setVenueSelect(newValue);
+  };
+
+  const { data, isLoading, isError } = useGetAllEventQuery({ ...query })
   const handleReset = () => {
     setVenueSelect(null);
     setSearchResult("")
-    setMaxPrice('');
-    setMinPrice('');
+    setMaxPrice(0);
+    setMinPrice(0);
   }
   //@ts-ignore
   const allEvent = data?.event?.data;
 
-  if(isLoading) {
-    return <Spinner/>;
+  if (isLoading) {
+    return <Spinner />;
   }
 
   //@ts-ignore
   const Venue = VanueData?.vanue?.data;
-console.log(searchResult);
+
   return (
-    <div>
-      <div style={{ margin: "0 2rem" }}>
-        <Row justify="space-around" style={{ padding: "5rem 0" }}>
+    <div className='container my-10'>
+       <h1
+        style={{
+          margin: "20px 0px",
+          color: "#FF5B22",
+          fontSize: "40px",
+          fontFamily: "serif",
+          fontWeight: "bold",
+          textAlign: "center"
+        }}
+      >Event</h1>
+        <Row justify="space-around">
           <Col sm={12} md={16} lg={4}>
-           <FilterEvent setSearchResult={setSearchResult} onVenueChanged={onVenueChange} Venue={Venue}/>
+            <FilterEvent
+              setSearchResult={setSearchResult}
+              //  onVenueChanged={onVenueChange}
+              setMaxPrice={setMaxPrice}
+              setMinPrice={setMinPrice}
+              maxPrice={maxPrice}
+              minPrice={minPrice}
+              Venue={Venue}
+              handleReset={handleReset}
+            />
           </Col>
 
           <Col sm={12} md={16} lg={18}>
-            <h1 style={{ textAlign: "center", marginBottom: "2rem" }}>
-              Event
-            </h1>
             <Row justify="center">
               {allEvent?.map((event: any) => (
                 <Col key={event._id} sm={12} md={12} lg={8}>
                   <div>
                     <EventCard
-                     title={event?.title || ""}
-                     category={event?.Category?.name || ""}
-                     description={event?.description || ""}
-                     vanue={event?.Vanue?.title || ""}
-                     price={event?.price || ""}
-                     review={event?.Review || ""}
-                     imageUrl={event?.eventImg || ""}
-                     href={`/events/${event?.id}` || ""}
-                     id={event?.id || ""}
+                      title={event?.title || ""}
+                      category={event?.Category?.name || ""}
+                      description={event?.description || ""}
+                      vanue={event?.Vanue?.title || ""}
+                      price={event?.price || ""}
+                      review={event?.Review || ""}
+                      imageUrl={event?.eventImg || ""}
+                      href={`/events/${event?.id}` || ""}
+                      id={event?.id || ""}
                     />
                   </div>
                 </Col>
@@ -82,7 +103,6 @@ console.log(searchResult);
             </Row>
           </Col>
         </Row>
-      </div>
     </div>
   )
 }

@@ -20,10 +20,7 @@ function CategoryPage() {
         return <Spinner/>
     }
     const categoryData = data?.Category;
-   
 
-    
-// console.log(categoryData);
   return (
     <div className='container my-10'>
         <div
