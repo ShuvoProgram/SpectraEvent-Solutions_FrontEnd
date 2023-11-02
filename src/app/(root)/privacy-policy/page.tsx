@@ -1,4 +1,10 @@
-import React from 'react'
+import { Metadata } from 'next';
+import React from 'react';
+
+export const metadata: Metadata = {
+    title: `SpectraEvent-Solutions | Privacy and Policy`,
+    description: 'Best Event Management Website',
+}
 
 function page() {
   return (

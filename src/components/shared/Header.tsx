@@ -82,9 +82,8 @@ export default function Header({ hasSider, collapsed,  setCollapsed}: IHasSider)
               </div>
               <ul className="hidden lg:flex gap-8">{renderNavLinks()}</ul>
             </div>
-            <div className="flex gap-6">
-              <div className="flex xs:flex items-center gap-10">
-                <Search />
+            <div className="flex md:gap-6">
+              <div className="flex xs:flex items-center gap-4 md:gap-10 lg:gap-10">
                 <Favorite setCartOpen={setCartOpen} cartOpen={cartOpen} count={data?.fav?.length}/>
                 <div>
                   {userLoggedIn ? (

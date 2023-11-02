@@ -1,5 +1,11 @@
 import FAQ from '@/components/About/FAQ'
-import React from 'react'
+import { Metadata } from 'next';
+import React from 'react';
+
+export const metadata: Metadata = {
+  title: `SpectraEvent-Solutions | About`,
+  description: 'Best Event Management Website',
+}
 
 function About() {
   return (

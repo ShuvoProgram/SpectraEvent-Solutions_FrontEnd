@@ -63,6 +63,7 @@ export interface IEvent {
     eventImg:       String
   createdAt: Date;
   updatedAt: Date;
+  Category: ICategory[]
   // Booking:        Booking[]
   Review:         IReview[]
   // Favorite:       Favorite?
@@ -86,8 +87,8 @@ export type ICategory ={
   event:          Event[]
   createdAt:      Date
   updatedAt:      Date
-  // AvailableEvent: AvailableEvent
   adminId:        String
+  length: Number | undefined
 }
 
 export type IFavorite = {
