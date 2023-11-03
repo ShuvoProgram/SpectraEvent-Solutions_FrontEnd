@@ -108,7 +108,7 @@ const getCategoryByEvent = events.filter((items: any) => items.CategoryId === id
         {!isLoading ? (
           <EventCard
             title={event?.title || ''}
-            category={event?.Category?.name || ''}
+            CategoryId={event?.CategoryId || ''}
             description={event?.description || ''}
             vanue={event?.Vanue?.title || ''}
             price={event?.price || ''}
