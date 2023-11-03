@@ -9,6 +9,7 @@ import UpcommingEvents from '@/components/Home/UpcommingEvents';
 import HeroSection from '@/components/Home/HeroSection';
 import ClientReview from '@/components/Home/ClientReview';
 import FeedbackForm from '@/components/Home/FeedbackForm';
+import Intro from '@/components/Home/Intro';
 
 // const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
 
@@ -32,6 +33,7 @@ export default function Home() {
       {/* <Test/> */}
      <Blog title='Blog' subtitle='Latest Blog'/>
      <FeedbackForm/>
+      <Intro/>
     </div>
   )
 }
