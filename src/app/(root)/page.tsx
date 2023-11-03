@@ -23,8 +23,8 @@ export default function Home() {
       <HeroSection/>
       {/* <BannerList /> */}
       <Category/>
-      <FeatureEvent title='Featured Events' subtitle='Grow Today'/>
-      <UpcommingEvents title='UpComing Events'/>
+      <FeatureEvent/>
+      <UpcommingEvents/>
       <Story/>
       <Team/>
       <Brand/>
