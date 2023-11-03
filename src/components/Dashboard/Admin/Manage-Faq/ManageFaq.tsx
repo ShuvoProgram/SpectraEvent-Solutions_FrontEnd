@@ -40,8 +40,9 @@ function ManageFaq() {
     }
   
     const {data, isLoading} = useGetAllFaqQuery({...query});
-  
+  // @ts-ignore
     const faq = data?.faq?.data;
+    // @ts-ignore
     const meta = data?.meta?.meta;
 
     const handleDelete = async (id: string) => {

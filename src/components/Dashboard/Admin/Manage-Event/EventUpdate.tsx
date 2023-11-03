@@ -35,9 +35,9 @@ function EventUpdate({params}: IDProps) {
             value: Or?.id,
         };
     });
-
+// @ts-ignore
     const Vanue = VanueData?.vanue?.data;
-    const VanueOptions = Vanue?.map((Or) => {
+    const VanueOptions = Vanue?.map((Or: { title: any; id: any; }) => {
         return {
             label: Or?.title,
             value: Or?.id,

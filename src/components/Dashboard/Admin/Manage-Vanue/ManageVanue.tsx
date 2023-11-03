@@ -41,8 +41,9 @@ function ManageVanue() {
     }
   
     const {data, isLoading} = useGetAllVanueQuery({...query});
-  
+  // @ts-ignore
     const Vanue = data?.vanue?.data;
+    // @ts-ignore
     const meta = data?.meta?.meta;
 
     const handleDelete = async (id: string) => {

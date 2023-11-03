@@ -40,7 +40,9 @@ function ManageBlog() {
         query["searchTerm"] = debouncedSearchTerm;
     }
     const { data, isLoading } = useGetAllBlogQuery({...query});
+    // @ts-ignore
     const blog = data?.blog?.data;
+    // @ts-ignore
     const meta = data?.blog?.meta;
 
     const onDelete = async (id: string) => {
@@ -48,7 +50,7 @@ function ManageBlog() {
             const res = await deleteBlog({ id }).unwrap();
             if (res) {
                 message.success('Successfully Deleted Blog')
-                window.Vanue.reload();
+               
             }
         } catch (error: any) {
             console.error(error.message);

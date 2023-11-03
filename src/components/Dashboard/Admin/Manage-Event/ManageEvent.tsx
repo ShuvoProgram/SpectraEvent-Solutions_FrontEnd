@@ -43,8 +43,9 @@ function ManageEvent() {
   
     const {data, isLoading} = useGetAllEventQuery({...query});
     
-  
+  // @ts-ignore
     const events = data?.event?.data;
+    // @ts-ignore
     const meta = data?.event?.meta;
 
     const handleDelete = async (id: string) => {

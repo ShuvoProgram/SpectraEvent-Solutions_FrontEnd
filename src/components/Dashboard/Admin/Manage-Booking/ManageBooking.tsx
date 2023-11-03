@@ -36,8 +36,9 @@ function ManageBooking() {
       query["search"] = debouncedTerm;
     }
 const {data, isLoading} = useGetAllBookingQuery({...query});
-
+// @ts-ignore
 const bookings = data?.booking?.data;
+// @ts-ignore
   const meta = data?.booking?.meta;
 
   console.log(bookings)

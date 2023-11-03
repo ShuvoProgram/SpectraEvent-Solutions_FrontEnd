@@ -20,7 +20,7 @@ function CustomerData() {
           <span className="ml-2 font-bold text-2xl text-gray-500">Total Customer</span>
         </div>
         <p className="mt-4 self-center font-bold text-2xl text-oceanblue">
-          {<span className="text-xl text-gray-500 font-medium">{ data?.users?.data?.length || 0 }</span>}
+          {/* {<span className="text-xl text-gray-500 font-medium">{ data?.users?.data?.length || 0 }</span>} */}
          
         </p>
         {/* <p className="mt-4 self-center flex flex-row flex-nowrap">
