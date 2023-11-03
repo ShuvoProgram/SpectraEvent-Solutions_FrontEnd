@@ -25,7 +25,7 @@ function CategoryTabsData({data}: any) {
                         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-10 mt-10" key={event.id}>
                             <EventCard
                                 title={event?.title || ""}
-                                category={event?.Category?.name || ""}
+                                CategoryId={event?.CategoryId|| ""}
                                 description={event?.description || ""}
                                 vanue={event?.Vanue?.title || ""}
                                 price={event?.price || ""}
