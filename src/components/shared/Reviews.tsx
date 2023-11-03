@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react'
 import Form from '../Form/Form';
 import { Button, Col, Rate, Row, message } from 'antd';
@@ -5,11 +6,18 @@ import FormTextArea from '../Form/FormTextArea';
 import { useCreateReviewMutation,} from '@/redux/api/reviewApi';
 import { useGetSingleEventQuery } from '@/redux/api/eventApi';
 import Spinner from '../Loading/Spinner';
+import { useGetSingleCustomerQuery } from '@/redux/api/userApi';
 
 function Reviews({id}: any) {
     const [value, setValue] = useState(0);
+    const [userName, setUserName] = useState<string | null>(null);
     const [createReview] = useCreateReviewMutation();
     const {data, isLoading, refetch} = useGetSingleEventQuery(id);
+    if(isLoading) {
+      return <Spinner/>
+  }
+  
+  const reviewData = data?.Review;
   
     const handleReview = async (values: any) => {
       const data = {
@@ -30,12 +38,8 @@ function Reviews({id}: any) {
         }
     };
     
-    if(isLoading) {
-        return <Spinner/>
-    }
+   
 
-    const reviewData = data?.Review;
-    
     return (
         <div className="w-full bg-white rounded-lg border p-2">
             <h3 className="font-bold">Discussion</h3>
@@ -51,21 +55,22 @@ function Reviews({id}: any) {
                                 border-2 border-emerald-400  shadow-emerald-400
                                 "/>
                                 <h3 className="font-bold">
-                                    User name
+                                    {review?.user?.firstName}
                                 </h3>
                             </div>
                             <p className="text-gray-600 mt-2">
-                                this is sample commnent
+                               {review?.comment}
                             </p>
     
                         </div>
                          ))
                     }
-                   
-                    <div className="w-full px-3 my-2">
                     <div className="w-full px-3 my-2">
         <Form submitHandler={handleReview}>
-          <Row>
+          <Row style={{
+            display: "flex",
+            flexDirection: "column",
+          }}>
             <Col
               style={{
                 display: 'flex',
@@ -99,7 +104,6 @@ function Reviews({id}: any) {
           </Row>
         </Form>
       </div>
-            </div>
                 </div>
             </div>
         </div>

@@ -56,7 +56,7 @@ function EventBookCard({price, id}: any) {
       </p>
     </div>
     
-    <Link href={`${id}/booking`}>
+    <Link href={`booking/${id}`}>
       <Button
         style={{
           marginTop: "10px",

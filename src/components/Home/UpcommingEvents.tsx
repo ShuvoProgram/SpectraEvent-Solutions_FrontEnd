@@ -26,7 +26,7 @@ function UpcommingEvents() {
                   {!isLoading ? (
                     <EventCard
                       title={event?.title || ""}
-                      category={event?.Category?.name || ""}
+                      CategoryId={event?.CategoryId|| ""}
                       description={event?.description || ""}
                       vanue={event?.Vanue?.title || ""}
                       price={event?.price || ""}

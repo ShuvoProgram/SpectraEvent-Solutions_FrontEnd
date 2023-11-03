@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import BookingDate from './BookingDate';
 import StepperForm from '../StepperForm/StepperForm';
 import BookingConfirmSummary from './BookingConfirmSummary';
-import { useAddBookingEventMutation, useConfirmBookingMutation } from '@/redux/api/bookingApi';
+import { useAddBookingEventMutation } from '@/redux/api/bookingApi';
 import { useGetProfileQuery } from '@/redux/api/userApi';
 import { message } from 'antd';
 
@@ -14,7 +14,6 @@ function BookingSchedule({id}: any) {
     const router = useRouter();
     
     const [newDate, setNewDates] = useState<string>("");
-    const [newData, setNewData] = useState<string>("");
     const { data, isLoading } = useGetSingleEventQuery(id);
     const { data: profileData } = useGetProfileQuery({});
     const [addBookingEvent] = useAddBookingEventMutation();
@@ -28,7 +27,6 @@ function BookingSchedule({id}: any) {
           content: (
             <BookingDate
               setNewDates={setNewDates}
-            //   setNewData={setNewData}
             />
           ),
         },
@@ -43,7 +41,7 @@ function BookingSchedule({id}: any) {
         }
       ];
 
-      const isDataNull = profileData.firstName === null && profileData.email === null && profileData.contactNo === null && profileData.address === null;
+      const isDataNull = profileData.firstName === undefined && profileData.email === undefined && profileData.contactNo === undefined && profileData.address === undefined;
 
       const handleStudentSubmit = async (values: any) => {
         const newData = {scheduleDate: newDate, eventId: data?.id}
@@ -57,7 +55,7 @@ function BookingSchedule({id}: any) {
         } else {
          message.error("Please full-fill your Information")
         }
-        console.log(newData)
+       
       }
 
   return (

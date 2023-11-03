@@ -12,13 +12,13 @@ interface IWork {
 function Event({data}: any) {
  
   return (
-    <div className=''>
+    <div className='mt-40 md:mt-4 lg:mt-4'>
     <div className="container">
     <div className="mt-20 flex flex-col items-center justify-center">
       <h1 className="text-center text-2xl font-semibold sm:text-3xl md:text-4xl">{data?.title}</h1>
       <p className="mt-4 flex items-center text-gray-400">
       <CalendarOutlined  className='mr-2'/>
-        <span>{`12-08-23`}</span>
+        <span>{data?.createdAt}</span>
         <span className="mx-2 h-1.5 w-1.5 rounded-full bg-primary-500"></span>
         <GroupOutlined className='mr-2'/>
         <span>{data?.Category?.name}</span>
@@ -33,7 +33,7 @@ function Event({data}: any) {
           </div>
     </div>
     <Row className="my-10">
-      <Col span={16}>
+      <Col sm={12} md={24} lg={16}>
       <div>
       <h3 className="text-xl font-semibold">Summary</h3>
       <p dangerouslySetInnerHTML={{__html: data?.description}} className="mt-4"/>
@@ -43,7 +43,7 @@ function Event({data}: any) {
       </div>
     </div>
       </Col>
-      <Col span={8}>
+      <Col sm={12} md={8} lg={8}>
       <EventBookCard price={data?.price} id={data?.id}/>
       </Col>
     </Row>

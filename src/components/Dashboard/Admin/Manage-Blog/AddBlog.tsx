@@ -4,20 +4,59 @@ import FormDatePicker from '@/components/Form/FormDatePicker';
 import FormInput from '@/components/Form/FormInput';
 import QuillEditor from '@/components/Form/QuillEditor';
 import BreadCrumb from '@/components/shared/BreadCrumb';
+import UploadImage from '@/components/shared/UploadImage';
 import { useCreateBlogMutation } from '@/redux/api/blogApi'
-import { Button, Col, Row, message } from 'antd';
-import React from 'react'
+import { Button, Col, Row, UploadProps, message } from 'antd';
+import { UploadChangeParam, UploadFile } from 'antd/es/upload';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
 
 function AddBlog() {
+    const [imageUrl, setImageUrl] = useState<string | null>(null);
     const [createBlog] = useCreateBlogMutation();
+    const router = useRouter();
+
+    const handleChange: UploadProps["onChange"] = async (
+        info: UploadChangeParam<UploadFile>
+      ) => {
+        const image = info.file.originFileObj;
+        const formData = new FormData();
+        formData.append("image", image as Blob);
+        try {
+          const response = await axios.post(
+            `https://api.imgbb.com/1/upload`,
+                formData,
+                {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                    params: {
+                        key: process.env.NEXT_PUBLIC_IMGBB_KEY,
+                    },
+                    }
+          );
+    
+          setImageUrl(response.data.data.display_url);
+        } catch (error) {
+          console.error("Error uploading image to ImageBB:", error);
+        }
+      };
 
     const onSubmit = async (data: any) => {
         // const userInfo = getUserInfo() as any;
         // const userId = userInfo?.userId;
+        data.image = imageUrl;
+        console.log(data)
         message.loading("Creating....");
         try {
-            await createBlog(data);
-            message.success("Blog created successfully");
+          const res = await createBlog(data).unwrap();
+          if(res.id){
+              message.success("Blog created successfully");
+              router.push('/admin/manage-blog')
+          } else {
+            message.error("Blog creation failed");
+          }
         } catch (error: any) {
             message.error(error.message)
         }
@@ -60,10 +99,13 @@ function AddBlog() {
                     </Col>
                     <Col className='gutter-row mb-4' span={12}>
                         <FormDatePicker
-                            name="status"
-                            label="Status"
+                            name="date"
+                            label="Date"
                             size="large"
                         />
+                    </Col>
+                    <Col className='gutter-row mb-4' span={12}>
+                        <UploadImage label='Image' name="image" imageUrl={imageUrl} handleChange={handleChange}/>
                     </Col>
                     <Col className='gutter-row mb-4' span={24}>
                     <QuillEditor

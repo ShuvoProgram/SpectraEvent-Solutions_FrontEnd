@@ -81,17 +81,14 @@ function CreateEvent() {
         values.eventImg = imageUrl;
         values.price = parseInt(values.price);
         values.people = parseInt(values.people);
-        // console.log(values)
         message.loading("Creating...");
         try {
             const res = await createEvent(values).unwrap();
-            console.log(res);
             if (res?.id) {
                 message.success("Event added successfully");
                 router.push('/admin/manage-event')
             }
         } catch (err: any) {
-            // console.error(err.message);
             message.error(err.message);
         }
     };

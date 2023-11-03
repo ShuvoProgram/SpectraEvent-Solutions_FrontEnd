@@ -77,7 +77,9 @@ const StepperForm = ({
           <div>{steps[current].content}</div>
           <div style={{ marginTop: 24 }}>
             {current < steps.length - 1 && (
-              <Button type="primary" onClick={() => next()}>
+              <Button type="primary" onClick={() => next()} style={{
+                backgroundColor: "#FF5B22"
+              }}>
                 Next
               </Button>
             )}
@@ -86,12 +88,15 @@ const StepperForm = ({
                 type="primary"
                 htmlType="submit"
                 onClick={() => message.success("Processing complete!")}
+                style={{
+                  backgroundColor: "#FF5B22"
+                }}
               >
                 Done
               </Button>
             )}
             {current > 0 && (
-              <Button style={{ margin: "0 8px" }} onClick={() => prev()}>
+              <Button style={{ margin: "0 8px",  backgroundColor: "#FF5B22" }} onClick={() => prev()} type="primary">
                 Previous
               </Button>
             )}

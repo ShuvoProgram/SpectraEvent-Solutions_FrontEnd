@@ -1,4 +1,5 @@
 "use client"
+import { useGetSingleCategoryQuery } from '@/redux/api/categoryApi';
 import { useCreateFavoriteMutation } from '@/redux/api/favorite';
 import { isLoggedIn } from '@/services/auth.service';
 // import { decodedToken } from '@/utils/jwt';
@@ -8,10 +9,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import internal from 'stream';
+import Spinner from '../Loading/Spinner';
 
 type Event = {
     title: string;
-    category: string;
+    CategoryId: string;
     imageUrl: string;
     price: number;
     description: any;
@@ -22,9 +24,15 @@ type Event = {
     isComing?: boolean;
 }
 
-function EventCard({title, category, imageUrl, price, description, review, vanue, href, id, isComing}: Event) {
+function EventCard({title, CategoryId, imageUrl, price, description, review, vanue, href, id, isComing}: Event) {
     const userLoggedIn = isLoggedIn();
     const [createFavorite] = useCreateFavoriteMutation();
+    const {data: category, isLoading} = useGetSingleCategoryQuery(CategoryId);
+
+    if(isLoading) {
+        return <Spinner/>
+    }
+
    const desc = description ? description.slice(0, 437) : "";
    const totalReview = Array.isArray(review) ? review.length : 0;
     // Calculate the sum of ratings
@@ -60,7 +68,7 @@ function EventCard({title, category, imageUrl, price, description, review, vanue
     <div className="p-2 py-5 text-center transform duration-500 hover:-translate-y-2 shadow-lg w-[280px] mx-auto">
 
     <div className="absolute mt-3 ml-3">
-        <button className="h-6 bg-[#FF5B22] text-white px-2 text-xs rounded font-medium">{category}</button>
+        <button className="h-6 bg-[#FF5B22] text-white px-2 text-xs rounded font-medium">{category?.name}</button>
     </div>
 
     <button className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.7rem]" onClick={() => handleFavorite(id)}>
