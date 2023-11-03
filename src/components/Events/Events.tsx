@@ -57,7 +57,7 @@ function Events() {
 
   return (
     <div className='container my-10'>
-       <h1
+      <h1
         style={{
           margin: "20px 0px",
           color: "#FF5B22",
@@ -67,42 +67,44 @@ function Events() {
           textAlign: "center"
         }}
       >Event</h1>
-        <Row justify="space-around">
-          <Col sm={12} md={16} lg={4}>
-            <FilterEvent
-              setSearchResult={setSearchResult}
-              //  onVenueChanged={onVenueChange}
-              setMaxPrice={setMaxPrice}
-              setMinPrice={setMinPrice}
-              maxPrice={maxPrice}
-              minPrice={minPrice}
-              Venue={Venue}
-              handleReset={handleReset}
-            />
-          </Col>
+      <Row justify="space-around">
+        <Col sm={12} md={16} lg={4}>
+          <FilterEvent
+            setSearchResult={setSearchResult}
+            //  onVenueChanged={onVenueChange}
+            setMaxPrice={setMaxPrice}
+            setMinPrice={setMinPrice}
+            maxPrice={maxPrice}
+            minPrice={minPrice}
+            Venue={Venue}
+            handleReset={handleReset}
+          />
+        </Col>
 
-          <Col sm={12} md={16} lg={18}>
-            <Row justify="center">
-              {allEvent?.map((event: any) => (
-                <Col key={event._id} sm={12} md={12} lg={8}>
-                  <div>
-                    <EventCard
-                      title={event?.title || ""}
-                      category={event?.Category?.name || ""}
-                      description={event?.description || ""}
-                      vanue={event?.Vanue?.title || ""}
-                      price={event?.price || ""}
-                      review={event?.Review || ""}
-                      imageUrl={event?.eventImg || ""}
-                      href={`/events/${event?.id}` || ""}
-                      id={event?.id || ""}
-                    />
-                  </div>
-                </Col>
-              ))}
-            </Row>
-          </Col>
-        </Row>
+        <Col sm={12} md={16} lg={18}>
+          <Row justify="center">
+            {isError ? (
+              <div>Error: Failed to fetch event list.</div>
+            ) : allEvent?.map((event: any) => (
+              <Col key={event._id} sm={12} md={12} lg={8}>
+                <div>
+                  <EventCard
+                    title={event?.title || ''}
+                    category={event?.Category?.name || ''}
+                    description={event?.description || ''}
+                    vanue={event?.Vanue?.title || ''}
+                    price={event?.price || ''}
+                    review={event?.Review || ''}
+                    imageUrl={event?.eventImg || ''}
+                    href={`/events/${event?.id}` || ''}
+                    id={event?.id || ''}
+                  />
+                </div>
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </Row>
     </div>
   )
 }

@@ -7,8 +7,22 @@ import { Rate, message } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import internal from 'stream';
 
-function EventCard({title, category, imageUrl, price, description, review, vanue, href, id}: any) {
+type Event = {
+    title: string;
+    category: string;
+    imageUrl: string;
+    price: number;
+    description: any;
+    review: any;
+    vanue: string;
+    href: string;
+    id: string;
+    isComing?: boolean;
+}
+
+function EventCard({title, category, imageUrl, price, description, review, vanue, href, id, isComing}: Event) {
     const userLoggedIn = isLoggedIn();
     const [createFavorite] = useCreateFavoriteMutation();
    const desc = description ? description.slice(0, 437) : "";
@@ -65,13 +79,13 @@ function EventCard({title, category, imageUrl, price, description, review, vanue
     <Rate disabled defaultValue={averageRating} />
     <span>( {totalReview} Reviews )</span>
             </div>
-        <Link href={`${href}`} className="">
-            <p className="text-lg text-[#252B42] tracking-wider text-center">{title}</p>
+        <Link href={isComing === true ? '#' : `${href}`} className="">
+            <p className="text-lg text-[#252B42] tracking-wider text-center">{isComing === true ? `Coming Soon` : title}</p>
         </Link>
 
         <div className="flex justify-between">
             <span className="text-base">Venue: {vanue}</span>
-            <span className="text-base">Price: $ {price}</span>
+            <span className="text-base">Price: $ {isComing === true ? `Coming Soon` : price}</span>
         </div>
 
         <div className="max-w-fit">
