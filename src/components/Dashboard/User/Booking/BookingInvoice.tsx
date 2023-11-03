@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 function BookingInvoice() {
@@ -5,7 +6,7 @@ function BookingInvoice() {
     <div className="bg-white rounded-lg shadow-lg px-8 py-10 max-w-xl mx-auto">
     <div className="flex items-center justify-between mb-8">
         <div className="flex items-center">
-            <img className="h-8 w-8 mr-2" src="https://tailwindflex.com/public/images/logos/favicon-32x32.png"
+            <Image width={100} height={100} className="h-8 w-8 mr-2" src="https://tailwindflex.com/public/images/logos/favicon-32x32.png"
                 alt="Logo" />
             <div className="text-gray-700 font-semibold text-lg">Your Company Name</div>
         </div>
