@@ -2,16 +2,16 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
-interface IBlog {
-  category: string;
-  title: string;
-  blogImg: string;
-  author: string;
-  publishedDate: string;
-  content: string;
-}
+// interface IBlog {
+//   category: string;
+//   title: string;
+//   blogImg: string;
+//   author: string;
+//   publishedDate: string;
+//   content: string;
+// }
 
-function page({category, title, blogImg, author, publishedDate, content}: IBlog) {
+function page({category, title, blogImg, author, publishedDate, content}: any) {
   return (
     <div className="relative p-4 pt-28">
       <div className="max-w-4xl mx-auto">
