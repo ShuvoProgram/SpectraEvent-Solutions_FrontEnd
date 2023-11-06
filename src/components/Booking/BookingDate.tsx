@@ -5,6 +5,7 @@ import { Button, Calendar, Col, Input, Row } from 'antd';
 import { useGetProfileQuery, useProfileUpdateMutation } from '@/redux/api/userApi';
 import FormInput from '../Form/FormInput';
 import Form from '../Form/Form';
+import Spinner from '../Loading/Spinner';
 
 interface IBookingDateProps {
   setNewDates: (value: string) => void;
@@ -12,7 +13,7 @@ interface IBookingDateProps {
 }
 
 function BookingDate({ setNewDates}: IBookingDateProps) {
-  const { data, isLoading } = useGetProfileQuery({});
+  // const { data, isLoading } = useGetProfileQuery({});
   const [updateProfile] = useProfileUpdateMutation();
   const [firstName, setFirstName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -24,14 +25,18 @@ function BookingDate({ setNewDates}: IBookingDateProps) {
     setNewDates(date);
   };
 
-  const defaultValues = {
-    firstName: data?.firstName || '',
-    email: data?.email || '',
-    contactNo: data?.contactNo || '',
-    address: data?.address || '',
-  };
+  // if(isLoading) {
+  //   return <Spinner/>
+  // }
 
-  const isDataNotNull = data && data.firstName === null && data.email === null && data.contactNo === null && data.address === null;
+  // const defaultValues = {
+  //   firstName: data?.firstName || '',
+  //   email: data?.email || '',
+  //   contactNo: data?.contactNo || '',
+  //   address: data?.address || '',
+  // };
+
+  // const isDataNotNull = data && data.firstName === null && data.email === null && data.contactNo === null && data.address === null;
 
  // Step 2: Handle the input change event and update the state
  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +56,7 @@ function BookingDate({ setNewDates}: IBookingDateProps) {
       </div>
       <div className='w-full mx-10'>
       <Row gutter={[10, 10]}>
-            <Col sm={24} md={12} lg={12}>
+            {/* <Col sm={24} md={12} lg={12}>
               <FormInput
                 name='firstName'
                 type='text'
@@ -60,8 +65,8 @@ function BookingDate({ setNewDates}: IBookingDateProps) {
                 required
                 
               />
-            </Col>
-            <Col sm={24} md={12} lg={12}>
+            </Col> */}
+            {/* <Col sm={24} md={12} lg={12}>
               <FormInput
                 name='email'
                 type='text'
@@ -87,7 +92,7 @@ function BookingDate({ setNewDates}: IBookingDateProps) {
                 label='Address'
                 required
               />
-            </Col>
+            </Col> */}
           </Row>
       </div>
     </div>

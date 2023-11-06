@@ -70,6 +70,14 @@ function ManageFavorite() {
         },
       },
       {
+        title: "Book Now",
+        render: function (data: any) {
+          return (
+            <Link className='p-2 bg-green-600 rounded-lg text-white hover:text-white' href={`/events/booking/${data?.event?.id}`}>Book Now</Link>
+          );
+        },
+      },
+      {
         title: "CreatedAt",
         dataIndex: "createdAt",
         render: function (data: any) {
@@ -81,28 +89,13 @@ function ManageFavorite() {
         title: "Action",
         render: function (data: any) {
           return (
-            <>
-              <Link href={`/admin/favorite/update/${data?.id}`}>
-                <Button
-                  style={{
-                    margin: "0px 5px",
-                    backgroundColor: "#00A9FF"
-                  }}
-                  onClick={() => console.log(data)}
-                  type="primary"
-
-                >
-                  <EditOutlined />
-                </Button>
-              </Link>
-              <Button
-                onClick={() => handleDelete(data?.id)}
-                type="primary"
-                danger
-              >
-                <DeleteOutlined />
-              </Button>
-            </>
+            <Button
+            onClick={() => handleDelete(data?.id)}
+            type="primary"
+            danger
+          >
+            <DeleteOutlined />
+          </Button>
           );
         },
       },
@@ -159,13 +152,6 @@ function ManageFavorite() {
                         <ReloadOutlined />
                     </button>
                 )}
-                <Link href="/admin/manage-vanue/create">
-            <Button type="primary" style={{
-              backgroundColor: "#54B435",
-              margin: "0px 10px"
-            }}>Create</Button>
-          </Link>
-                
             </ActionBar>
             <UMTable
         loading={isLoading}

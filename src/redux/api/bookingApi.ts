@@ -30,6 +30,22 @@ export const bookingApi = baseApi.injectEndpoints({
           },
           providesTags: [tagTypes.booking],
     }),
+    getAllBookingForUser: build.query({
+        query: (arg: Record<string, any>) => {
+            return {
+                url: `${BOOKING_URL}/user`,
+                method: "GET",
+                params: arg,
+            }
+        },
+        transformResponse: (response: IBooking[], meta: IMeta) => {
+            return {
+              booking: response,
+              meta,
+            };
+          },
+          providesTags: [tagTypes.booking],
+    }),
    getSingleBooking: build.query({
       query: (id: string | string[] | undefined) => ({
         url: `${BOOKING_URL}/${id}`,
@@ -85,4 +101,5 @@ export const {
   useCancelBookingMutation,
   useConfirmBookingMutation,
   useCompleteBookingMutation,
+  useGetAllBookingForUserQuery
     } = bookingApi;

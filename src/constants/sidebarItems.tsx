@@ -29,9 +29,9 @@ export const sidebarItems = (role: string) => {
   ];
   const userSidebarItem: MenuProps["items"] = [
     {
-      label: <Link href={`/${role}/manage-booking`}>Manage Bookings</Link>,
+      label: <Link href={`/${role}/my-booking`}>My Bookings</Link>,
       icon: <TableOutlined />,
-      key: `/manage-booking`,
+      key: `/my-booking`,
     },
     {
       label: <Link href={`/${role}/favorite`}>Favorite</Link>,

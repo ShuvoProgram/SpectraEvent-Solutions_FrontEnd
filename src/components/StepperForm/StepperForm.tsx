@@ -87,7 +87,7 @@ const StepperForm = ({
               <Button
                 type="primary"
                 htmlType="submit"
-                onClick={() => message.success("Processing complete!")}
+                onClick={() => message.success("Booking complete!")}
                 style={{
                   backgroundColor: "#FF5B22"
                 }}

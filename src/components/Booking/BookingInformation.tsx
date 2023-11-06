@@ -118,7 +118,6 @@ function BookingInformation({ id }: any) {
                             </div>
                             <div>
                                 <h2 className='text-xl font-semibold'>Price {data?.price} Tk</h2>
-                              0
                             </div>
                         </div>
                         <p dangerouslySetInnerHTML={{ __html: desc }} className='my-4'/>

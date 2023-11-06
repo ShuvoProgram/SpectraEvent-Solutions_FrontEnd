@@ -14,8 +14,8 @@ function BookingSchedule({id}: any) {
     const router = useRouter();
     
     const [newDate, setNewDates] = useState<string>("");
-    const { data, isLoading } = useGetSingleEventQuery(id);
-    const { data: profileData } = useGetProfileQuery({});
+    const { data, isFetching } = useGetSingleEventQuery(id);
+    const { data: profileData, isLoading } = useGetProfileQuery({});
     const [addBookingEvent] = useAddBookingEventMutation();
 
     if (isLoading) {

@@ -172,3 +172,12 @@ export const isConfirm = [
     value: false
   }
 ]
+
+export type Invoice = {
+date: String;
+invoiceId: String;
+userName: String;
+userContactNo: String;
+userEmail: String;
+userAddress: String;
+}

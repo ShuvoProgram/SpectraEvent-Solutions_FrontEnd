@@ -77,7 +77,6 @@ const bookings = data?.booking?.data;
       title: "Booking Status",
       dataIndex: "status",
       render: function (data: any) {
-        console.log(data)
         return data === "pending" ? (
           <strong style={{ color: "orange" }}>Pending</strong>
         ) : data === "confirmed" ? (
