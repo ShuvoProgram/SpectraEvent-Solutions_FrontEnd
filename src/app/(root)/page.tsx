@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div>
+    <div className='mt-10'>
       <HeroSection/>
       {/* <BannerList /> */}
       <Category/>
@@ -31,9 +31,9 @@ export default function Home() {
       <Brand/>
       <ClientReview/>
       {/* <Test/> */}
+      <Intro/>
      <Blog title='Blog' subtitle='Latest Blog'/>
      <FeedbackForm/>
-      <Intro/>
     </div>
   )
 }

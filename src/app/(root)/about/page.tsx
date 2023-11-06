@@ -1,4 +1,5 @@
 import FAQ from '@/components/About/FAQ'
+import BlogPage from '@/components/Blog/BlogPage';
 import { Metadata } from 'next';
 import React from 'react';
 
@@ -10,7 +11,8 @@ export const metadata: Metadata = {
 function About() {
   return (
     <div className=''>
-        <FAQ/>
+        {/* <FAQ/> */}
+        <BlogPage/>
     </div>
   )
 }

@@ -1,10 +1,11 @@
+import ManageFavorite from '@/components/Dashboard/User/Favorite/ManageFavorite';
 import Link from 'next/link';
 import React from 'react'
 
 function FavoritePage() {
   return (
     <div>
-        <Link href={`/user/favorite/update`}>Update Favorite</Link>
+       <ManageFavorite/>
     </div>
   )
 }

@@ -68,7 +68,7 @@ const socialMedia = [
 
 export default function Footer() {
     return (
-        <footer className="">
+        <footer className="py-10">
             <div className="container mx-auto">
                 <div className="site-footer__top flex flex-wrap md:flex-nowrap justify-between md:space-x-12 pb-12">
                     <div className="site-footer__description mb-10 md:mb-0 md:w-2/5">
@@ -82,8 +82,7 @@ export default function Footer() {
                                     <Link href={items.href} className='flex w-full'>
                                         <items.icon
                                             style={{
-
-                                                color: "inherit",
+                                                color: "#FF5B22",
                                                 width: "30px",
                                                 height: "25px",
 
@@ -100,7 +99,7 @@ export default function Footer() {
                             <li className="font-bold text-sm md:text-base">Feature</li>
                             {
                                 footerFeatureLinks.map((features, idx) => (
-                                    <li className="text-sm md:text-base" key={idx}><Link href={features.href}>{features.name}</Link></li>
+                                    <li className="text-sm md:text-base" key={idx}><Link href={features.href} className='bg-gray-100 text-gray-500'>{features.name}</Link></li>
                                 ))
                             }
                         </ul>
@@ -108,14 +107,14 @@ export default function Footer() {
                             <li className="font-bold text-sm md:text-base">Information</li>
                             {
                                 footerLinks.map((learn, idx) => (
-                                    <li className="text-sm md:text-base" key={idx}><Link href={learn.href}>{learn.name}</Link></li>
+                                    <li className="text-sm md:text-base" key={idx}><Link href={learn.href} className='bg-gray-100 text-gray-500'>{learn.name}</Link></li>
                                 ))
                             }
                         </ul>
                         <ul className="w-full md:w-1/3">
                             <li className="font-bold text-sm md:text-base">Contact</li>
-                            <li className="text-sm md:text-base"><a href="#">store@uikit.com</a></li>
-                            <li className="text-sm md:text-base"><a href="#">Hotline: +1 131 138 138</a></li>
+                            <li className="text-sm md:text-base"><a className='bg-gray-100 text-gray-500' href="#">store@uikit.com</a></li>
+                            <li className="text-sm md:text-base"><a className='bg-gray-100 text-gray-500' href="#">Hotline: +1 131 138 138</a></li>
                         </ul>
                     </div>
                 </div>

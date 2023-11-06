@@ -63,7 +63,6 @@ function EventCard({title, CategoryId, imageUrl, price, description, review, van
             message.error("Already has favorite list")
         }
     }
-
   return (
     <div className="p-2 py-5 text-center transform duration-500 hover:-translate-y-2 shadow-lg w-[280px] mx-auto">
 
