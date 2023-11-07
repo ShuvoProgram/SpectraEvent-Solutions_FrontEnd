@@ -24,8 +24,7 @@ function UpdateBooking({params}: IDProps) {
    const handleCancelBooking = async (data: any) => {
     message.loading("Cancel booking...")
     try {
-        const res = await cancelBooking({id: data}).unwrap();
-        console.log(res)
+        const res = await cancelBooking(data).unwrap();
         if(res.id) {
           message.success("Booking cancel successfully");
           refetch();
@@ -38,8 +37,7 @@ function UpdateBooking({params}: IDProps) {
    const handleConfirmBooking = async (data: any) => {
     message.loading("Confirm booking...")
     try {
-        const res = await confirmBooking({id: data}).unwrap();
-        console.log(res)
+        const res = await confirmBooking(data).unwrap();
         if(res.id) {
           message.success("Booking confirm successfully");
           refetch();
@@ -48,8 +46,7 @@ function UpdateBooking({params}: IDProps) {
         message.error(error.message)
     }
    }
-   console.log(data);
-  console.log(venueData)
+
   return (
     <div
     style={{
@@ -122,7 +119,8 @@ function UpdateBooking({params}: IDProps) {
             type='primary'
             onClick={() => handleConfirmBooking(data?.id)}
             style={{
-              marginLeft: "10px"
+              marginLeft: "10px",
+              backgroundColor: "#54B435"
             }}
             >Confirm Booking</Button>
           </Col>

@@ -12,7 +12,7 @@ function CategoryTabsData({data}: any) {
     // }
 // @ts-ignore
     const events = eventData?.event?.data;
-    console.log(events)
+   
   return (
     <div className='w-full h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
        {!isError ? (

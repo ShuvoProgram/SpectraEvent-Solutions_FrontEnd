@@ -47,7 +47,6 @@ function AddBlog() {
         // const userInfo = getUserInfo() as any;
         // const userId = userInfo?.userId;
         data.image = imageUrl;
-        console.log(data)
         message.loading("Creating....");
         try {
           const res = await createBlog(data).unwrap();

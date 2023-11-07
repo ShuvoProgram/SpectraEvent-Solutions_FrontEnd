@@ -11,7 +11,6 @@ function BookingInformation({ id }: any) {
     if (isLoading) {
         return <Spinner />
     }
-    // console.log(data);
     const totalReview = Array.isArray(data?.review) ? data?.review.length : 0;
     // Calculate the sum of ratings
     const sumOfRatings = Array.isArray(data?.review)
@@ -23,21 +22,10 @@ function BookingInformation({ id }: any) {
 
     const desc = data?.description ? data?.description.slice(0, 1000) : "";
     return (
-        <div className='mt-10'>
+        <div className='mt-36 md:mt-10 lg:mt-10'>
             <h1 className='text-3xl font-semibold text-center'>BookingInformation</h1>
-            <div
-                style={{
-                    display: "flex",
-                    gap: "1rem",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    padding: "1rem",
-                    height: "350px",
-                }}
-            >
-                <div style={{
-                    width: "40%"
-                }}>
+            <div className='bookingInfo'>
+                <div className='bookingInfo-image'>
                     <Image
                         style={{ height: "100%", width: "100%", borderRadius: "10px" }}
                         src={data?.eventImg}
@@ -46,13 +34,7 @@ function BookingInformation({ id }: any) {
                         alt="Picture of the author"
                     />
                 </div>
-                <div
-                    style={{
-                        width: "60%",
-                        height: "15rem",
-                    }}
-                >
-
+                <div className='bookingInfo-description'>
                     <div
                         style={{
                             width: "100%",
@@ -63,7 +45,7 @@ function BookingInformation({ id }: any) {
                             padding: "1rem",
                         }}
                     >
-                        <div>
+                        <div className='my-2'>
                             <p
                                 style={{
                                     backgroundColor: "#FF9130",
@@ -78,15 +60,12 @@ function BookingInformation({ id }: any) {
                         </div>
 
                         <div>
-                            <h1
-                                style={{
-                                    fontSize: "2rem",
-                                }}
-                            >
+                            <h1 className='text-2xl md:text-3xl'>
                                 {data?.title}
                             </h1>
                             <p
                                 style={{
+                                    margin: "10px 0px",
                                     backgroundColor: "skyBlue",
                                     color: "white",
                                     padding: "5px",
@@ -98,12 +77,7 @@ function BookingInformation({ id }: any) {
                             </p>
                         </div>
 
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "space-between",
-                            }}
-                        >
+                        <div className='bookingInfo-price'>
                             <div>
                                 <div className='flex items-center my-2'>
                                     <Rate disabled defaultValue={averageRating} />

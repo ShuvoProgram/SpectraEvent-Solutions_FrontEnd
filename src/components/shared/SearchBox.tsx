@@ -15,7 +15,6 @@ const SearchBox = ({ open, setOpen }: any) => {
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value
     setSearchValue(value)
-    console.log('Search Input:', value)
   }
 
   return (

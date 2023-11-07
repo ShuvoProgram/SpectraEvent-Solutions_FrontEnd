@@ -41,7 +41,6 @@ const bookings = data?.booking?.data;
 // @ts-ignore
   const meta = data?.booking?.meta;
 
-  console.log(bookings)
 
   const columns = [
     {

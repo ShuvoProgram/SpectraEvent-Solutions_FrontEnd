@@ -47,7 +47,7 @@ function MyBooking() {
       const handleCancelBooking = async (id: string) => {
         message.loading("Canceling......")
         try {
-          console.log(id)
+     
           const res = await cancelBooking(id);
           if (res) {
             message.success('Successfully Cancel Booking');
@@ -57,7 +57,7 @@ function MyBooking() {
           message.error(err.message)
         }
       }
-      console.log(bookingData);
+     
 
       const columns = [
         {
@@ -98,8 +98,8 @@ function MyBooking() {
         {
           title: "Invoice Pdf",
           render: function (data: any) {
-            return data.status === "confirm" ? (
-              <strong style={{ color: "green" }}>Confirm</strong>
+            return data.status === "confirmed" ? (
+              <Link href={`/user/my-booking/booking-invoice/${data?.id}`} style={{ color: "green" }}>Download Invoice</Link>
             ) : (
               <strong>
                 Not Available
@@ -149,7 +149,7 @@ function MyBooking() {
         setSearchTerm("");
       };
 
-    console.log(meta)
+
   return (
     <div
     style={{

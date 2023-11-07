@@ -43,24 +43,6 @@ const UploadImage = ({
  }: InputUpload) => {
   const [loading, setLoading] = useState(false);
   const { setValue } = useFormContext();
-
-  // const handleChange: UploadProps["onChange"] = (
-  //   info: UploadChangeParam<UploadFile>
-  // ) => {
-  //   if (info.file.status === "uploading") {
-  //     setLoading(true);
-  //     return;
-  //   }
-  //   if (info.file.status === "done") {
-  //     // Get this url from response in real world.
-  //     setValue(name, info.file.originFileObj);
-  //     getBase64(info.file.originFileObj as RcFile, (url) => {
-  //       setLoading(false);
-  //       setImageUrl(url);
-  //     });
-  //   }
-  // };
-// console.log(imageUrl)
   const uploadButton = (
     <div>
       {loading ? <LoadingOutlined /> : <PlusOutlined />}

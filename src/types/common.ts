@@ -180,4 +180,7 @@ userName: String;
 userContactNo: String;
 userEmail: String;
 userAddress: String;
+eventTitle: String;
+EventLocation: String;
+EventPrice: Number;
 }

@@ -16,8 +16,6 @@ function EventDetails({params}: IDProps) {
       return <Spinner/>
   }
 
-    // console.log(data);
-
   return (
     <div
     style={{

@@ -8,7 +8,7 @@ import { Button } from 'antd';
 function FeedbackForm() {
 
   const handleFeedback = ({values}: any) => {
-    console.log(values)
+
   }
   return (
    <section className="body-font relative font-serif">

@@ -16,7 +16,7 @@ function UpdateProfile() {
   const [updateProfile] = useProfileUpdateMutation();
   const onSubmit = async (values: any) => {
     try {
-      console.log(values);
+     
       const res = await updateProfile(values).unwrap();
       if (res?.id) {
         message.success("User Successfully Updated!");
@@ -26,7 +26,7 @@ function UpdateProfile() {
     }
   }
 
-  // console.log(userDate)
+
 
   const defaultValue = {
     firstName: userDate?.firstName || "",

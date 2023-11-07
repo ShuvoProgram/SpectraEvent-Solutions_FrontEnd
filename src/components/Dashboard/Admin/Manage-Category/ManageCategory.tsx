@@ -43,7 +43,7 @@ if (!!debouncedSearchTerm) {
 const { data, isLoading } = useGetAllCategoryQuery({ ...query });
 
 const categories = data?.Category;
-// console.log(categories)
+
 // @ts-ignore
   const meta = data?.Category?.meta;
  const handleDelete = async (id: string) => {

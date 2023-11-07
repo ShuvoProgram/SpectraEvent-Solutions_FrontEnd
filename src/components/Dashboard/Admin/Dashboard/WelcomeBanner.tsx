@@ -3,7 +3,7 @@ import React from 'react';
 
 function WelcomeBanner() {
     const timeOfDay = getMorningOrEveningTime();
-    // console.log(`It's currently ${timeOfDay}.`);
+  
   return (
     <div className="relative bg-indigo-200 dark:bg-indigo-500 p-4 sm:p-6 rounded-sm overflow-hidden mb-8">
       {/* Background illustration */}

@@ -22,7 +22,7 @@ export default function LoginFrom() {
     const router = useRouter();
 
     const onSubmit: SubmitHandler<LoginFormInputs> = async (data: any) => {
-        // console.log(data);
+       
         try {
             const res = await login({ ...data }).unwrap();
             

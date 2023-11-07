@@ -19,11 +19,10 @@ function BookingConfirmSummary({ event, newDate,}: IBookingConfirm) {
         return <Spinner />
     }
     const {firstName, email, contactNo, address} = data;
-    console.log(data)
   return (
     <div
     style={{
-        height: "22rem",
+        // height: "22rem",
         padding: "1rem",
         border: "1px solid #e6e6e6",
         marginTop: "1rem",
@@ -32,19 +31,12 @@ function BookingConfirmSummary({ event, newDate,}: IBookingConfirm) {
       }}
     >
   <Row>
-        <Col span={16}>
+        <Col sm={24} md={12}>
           <div>
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "evenly",
-                gap: "1rem",
-                width: "100%",
-              }}
-            >
+            <div className='content-evenly gap-4 w-full flex-col md:flex'>
               <Card
                 style={{
-                  width: "45%",
+                  width: "80%",
                 }}
                 title="Booking Date"
               >
@@ -73,12 +65,12 @@ function BookingConfirmSummary({ event, newDate,}: IBookingConfirm) {
           >
             <Card
               style={{
-                width: "92%",
+                width: "98%",
               }}
               title={"Booking Information"}
             >
               <Row>
-                <Col span={12}>
+                <Col sm={24} md={12}>
                   <p>
                     <b>Name : {firstName} </b>
                   </p>
@@ -89,7 +81,7 @@ function BookingConfirmSummary({ event, newDate,}: IBookingConfirm) {
                     <b>Address : {address} </b>
                   </p>
                 </Col>
-                <Col span={12}>
+                <Col sm={24} md={12}>
                   <p>
                     <b>Address : {address} </b>
                   </p>
@@ -104,10 +96,10 @@ function BookingConfirmSummary({ event, newDate,}: IBookingConfirm) {
             </Card>
           </div>
         </Col>
-        <Col span={8}>
+        <Col sm={24} md={12}>
           <Card
             style={{
-              width: "100%",
+              width: "90%",
             }}
             title="Price Summary"
           >
