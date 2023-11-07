@@ -92,10 +92,20 @@ export const sidebarItems = (role: string) => {
       }
   ];
 
+  const superAdminSidebarItems: MenuProps["items"] = [
+    {
+      label: <Link href={`/${role}/manage-admin`}>Manage-Admin</Link>,
+      key: "/manage-admin",
+      icon: <UserOutlined/>
+    }
+  ]
+
   if(role === USER_ROLE.CUSTOMER){
     return userSidebarItem;
   } else if (role === USER_ROLE.ADMIN) {
     return adminSideBarItems
+  } else if (role === USER_ROLE.SUPER_ADMIN) {
+    return superAdminSidebarItems
   }
   else{
     return defaultSidebarItems;
