@@ -3,6 +3,7 @@ import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
 import { useGetSingleCustomerQuery } from '@/redux/api/userApi';
+import { getUserInfo } from '@/services/auth.service';
 import { IDProps } from '@/types'
 import { EditOutlined, UserOutlined } from '@ant-design/icons'
 import { Avatar } from 'antd';
@@ -13,6 +14,7 @@ import { BsBriefcase } from 'react-icons/bs';
 
 function CustomerDetails({params}: IDProps) {
     const { id } = params;
+    const { role } = getUserInfo() as any;
     const {data, isLoading} = useGetSingleCustomerQuery(id);
 
     if (isLoading) {
@@ -29,16 +31,20 @@ function CustomerDetails({params}: IDProps) {
     }}
     >
       <BreadCrumb
-                items={[
-                    {
-                        label: "Admin",
-                        link: "/admin",
-                    },
-                    {
-                        label: "User",
-                        link: "/admin/user",
-                    },
-                ]}
+               items={[
+                {
+                    label: "Admin",
+                    link: `/${role}`,
+                },
+                {
+                    label: "Manage-Customer",
+                    link: `/${role}/manage-customer`,
+                },
+                {
+                    label: "Customer-Details",
+                    link: `/${role}/manage-customer/customer-details`,
+                },
+            ]}
             />
             <ActionBar title="Customer" />
             <div className="pt-16 bg-blueGray-50">

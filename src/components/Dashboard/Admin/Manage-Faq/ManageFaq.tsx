@@ -83,10 +83,10 @@ function ManageFaq() {
                 <Button
                   style={{
                     margin: "0px 5px",
-                    backgroundColor: "#00A9FF"
+                    
                   }}
                   onClick={() => console.log(data)}
-                  type="primary"
+                  
 
                 >
                   <EditOutlined />
@@ -126,7 +126,7 @@ function ManageFaq() {
     <div>
               <ActionBar>
               <Input
-                    addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#4338ca" }} />}
+                    addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FF5B22" }} />}
                     placeholder="Search ......"
                     onChange={(e) => {
                         setSearchTerm(e.target.value);

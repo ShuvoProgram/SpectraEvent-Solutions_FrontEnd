@@ -1,5 +1,11 @@
 import ManageFeedback from '@/components/Dashboard/Admin/Manage-Feedback/ManageFeedback'
-import React from 'react'
+import { Metadata } from 'next';
+import React from 'react';
+
+export const metadata: Metadata = {
+  title: `SpectraEvent-Solutions | Manage Feedback`,
+  description: 'Best Event Management Website',
+}
 
 function page() {
   return (

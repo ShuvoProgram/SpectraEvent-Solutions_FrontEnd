@@ -27,12 +27,20 @@ function EventDetails({params}: IDProps) {
     }}
     >
       <BreadCrumb
-         items={[
+           items={[
             {
-              label: "admin",
-              link: "/admin",
+                label: "Admin",
+                link: "/admin",
             },
-          ]}
+            {
+                label: "Manage-Event",
+                link: "/admin/manage-event",
+            },
+            {
+                label: "Event-Information",
+                link: "/admin/manage-event/view",
+            },
+        ]}
         />
         <h1 style={{ fontSize: "22px", fontWeight: "500", margin: "5px 0px" }}>Event Information</h1>
         <div>

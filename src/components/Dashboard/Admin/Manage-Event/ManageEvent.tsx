@@ -110,7 +110,7 @@ function ManageEvent() {
           return (
             <>
               <Link href={`/admin/manage-event/view/${data.id}`}>
-                <Button onClick={() => console.log(data)} type="primary">
+                <Button onClick={() => console.log(data)}>
                   <EyeOutlined />
                 </Button>
               </Link>
@@ -120,7 +120,7 @@ function ManageEvent() {
                     margin: "0px 5px",
                   }}
                   onClick={() => console.log(data)}
-                  type="primary"
+                  
                 >
                   <EditOutlined />
                 </Button>

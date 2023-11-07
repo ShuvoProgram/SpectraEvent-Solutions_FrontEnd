@@ -70,14 +70,18 @@ function AddBlog() {
         marginTop: "10px",
       }}
     >
-    <BreadCrumb
-        items={[
-            {
-                label: "Admin",
-                link: "/admin",
-            },
-        ]}
-    />
+     <BreadCrumb
+                items={[
+                    {
+                        label: "Admin",
+                        link: "/admin",
+                    },
+                    {
+                        label: "Manage-Blog",
+                        link: "/admin/manage-blog",
+                    },
+                ]}
+            />
         <Form submitHandler={onSubmit}>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                     <Col className='gutter-row mb-4' span={24}>

@@ -15,10 +15,11 @@ import React, { useState } from 'react'
 import ActionBar from '@/components/shared/ActionBar';
 import UMTable from '@/components/shared/UMTable';
 import BreadCrumb from '@/components/shared/BreadCrumb';
+import { getUserInfo } from '@/services/auth.service';
 
 function MangeCustomer() {
     const query: Record<string, any> = {};
-
+    const { role } = getUserInfo() as any;
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
     const [sortBy, setSortBy] = useState<string>("");
@@ -89,19 +90,13 @@ function MangeCustomer() {
                 return (
                     <>
                         <Link href={`/admin/manage-customer/customer-details/${data.id}`}>
-                        <Button onClick={() => console.log(data)} type="primary">
+                        <Button onClick={() => console.log(data)}>
                   <EyeOutlined />
                 </Button>
                         </Link>
                         <Link href={`/admin/manage-customer/update/${data.id}`}>
                         <Button
-                  style={{
-                    margin: "0px 5px",
-                    backgroundColor: "#00A9FF"
-                  }}
                   onClick={() => console.log(data)}
-                  type="primary"
-
                 >
                   <EditOutlined />
                 </Button>
@@ -147,12 +142,16 @@ function MangeCustomer() {
       }}
     >
           <BreadCrumb
-                items={[
-                    {
-                        label: "Admin",
-                        link: "/admin",
-                    },
-                ]}
+               items={[
+                {
+                    label: "Admin",
+                    link: `/${role}`,
+                },
+                {
+                    label: "Manage-Customer",
+                    link: `/${role}/manage-customer`,
+                },
+            ]}
             />
          <ActionBar title="Customer List">
                 <Input

@@ -30,7 +30,6 @@ function BookingInvoice({params}: IDProps) {
     const BookingInvoiceDate = dayjs(data.createdAt).format("MMM D, YYYY");
     const InvoiceId = data?.id.slice(0, 10);
     
-    console.log(data)
     return (
         <div
             style={{

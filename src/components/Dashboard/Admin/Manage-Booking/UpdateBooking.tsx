@@ -64,8 +64,8 @@ function UpdateBooking({params}: IDProps) {
                         link: `/${role}`,
                     },
                     {
-                        label: "Manage-Customer",
-                        link: `/${role}/manage-customer`,
+                        label: "Manage-Booking",
+                        link: `/${role}/manage-booking`,
                     },
                 ]}
             />

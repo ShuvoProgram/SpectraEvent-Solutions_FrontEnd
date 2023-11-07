@@ -39,7 +39,7 @@ function ManageFavorite() {
     const {data, isLoading} = useGetAllFavoriteQuery({...query})
     // @ts-ignore
     const favData = data?.fav;
-    console.log(favData);
+   
     // @ts-ignore
     const meta = data?.meta?.meta;
 
@@ -102,13 +102,13 @@ function ManageFavorite() {
     ];
 
     const onPaginationChange = (page: number, pageSize: number) => {
-      console.log("Page:", page, "PageSize:", pageSize);
+      
       setPage(page);
       setSize(pageSize);
     };
     const onTableChange = (pagination: any, filter: any, sorter: any) => {
       const { order, field } = sorter;
-      // console.log(order, field);
+     
       setSortBy(field as string);
       setSortOrder(order === "ascend" ? "asc" : "desc");
     };

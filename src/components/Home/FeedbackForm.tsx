@@ -10,7 +10,6 @@ function FeedbackForm() {
   const [createFeedback] = useCreateFeedbackMutation();
 
   const handleFeedback = async (values: any) => {
-    console.log(values)
     try {
     const res = await createFeedback(values).unwrap();
     if(res.id){

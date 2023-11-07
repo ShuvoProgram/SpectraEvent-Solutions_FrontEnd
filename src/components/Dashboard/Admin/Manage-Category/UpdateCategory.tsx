@@ -84,7 +84,7 @@ const handleChange: UploadProps["onChange"] = async (
                     },
                     {
                         label: "Category",
-                        link: "/admin/manage-Category",
+                        link: "/admin/manage-category",
                     },
                 ]}
             />

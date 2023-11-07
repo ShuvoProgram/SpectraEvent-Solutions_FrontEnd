@@ -56,7 +56,7 @@ function ManageFeedback() {
             return (
               <>
                  <Link href={`/admin/manage-feedback/update/${data.id}`}>
-                <Button onClick={() => console.log(data)} type="primary">
+                <Button onClick={() => console.log(data)} style={{margin: "0px 10px"}}>
                 <EditOutlined />
                 </Button>
               </Link>
@@ -73,7 +73,7 @@ function ManageFeedback() {
         },
       ];
 
-    console.log(data);
+
   return (
     <div
     style={{

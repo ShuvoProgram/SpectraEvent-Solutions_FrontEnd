@@ -5,7 +5,7 @@ import BreadCrumb from '@/components/shared/BreadCrumb';
 import Spinner from '@/components/shared/Spinner';
 import { useGetSingleCustomerQuery, useUpdateCustomerMutation } from '@/redux/api/userApi';
 import { IDProps } from '@/types'
-import { Col, Row, message } from 'antd';
+import { Button, Col, Row, message } from 'antd';
 import React from 'react'
 
 function UpdateCustomer({ params }: IDProps) {
@@ -28,8 +28,6 @@ function UpdateCustomer({ params }: IDProps) {
     };
 
 
-
-
   return (
     <div
     style={{
@@ -50,15 +48,17 @@ function UpdateCustomer({ params }: IDProps) {
                         label: "Manage-Customer",
                         link: "/admin/manage-customer",
                     },
+                    {
+                        label: "Customer-Update",
+                        link: "/admin/manage-customer/update",
+                    },
                 ]}
             />
          <h1 className="py-5 text-lg font-bold">Update Customer</h1>
          <div>
          {/* defaultValues={defaultValues} */}
                 <Form submitHandler={onSubmit} >
-                    <div className="p-10 mb-5 relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-                        <h1 className="text-lg font-bold mb-5">Update User Information</h1>
-                        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+                <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
                             <Col
                                 className="gutter-row mb-4"
                                 span={8}
@@ -114,20 +114,8 @@ function UpdateCustomer({ params }: IDProps) {
                                     label="Address"
                                 />
                             </Col>
-                            <Col
-                                className="gutter-row mb-4"
-                                span={12}
-                            >
-                                <FormInput
-                                    type="text"
-                                    name="profileImg"
-                                    size="large"
-                                    label="Image Link"
-                                />
-                            </Col>
                         </Row>
-                    </div>
-                    <button className="bg-violet-600 text-white p-2 bg-clip-border shadow-md rounded font-semibold" type="submit">Update User</button>
+                    <Button htmlType='submit'>Update User</Button>
                 </Form>
             </div>
     </div>

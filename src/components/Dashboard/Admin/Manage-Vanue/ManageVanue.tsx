@@ -80,11 +80,10 @@ function ManageVanue() {
                 <Button
                   style={{
                     margin: "0px 5px",
-                    backgroundColor: "#00A9FF"
+                   
                   }}
                   onClick={() => console.log(data)}
-                  type="primary"
-
+                
                 >
                   <EditOutlined />
                 </Button>

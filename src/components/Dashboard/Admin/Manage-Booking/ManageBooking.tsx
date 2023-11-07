@@ -112,7 +112,7 @@ const bookings = data?.booking?.data;
           <div
           >
             <Link href={`/${role}/manage-booking/update/${data.id}`}>
-              <Button onClick={() => console.log(data)} type="primary">
+              <Button onClick={() => console.log(data)}>
                 <EditOutlined />
               </Button>
             </Link>
