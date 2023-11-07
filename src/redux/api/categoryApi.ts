@@ -41,7 +41,7 @@ export const categoryApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${Category_URL}/${data.id}`,
             method: "PATCH",
-            data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.category]
     }),

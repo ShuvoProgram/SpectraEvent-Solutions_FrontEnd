@@ -19,7 +19,7 @@ function CreateEvent() {
     const [createEvent] = useCreateEventMutation();
     const router = useRouter();
     const [imageUrl, setImageUrl] = useState<string | null>(null);
-    const { data, isLoading } = useGetAllCategoryQuery({
+    const { data } = useGetAllCategoryQuery({
         limit: 100,
         page: 1,
     });

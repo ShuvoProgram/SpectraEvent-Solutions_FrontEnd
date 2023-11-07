@@ -41,7 +41,7 @@ export const blogApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${BLOG_URL}/${data.id}`,
             method: "PATCH",
-            data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.blog]
     }),

@@ -22,7 +22,7 @@ function UpdateVanue({id}: IDProps) {
 
     const onSubmit = async (values: any) => {
         try {
-          const res = await updateVanue({...values}).unwrap();
+          const res = await updateVanue({...values, id}).unwrap();
             if(res?.id) {
               message.success("Vanue Successfully Updated!");
             }

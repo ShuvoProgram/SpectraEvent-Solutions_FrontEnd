@@ -3,12 +3,22 @@ import React from 'react'
 import Form from '../Form/Form';
 import FormInput from '../Form/FormInput';
 import FormTextArea from '../Form/FormTextArea';
-import { Button } from 'antd';
+import { Button, message } from 'antd';
+import { useCreateFeedbackMutation } from '@/redux/api/feedbackApi';
 
 function FeedbackForm() {
+  const [createFeedback] = useCreateFeedbackMutation();
 
-  const handleFeedback = ({values}: any) => {
-
+  const handleFeedback = async (values: any) => {
+    console.log(values)
+    try {
+    const res = await createFeedback(values).unwrap();
+    if(res.id){
+      message.success('Send Your Feedback')
+    }
+    } catch (error: any) {
+      message.error(error.message)
+    }
   }
   return (
    <section className="body-font relative font-serif">

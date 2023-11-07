@@ -5,6 +5,7 @@ import FormTextArea from '@/components/Form/FormTextArea';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import { useGetSingleFaqQuery, useUpdateFaqMutation } from '@/redux/api/faqApi'
 import { Button, Col, Row, message } from 'antd';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 type IDProps = {
@@ -12,16 +13,18 @@ type IDProps = {
   };
 
 function UpdateFaq({id}: IDProps) {
-    const {data: faqData, isLoading} = useGetSingleFaqQuery(id);
+  const router = useRouter();
+    const {data: faqData} = useGetSingleFaqQuery(id);
     const [updateFaq] = useUpdateFaqMutation();
     const onSubmit = async (values: any) => {
         try {
-          const res = await updateFaq({...values}).unwrap();
+          const res = await updateFaq({...values, id}).unwrap();
             if(res?.id) {
               message.success("FAQ Successfully Updated!");
+              router.push('/admin/manage-faq')
             }
         } catch (error: any) {
-            console.error(error.message)
+            message.error(error.message)
         }
     };
     const defaultValue = {

@@ -10,7 +10,7 @@ export const vanueApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `${Vanue_URL}`,
         method: "POST",
-        data
+        data: data.body
       }),
       invalidatesTags: [tagTypes.vanue],
     }),
@@ -41,7 +41,7 @@ export const vanueApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${Vanue_URL}/${data.id}`,
             method: "PATCH",
-            data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.vanue]
     }),

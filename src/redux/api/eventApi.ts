@@ -10,7 +10,7 @@ export const eventApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `${EVENT_URL}`,
         method: "POST",
-        data
+        data: data.body
       }),
       invalidatesTags: [tagTypes.event],
     }),
@@ -41,7 +41,7 @@ export const eventApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${EVENT_URL}/${data.id}`,
             method: "PATCH",
-            data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.event]
     }),

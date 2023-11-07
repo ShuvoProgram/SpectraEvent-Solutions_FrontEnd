@@ -41,7 +41,7 @@ export const faqApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${FAQ_URL}/${data.id}`,
             method: "PATCH",
-            data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.faq]
     }),

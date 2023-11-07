@@ -20,7 +20,7 @@ function UpdateCustomer({ params }: IDProps) {
     const onSubmit = async (values: any) => {
         message.loading("Updating...");
         try {
-            await updateCustomer({ id, body: values });
+            await updateCustomer({...values, id});
             message.success("User updated successfully!");
         } catch (err: any) {
             message.error(err.message);

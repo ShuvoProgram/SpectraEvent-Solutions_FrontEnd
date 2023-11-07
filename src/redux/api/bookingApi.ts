@@ -10,7 +10,7 @@ export const bookingApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `${BOOKING_URL}/create-booking`,
         method: "POST",
-        data
+        data: data.body
       }),
       invalidatesTags: [tagTypes.booking],
     }),
@@ -57,7 +57,7 @@ export const bookingApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${BOOKING_URL}/${data.id}`,
             method: "PATCH",
-           data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.booking]
     }),

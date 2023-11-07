@@ -138,6 +138,13 @@ export type IBooking = {
   updatedAt: Date
 }
 
+export type IFeedback = {
+  id: String
+  name: String
+  email: String
+  isPublic: boolean
+}
+
 export enum GENDER {
   male,
   female

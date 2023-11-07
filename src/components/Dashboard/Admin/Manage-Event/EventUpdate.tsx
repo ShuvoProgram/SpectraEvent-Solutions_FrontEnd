@@ -53,7 +53,7 @@ function EventUpdate({params}: IDProps) {
         try {
             values.price = parseInt(values.price);
         values.people = parseInt(values.people);
-         const res = await updateEvent({ ...values }).unwrap();
+         const res = await updateEvent({...values, id}).unwrap();
          if(res?.id){
              message.success("Event updated successfully!");
              router.push('/admin/manage-event')

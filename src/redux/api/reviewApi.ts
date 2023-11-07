@@ -10,7 +10,7 @@ export const reviewApi = baseApi.injectEndpoints({
       query: (data) => ({
         url: `${REVIEW_URL}`,
         method: "POST",
-        data
+        data: data.body
       }),
       invalidatesTags: [tagTypes.review],
     }),
@@ -41,7 +41,7 @@ export const reviewApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${REVIEW_URL}/${data.id}`,
             method: "PATCH",
-            data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.review]
     }),

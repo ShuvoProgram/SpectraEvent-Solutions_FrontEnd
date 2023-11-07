@@ -41,7 +41,7 @@ export const favoriteApi = baseApi.injectEndpoints({
         query: (data) => ({
             url: `${FAVORITE_URL}/${data.id}`,
             method: "PATCH",
-            data
+            data: data.body
         }),
         invalidatesTags: [tagTypes.favorite]
     }),
