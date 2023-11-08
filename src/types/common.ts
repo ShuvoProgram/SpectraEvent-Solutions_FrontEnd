@@ -33,17 +33,17 @@ export interface Name {
 
 export type IAdmin = {
   id: string;
-  firstName:    String
-  middleName:   String
-  lastName:     String
+  firstName: String
+  middleName: String
+  lastName: String
   profileImage: String
-  contactNo:    String
-  dateOfBirth:  String
-  bio:          String
-  gender:       GENDER
-  bloodGroup:   String
+  contactNo: String
+  dateOfBirth: String
+  bio: String
+  gender: GENDER
+  bloodGroup: String
   needsPasswordChange: Boolean
-  address:      String
+  address: String
   createdAt: string;
   updatedAt: string;
   __v: number;
@@ -51,89 +51,89 @@ export type IAdmin = {
 
 export interface IEvent {
   id: string;
-  title:          String
-    organizationId: String
-    isBooked:       Boolean      
-    description:    String
-    eventDate:      String
-    facility:       String
-    price:          Number
-    maxCapacity:    Number
-    availableSeats: Number
-    eventImg:       String
+  title: String
+  organizationId: String
+  isBooked: Boolean
+  description: String
+  eventDate: String
+  facility: String
+  price: Number
+  maxCapacity: Number
+  availableSeats: Number
+  eventImg: String
   createdAt: Date;
   updatedAt: Date;
   Category: ICategory[]
   // Booking:        Booking[]
-  Review:         IReview[]
+  Review: IReview[]
   // Favorite:       Favorite?
   // availabilities: IAvailability[];
-  adminId:        String
+  adminId: String
 }
 
 export type IFAQ = {
-  id:        String
-  question:  String
-  answer:    String
+  id: String
+  question: String
+  answer: String
   createdAt: String;
   updatedAt: String;
   deletedAt?: null;
 }
 
-export type ICategory ={
-  id:             String
-  name:           String
-  image:          String
-  event:          Event[]
-  createdAt:      Date
-  updatedAt:      Date
-  adminId:        String
+export type ICategory = {
+  id: String
+  name: String
+  image: String
+  event: Event[]
+  createdAt: Date
+  updatedAt: Date
+  adminId: String
   length: Number | undefined
 }
 
 export type IFavorite = {
-  id:      String
-    userId:  String
-    eventId: String
-    createdAt: Date
-    updatedAt: Date
+  id: String
+  userId: String
+  eventId: String
+  createdAt: Date
+  updatedAt: Date
 }
 
 export type IBlog = {
-  id:          String
-    contentType: String
-    title:       String
-    content:     String
-    createdAt:   Date
-    updatedAt:   Date
-    adminId:     String
-    review:      IReview[]
+  id: String
+  contentType: String
+  title: String
+  content: String
+  createdAt: Date
+  updatedAt: Date
+  adminId: String
+  review: IReview[]
 }
 
 export type IVanue = {
-  id:          String
-    title:       String
-    createdAt:   Date
-    updatedAt:   Date
-    event: IEvent[]
+  id: String
+  title: String
+  createdAt: Date
+  updatedAt: Date
+  event: IEvent[]
 }
 
 export type IReview = {
-  id:        String
-  userId:    String 
-  eventId:   String
-  rating:    String
-  comment:   String
+  id: String
+  userId: String
+  eventId: String
+  rating: String
+  comment: String
   createdAt: Date
   updatedAt: Date
-  blogId:    String
+  blogId: String
 }
 
 export type IBooking = {
-  id:        String
-  userId:    String
-  eventId:   String
-  date:      String
+  id: String
+  userId: String
+  eventId: String
+  date: String
   createdAt: Date
   updatedAt: Date
 }
@@ -181,13 +181,23 @@ export const isConfirm = [
 ]
 
 export type Invoice = {
-date: String;
-invoiceId: String;
-userName: String;
-userContactNo: String;
-userEmail: String;
-userAddress: String;
-eventTitle: String;
-EventLocation: String;
-EventPrice: Number;
+  date: String;
+  invoiceId: String;
+  userName: String;
+  userContactNo: String;
+  userEmail: String;
+  userAddress: String;
+  eventTitle: String;
+  EventLocation: String;
+  EventPrice: Number;
+}
+
+export type IBlogCard = {
+  id: string;
+  adminId: string;
+  title: string;
+  date: string;
+  img: string;
+  description: string;
+  contentType: string;
 }

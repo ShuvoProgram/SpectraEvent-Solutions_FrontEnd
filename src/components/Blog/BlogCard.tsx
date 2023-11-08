@@ -1,30 +1,25 @@
 import Image from 'next/image';
 import React from 'react'
-import {
-    HeartFilled,
-    HeartOutlined
-  } from '@ant-design/icons';
 import Link from 'next/link';
+import { useAdminQuery } from '@/redux/api/adminApi';
+import dayjs from "dayjs";
+import Spinner from '../Loading/Spinner';
+import { IBlogCard } from '@/types';
 
-interface IBlogCard {
-    author: string;
-     title: string;
-      date: string;
-       img: string;
-        description: string;
-        liked: boolean;
-        likeCount: number;
-        link: string;
-}
-
-function BlogCard({author, title, date, img, description, liked, likeCount, link}: IBlogCard) {
+function BlogCard({adminId, title, date, img, description, contentType, id}: IBlogCard) {
+    const {data: adminData, isLoading} = useAdminQuery(adminId);
+    if(isLoading) {
+        return <Spinner/>;
+    }
+    const publishedDate = dayjs(date).format("MMM D");
+    const fullName = adminData?.firstName + " " + adminData?.lastName
   return (
     <div className="rounded overflow-hidden shadow-lg font-serif">
-            <Link href="#"></Link>
+            <Link href={`/blog/${id}`}></Link>
             <div className="relative">
-                <Link href="#">
+                <Link href={`/blog/${id}`}>
                     <Image width={100} height={100} className="w-full"
-                        src="https://images.pexels.com/photos/196667/pexels-photo-196667.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500"
+                        src={img}
                         alt="Sunset in the mountains"/>
                     <div
                         className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25">
@@ -33,36 +28,32 @@ function BlogCard({author, title, date, img, description, liked, likeCount, link
                 <Link href="#!">
                     <div
                         className="absolute bottom-0 left-0 bg-[#FF5B22] px-4 py-2 text-white text-sm hover:bg-white hover:text-[#FF5B22] transition duration-500 ease-in-out">
-                        Photos
+                        {contentType}
                     </div>
                 </Link>
 
-                <Link href="!#">
+                <Link href={`/blog/${id}`}>
                     <div
                         className="text-sm absolute top-0 right-0 bg-[#FF5B22] px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-[#FF5B22] transition duration-500 ease-in-out">
-                        <span className="font-bold">27</span>
-                        <small>March</small>
+                        <span className="font-bold">{publishedDate}</span>
+                        {/* <small>March</small> */}
                     </div>
                 </Link>
             </div>
             <div className="px-6 py-4">
 
-                <Link href="#"
-                    className="font-semibold text-lg inline-block hover:text-[#FF5B22] transition duration-500 ease-in-out">Best
-                    View in Newyork City</Link>
-                <p className="text-gray-500 text-sm">
-                    The city that never sleeps
-                </p>
+                <Link href={`/blog/${id}`}
+                    className="font-semibold text-lg inline-block hover:text-[#FF5B22] transition duration-500 ease-in-out">{title}</Link>
+                <p className="text-gray-500 text-sm" dangerouslySetInnerHTML={{__html: description}}/>
             </div>
             <div className="flex items-center px-6 py-2">
                     <a
                         href="#">
-                          <Image width={100} height={100} className="w-10 h-10 rounded-full mr-4" src={img} alt="Avatar of Jonathan Reinink"/>
+                          <Image width={100} height={100} className="w-10 h-10 rounded-full mr-4" src={adminData?.profileImage} alt="Avatar of Jonathan Reinink"/>
                           </a>
                     <div className="text-sm">
-                        <a href="#" className="text-gray-900 font-semibold leading-none hover:text-[#FF5B22]">Jonathan
-                            Reinink</a>
-                        <p className="text-gray-600">Aug 18</p>
+                        <a href="#" className="text-gray-900 font-semibold leading-none hover:text-[#FF5B22]">{fullName}</a>
+                        <p className="text-gray-600">{adminData?.role}</p>
                     </div>
                 </div>
             <div className="px-6 py-2 flex flex-row items-center">
@@ -84,4 +75,4 @@ function BlogCard({author, title, date, img, description, liked, likeCount, link
   )
 }
 
-export default BlogCard
+export default BlogCard;
