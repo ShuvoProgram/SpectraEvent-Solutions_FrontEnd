@@ -2,15 +2,11 @@
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { AiOutlineClose } from 'react-icons/ai';
-import { RxHamburgerMenu } from 'react-icons/rx';
 import { getUserInfo, isLoggedIn } from '@/services/auth.service';
 import Favorite from './Favorite';
-// import { useRouter } from 'next/navigation';
 import { useGetAllFavoriteQuery } from '@/redux/api/favorite';
 import dynamic from 'next/dynamic';
 import { MenuFoldOutlined } from '@ant-design/icons';
-// import { useRouter } from 'next/navigation';
 const AvatarProfile = dynamic(() => import('./Avater'), { ssr: false });
 
 

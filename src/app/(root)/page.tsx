@@ -11,8 +11,6 @@ import ClientReview from '@/components/Home/ClientReview';
 import FeedbackForm from '@/components/Home/FeedbackForm';
 import Intro from '@/components/Home/Intro';
 
-// const BannerList = dynamic(() => import('@/components/Home/BannerList'), { ssr: false });
-
 export const metadata: Metadata = {
   title: `SpectraEvent-Solutions | Home`,
   description: 'Best Event Management Website',
@@ -22,7 +20,6 @@ export default function Home() {
   return (
     <div className='mt-10'>
       <HeroSection/>
-      {/* <BannerList /> */}
       <Category/>
       <FeatureEvent/>
       <UpcommingEvents/>
@@ -30,7 +27,6 @@ export default function Home() {
       <Team/>
       <Brand/>
       <ClientReview/>
-      {/* <Test/> */}
       <Intro/>
      <Blog title='Blog' subtitle='Latest Blog'/>
      <FeedbackForm/>

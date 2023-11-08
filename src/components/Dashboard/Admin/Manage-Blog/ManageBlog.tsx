@@ -15,9 +15,11 @@ import {
 import UMTable from '@/components/shared/UMTable';
 import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
+import { useAdminQuery } from '@/redux/api/adminApi';
 
 function ManageBlog() {
     const query: Record<string, any> = {};
+    const [adminId, setAdminId] = useState<string>("")
 
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
@@ -40,23 +42,26 @@ function ManageBlog() {
         query["searchTerm"] = debouncedSearchTerm;
     }
     const { data, isLoading } = useGetAllBlogQuery({...query});
+    const {data: adminData} = useAdminQuery(adminId)
     // @ts-ignore
     const blog = data?.blog?.data;
+    // console.log(blog)
     // @ts-ignore
     const meta = data?.blog?.meta;
 
     const onDelete = async (id: string) => {
+        message.loading("Deleting.....");
         try {
-            const res = await deleteBlog({ id }).unwrap();
-            if (res) {
+            console.log(id)
+            const res = await deleteBlog(id).unwrap();
+            if (res?.id) {
                 message.success('Successfully Deleted Blog')
-               
             }
         } catch (error: any) {
             console.error(error.message);
         }
     }
-
+console.log(adminData);
     const columns = [
         {
             title: "Title",
@@ -68,23 +73,22 @@ function ManageBlog() {
         },
         {
             title: "Author",
-            dataIndex: "user",
+            // dataIndex: "user",
             render: function (data: Record<string, string>) {
-                const fullName = `${data?.name}`;
+                const fullName = `${adminData?.firstName} ${adminData?.lastName}`;
                 return <>{fullName}</>;
             },
         },
         {
             title: "Author Email",
-            dataIndex: "user",
             render: function (data: Record<string, string>) {
-                const email = `${data?.email}`;
-                return <>{email}</>;
+                setAdminId(data?.adminId)
+                return <>{adminData?.email}</>;
             },
         },
         {
-            title: "Date",
-            dataIndex: "date",
+            title: "Created at",
+            dataIndex: "createdAt",
             render: function (data: any) {
                 return data && dayjs(data).format("MMM D, YYYY hh:mm A");
             },
@@ -96,18 +100,20 @@ function ManageBlog() {
                 return (
                     <>
                         <Link href={`/blog/details/${data.id}`}>
-                            <button className="bg-orange-600 text-white font-bold py-1 px-2 rounded mr-2">
-                                <EyeOutlined />
-                            </button>
+                        <Button onClick={() => console.log(data)}>
+                  <EyeOutlined />
+                </Button>
                         </Link>
-                        <Link href={`/admin/blog/update/${data.id}`}>
-                            <button className="bg-orange-600 text-white font-bold py-1 px-2 rounded mr-2">
-                                <EditOutlined />
-                            </button>
+                        <Link href={`/admin/manage-blog/update/${data.id}`}>
+                        <Button onClick={() => console.log(data)}>
+                <EditOutlined />
+              </Button>
                         </Link>
-                        <button onClick={() => onDelete(data?.id)} className="bg-red-500 text-white font-bold py-1 px-2 rounded mr-2">
-                            <DeleteOutlined />
-                        </button>
+                        <Button 
+                        onClick={() => onDelete(data?.id)}
+                         type="primary" danger>
+                <DeleteOutlined />
+              </Button>
                     </>
                 );
             },
