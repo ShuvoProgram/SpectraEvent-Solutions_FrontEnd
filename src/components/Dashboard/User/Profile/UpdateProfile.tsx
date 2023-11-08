@@ -4,25 +4,64 @@ import FormDatePicker from '@/components/Form/FormDatePicker';
 import FormInput from '@/components/Form/FormInput'
 import FormSelectField from '@/components/Form/FormSelectedField'
 import FormTextArea from '@/components/Form/FormTextArea';
+import Spinner from '@/components/Loading/Spinner';
 import BreadCrumb from '@/components/shared/BreadCrumb';
+import UploadImage from '@/components/shared/UploadImage';
 import { bloodGroupOptions, genderOptions } from '@/constants/global'
 import { useGetProfileQuery, useProfileUpdateMutation } from '@/redux/api/userApi'
 import { setToLocalStorage } from '@/utils/local-storage';
-import { Button, Col, Row, message } from 'antd'
-import React from 'react'
+import { Button, Col, Row, UploadProps, message } from 'antd'
+import { UploadChangeParam, UploadFile } from 'antd/es/upload';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react'
 
 function UpdateProfile() {
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
   const { data: userDate, isLoading } = useGetProfileQuery({});
   const [updateProfile] = useProfileUpdateMutation();
+  const router = useRouter()
+
+  if(isLoading) {
+    return <Spinner/>
+  }
+
+  const handleChange: UploadProps["onChange"] = async (
+    info: UploadChangeParam<UploadFile>
+  ) => {
+    const image = info.file.originFileObj;
+    const formData = new FormData();
+    formData.append("image", image as Blob);
+    try {
+      const response = await axios.post(
+        `https://api.imgbb.com/1/upload`,
+            formData,
+            {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+                params: {
+                    key: process.env.NEXT_PUBLIC_IMGBB_KEY,
+                },
+                }
+      );
+
+      setImageUrl(response.data.data.display_url);
+    } catch (error) {
+      console.error("Error uploading image to ImageBB:", error);
+    }
+  };
+
   const onSubmit = async (values: any) => {
     try {
-     
-      const res = await updateProfile(values).unwrap();
+      values.profileImage = imageUrl;
+      const res = await updateProfile({body: values}).unwrap();
       if (res?.id) {
         message.success("User Successfully Updated!");
+        router.push('/user/profile')
       }
     } catch (error: any) {
-      console.error(error.message)
+      message.error(error.message)
     }
   }
 
@@ -64,8 +103,8 @@ function UpdateProfile() {
       >
         Update Profile
       </p>
-      {/* defaultValues={defaultValue} */}
-      <Form submitHandler={onSubmit} >
+      
+      <Form submitHandler={onSubmit} defaultValues={defaultValue}>
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col
             className="gutter-row"
@@ -180,6 +219,15 @@ function UpdateProfile() {
               label='Address'
               size='large'
             />
+          </Col>
+          <Col
+            className='gutter-row'
+            span={24}
+            style={{
+              marginBottom: "10px",
+            }}
+          >
+           <UploadImage label='Image' name="profileImage" imageUrl={imageUrl} handleChange={handleChange}/>
           </Col>
           <Col
             className='gutter-row'

@@ -26,7 +26,6 @@ function CategoryPage() {
         <div
          style={{
             width: "100%",
-            // height: "200px",
             margin: "20px 0",
             display: "flex",
             flexDirection: "column",
@@ -50,7 +49,7 @@ function CategoryPage() {
                 },
             ]}
             />
-             <div className='m-5 bg-white pt-3 w-full h-full my-10 '>
+             <div className='m-5 pt-3 w-full h-full my-10 '>
              <Space style={{ marginBottom: 24 }}>
         Tab position:
         <Radio.Group value={tabPosition} onChange={changeTabPosition}>

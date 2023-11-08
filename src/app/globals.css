@@ -531,9 +531,6 @@ a:hover {
   transition: none !important;
 }
 
-.ant-tabs-content-holder {
-  background: white !important;
-}
 
 .ant-tabs-tab-active .ant-tabs-tab-btn {
   color: white !important;
@@ -546,6 +543,10 @@ a:hover {
 
 .ant-tabs-nav {
   width: 200px;
+}
+
+.ant-layout-sider-trigger{
+  background-color: #FF5B22 !important;
 }
 
 .bookingInfo {

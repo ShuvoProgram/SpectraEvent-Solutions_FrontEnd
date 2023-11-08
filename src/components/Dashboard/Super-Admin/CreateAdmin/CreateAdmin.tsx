@@ -48,7 +48,7 @@ function CreateAdmin() {
     const onSubmit = async (values: any) => {
       values.profileImage = imageUrl;
       message.loading("Creating...");
-      console.log(values)
+      // console.log(values)
       try {
         const res = await addAdminWithFormData(values).unwrap();
         if (res?.id) {

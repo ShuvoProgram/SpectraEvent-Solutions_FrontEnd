@@ -3,7 +3,7 @@ import { Button, message } from 'antd'
 import Link from 'next/link'
 import React from 'react'
 
-function EventBookCard({price, id}: any) {
+function EventBookCard({price, id, isBooked}: any) {
   return (
     <div
     style={{
@@ -55,8 +55,27 @@ function EventBookCard({price, id}: any) {
           price * (20 / 100)}
       </p>
     </div>
-    
-    <Link href={`booking/${id}`}>
+    {
+      isBooked === true ? (
+        <Button
+        style={{
+          marginTop: "10px",
+          width: "100%",
+          height: "40px",
+          backgroundColor: "#FF9130",
+          color: "#fff",
+        }}
+        onClick={() => message.error("It is not possible to Booked")}
+      >
+        Booked
+        <IdcardOutlined
+          style={{
+            marginLeft: "5px",
+          }}
+        />
+      </Button>
+      ) : (
+<Link href={`booking/${id}`}>
       <Button
         style={{
           marginTop: "10px",
@@ -65,7 +84,7 @@ function EventBookCard({price, id}: any) {
           backgroundColor: "#FF9130",
           color: "#fff",
         }}
-        // onClick={() => handelBook(service)}
+        
       >
         Book Now
         <IdcardOutlined
@@ -75,7 +94,8 @@ function EventBookCard({price, id}: any) {
         />
       </Button>
     </Link>
-
+      )
+    }
     <Button
       style={{
         marginTop: "10px",

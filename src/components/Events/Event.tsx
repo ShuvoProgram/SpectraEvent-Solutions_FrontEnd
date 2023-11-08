@@ -5,10 +5,6 @@ import { Col, Row } from 'antd';
 import EventBookCard from './EventBookCard';
 import Reviews from '../shared/Reviews';
 
-interface IWork {
-  work: []
-}
-
 function Event({data}: any) {
  
   return (
@@ -44,7 +40,7 @@ function Event({data}: any) {
     </div>
       </Col>
       <Col sm={12} md={8} lg={8}>
-      <EventBookCard price={data?.price} id={data?.id}/>
+      <EventBookCard price={data?.price} id={data?.id} isBooked={data?.isBooked}/>
       </Col>
     </Row>
   </div>

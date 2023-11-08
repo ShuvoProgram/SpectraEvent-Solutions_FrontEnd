@@ -72,9 +72,11 @@ function ManageFavorite() {
       {
         title: "Book Now",
         render: function (data: any) {
-          return (
+          return data?.event?.isBooked === true ? (
+            <>Booked</>
+          ) : (
             <Link className='p-2 bg-green-600 rounded-lg text-white hover:text-white' href={`/events/booking/${data?.event?.id}`}>Book Now</Link>
-          );
+          )
         },
       },
       {

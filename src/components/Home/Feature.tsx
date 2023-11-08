@@ -20,7 +20,7 @@ function FeatureEvent() {
         {!isError ? (
             //filter for event on isBooked
             events?.filter((event: any) => {
-              return event.isComingSoon === false;
+              return event.isComingSoon === false && event.isBooked === false;
             })
               .slice(0, 3)
               .map((event: any) => (

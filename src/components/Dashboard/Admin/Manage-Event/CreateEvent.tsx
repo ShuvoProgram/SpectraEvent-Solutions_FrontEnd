@@ -83,7 +83,9 @@ function CreateEvent() {
         values.people = parseInt(values.people);
         message.loading("Creating...");
         try {
-            const res = await createEvent(values).unwrap();
+            console.log(values)
+            const res = await createEvent({body: values}).unwrap();
+
             if (res?.id) {
                 message.success("Event added successfully");
                 router.push('/admin/manage-event')

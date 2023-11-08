@@ -7,9 +7,7 @@ function CategoryTabsData({data}: any) {
             categoryId: data.id
         }
     })
-    // if(isLoading) {
-    //     return <Spinner/>
-    // }
+
 // @ts-ignore
     const events = eventData?.event?.data;
    

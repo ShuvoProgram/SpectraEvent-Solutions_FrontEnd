@@ -18,7 +18,7 @@ function UpdateFaq({id}: IDProps) {
     const [updateFaq] = useUpdateFaqMutation();
     const onSubmit = async (values: any) => {
         try {
-          const res = await updateFaq({...values, id}).unwrap();
+          const res = await updateFaq({body: values, id}).unwrap();
             if(res?.id) {
               message.success("FAQ Successfully Updated!");
               router.push('/admin/manage-faq')
