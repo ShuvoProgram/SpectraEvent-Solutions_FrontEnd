@@ -12,9 +12,9 @@ function BlogPage({params}: IDProps) {
         return <Spinner/>
     }
     return (
-        <div className="bg-white font-sans leading-normal tracking-normal">
+        <div className="font-sans leading-normal tracking-normal mt-40 md:mt-16 mb-16">
           
-            <div className="container w-full max-w-6xl mx-auto bg-white bg-cover mt-8 rounded" style={{
+            <div className="container w-full max-w-6xl mx-auto bg-cover mt-8 rounded" style={{
                 backgroundImage: `${`url(${data?.image})`}`,
                 height: "75vh"
             }}></div>

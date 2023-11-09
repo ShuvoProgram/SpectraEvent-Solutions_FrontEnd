@@ -4,9 +4,10 @@ import { CalendarOutlined, EnvironmentOutlined, GroupOutlined } from '@ant-desig
 import { Col, Row } from 'antd';
 import EventBookCard from './EventBookCard';
 import Reviews from '../shared/Reviews';
+import dayjs from "dayjs";
 
 function Event({data}: any) {
- 
+ const publishedDate = dayjs(data?.createdAt).format("MMM D, YYYY")
   return (
     <div className='mt-40 md:mt-4 lg:mt-4'>
     <div className="container">
@@ -14,7 +15,7 @@ function Event({data}: any) {
       <h1 className="text-center text-2xl font-semibold sm:text-3xl md:text-4xl">{data?.title}</h1>
       <p className="mt-4 flex items-center text-gray-400">
       <CalendarOutlined  className='mr-2'/>
-        <span>{data?.createdAt}</span>
+        <span>{publishedDate}</span>
         <span className="mx-2 h-1.5 w-1.5 rounded-full bg-primary-500"></span>
         <GroupOutlined className='mr-2'/>
         <span>{data?.Category?.name}</span>

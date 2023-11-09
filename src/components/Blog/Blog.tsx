@@ -17,7 +17,7 @@ function Blog() {
    // @ts-ignore
   console.log(data?.blog?.data);
   return (
-    <div className='container my-10'>
+    <div className='container mt-24 md:mt-16'>
         <h1
         style={{
           margin: "20px 0px",
