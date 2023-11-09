@@ -8,7 +8,7 @@ import Spinner from '@/components/shared/Spinner';
 import { useGetAllCategoryQuery } from '@/redux/api/categoryApi';
 import { useGetSingleEventQuery, useUpdateEventMutation } from '@/redux/api/eventApi';
 import { useGetAllVanueQuery, useGetSingleVanueQuery } from '@/redux/api/vanueApi';
-import { IDProps } from '@/types'
+import { IDProps, isConfirm } from '@/types'
 import { Button, Col, Row, message } from 'antd';
 import { useRouter } from 'next/navigation';
 import React from 'react'
@@ -44,6 +44,13 @@ function EventUpdate({params}: IDProps) {
         }
     })
 
+    const confirmOption = isConfirm.map((Or: {label: any, value: any}) => {
+        return {
+            label: Or?.label,
+            value: Or?.value
+        }
+    })
+    
     if(isLoading) {
         return <Spinner/>
     }
@@ -53,7 +60,7 @@ function EventUpdate({params}: IDProps) {
         try {
             values.price = parseInt(values.price);
         values.people = parseInt(values.people);
-         const res = await updateEvent({...values, id}).unwrap();
+         const res = await updateEvent({body: values, id}).unwrap();
          if(res?.id){
              message.success("Event updated successfully!");
              router.push('/admin/manage-event')
@@ -66,7 +73,7 @@ function EventUpdate({params}: IDProps) {
        // @ts-ignore
        const defaultValues = {
         title: data?.title || "",
-        VanueId: data?.VanueId || "",
+        vanueId: Vanue?.name || "",
         organizationId: data?.organizationId || "",
         price: data?.price || "",
         people: data?.people || "",
@@ -118,6 +125,15 @@ function EventUpdate({params}: IDProps) {
                             label="Vanue"
                             size='large'
                             options={VanueOptions as SelectOptions[]}
+                            placeholder='Select'
+                        />
+                    </Col>
+                    <Col xs={24} sm={10} md={16} lg={10} style={{ margin: "10px 10px" }}>
+                    <FormSelectField
+                            name="isComingSoon"
+                            label="IsComingSoon"
+                            size='large'
+                            options={confirmOption as SelectOptions[]}
                             placeholder='Select'
                         />
                     </Col>

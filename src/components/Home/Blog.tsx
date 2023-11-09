@@ -5,6 +5,7 @@ import SectionTitle from '../shared/SectionTitle';
 import { useGetAllBlogQuery } from '@/redux/api/blogApi';
 import { Skeleton } from 'antd';
 import Spinner from '../Loading/Spinner';
+import Link from 'next/link';
 
 function Blog() {
   const query: Record<string, any> = {};
@@ -44,6 +45,9 @@ function Blog() {
             <p>Failed to fetch event list.</p>
           )}
       </div>
+      <div className='w-full flex items-center justify-center mt-5'>
+     <Link href={`/blog`} className='p-4 bg-[#FF5B22] rounded-md text-white hover:text-white font-serif'>Get All BLogs</Link>
+     </div>
       </div>
     </section>
   )
