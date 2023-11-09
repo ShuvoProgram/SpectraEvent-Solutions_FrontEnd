@@ -60,7 +60,7 @@ const handleChange: UploadProps["onChange"] = async (
         const res = await updateCategory({...values, id}).unwrap();
         if(res?.id){
             message.success("Category updated successfully!");
-            router.push('/admin/manage-Category')
+            router.push('/admin/manage-category')
         }
       } catch (err: any) {
           message.error(err.message);

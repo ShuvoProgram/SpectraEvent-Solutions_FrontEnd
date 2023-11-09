@@ -118,7 +118,14 @@ function MyBooking() {
         {
           title: "Cancel Booking",
           render: function (data: any) {
-            return (
+            return data.status === "confirmed" ? (
+              <Button
+              type="primary"
+              ghost
+            >
+              <DeleteOutlined />
+            </Button>
+            ) : (
               <Button
               onClick={() => handleCancelBooking(data?.id)}
               type="primary"
@@ -126,7 +133,7 @@ function MyBooking() {
             >
               <DeleteOutlined />
             </Button>
-            );
+            )
           },
         },
       ];

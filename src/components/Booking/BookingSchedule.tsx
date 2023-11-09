@@ -45,9 +45,8 @@ function BookingSchedule({id}: any) {
 
       const handleStudentSubmit = async (values: any) => {
         const newData = {scheduleDate: newDate, eventId: data?.id}
-        
         if(!isDataNull){
-            const res = await addBookingEvent(newData).unwrap();
+            const res = await addBookingEvent({body: newData}).unwrap();
             if(res.id) {
                 message.success("Booking Confirmed Successfully");
                 router.push("/dashboard");

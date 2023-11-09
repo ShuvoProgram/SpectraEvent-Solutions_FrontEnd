@@ -26,7 +26,7 @@ function Reviews({id}: any) {
           eventId: id
       }
       try {
-          const res = await createReview(data).unwrap();
+          const res = await createReview({body: data}).unwrap();
           if(res.id){
               message.success("Review created successfully!");
               refetch()

@@ -52,7 +52,7 @@ function ManageBlog() {
     const onDelete = async (id: string) => {
         message.loading("Deleting.....");
         try {
-            console.log(id)
+            
             const res = await deleteBlog(id).unwrap();
             if (res?.id) {
                 message.success('Successfully Deleted Blog')
@@ -61,7 +61,7 @@ function ManageBlog() {
             console.error(error.message);
         }
     }
-console.log(adminData);
+
     const columns = [
         {
             title: "Title",

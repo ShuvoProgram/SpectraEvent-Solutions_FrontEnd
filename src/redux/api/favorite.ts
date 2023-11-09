@@ -15,19 +15,12 @@ export const favoriteApi = baseApi.injectEndpoints({
       invalidatesTags: [tagTypes.favorite],
     }),
     getAllFavorite: build.query({
-        query: (arg: Record<string, any>) => {
+        query: () => {
             return {
                 url: FAVORITE_URL,
-                method: "GET",
-                params: arg,
+                method: "GET"
             }
         },
-        transformResponse: (response: IFavorite[], meta: IMeta) => {
-            return {
-              fav: response,
-              meta,
-            };
-          },
           providesTags: [tagTypes.favorite],
     }),
    getSingleFavorite: build.query({

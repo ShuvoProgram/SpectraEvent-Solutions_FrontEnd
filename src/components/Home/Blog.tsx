@@ -15,14 +15,7 @@ function Blog() {
   }
    // @ts-ignore
    const blogs = data?.blog?.data;
-   // @ts-ignore
-  console.log(data);
 
-  // if(blogs.length === 0) {
-  //   return (
-  //     <div>Blogs Are Not Available</div>
-  //   )
-  // }
   return (
     <section className="py-14">
      <div className="container">

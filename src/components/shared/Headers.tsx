@@ -7,6 +7,7 @@ import Favorite from './Favorite';
 import { useGetAllFavoriteQuery } from '@/redux/api/favorite';
 import dynamic from 'next/dynamic';
 import { MenuFoldOutlined } from '@ant-design/icons';
+import { Spin } from 'antd';
 const AvatarProfile = dynamic(() => import('./Avater'), { ssr: false });
 
 
@@ -37,7 +38,10 @@ function Headers() {
     const userLoggedIn = isLoggedIn();
     const [cartOpen, setCartOpen] = useState(false);
   const { role } = getUserInfo() as any;
-  const {data, refetch} = useGetAllFavoriteQuery({})
+  const {data, refetch, isLoading} = useGetAllFavoriteQuery({
+    pollingInterval: 3000,
+  })
+
     const renderNavLinks = () => {
         return LinkItems.map((item, index) => (
           <li key={index} className=''>
@@ -61,7 +65,7 @@ function Headers() {
       <div className="flex md:gap-6 sm:pr-20">
               <div className="flex xs:flex items-center gap-4 md:gap-10 lg:gap-10">
                 <Link href={`/user/favorite`}>
-                <Favorite count={data?.fav?.length}/>
+                <Favorite count={data?.length}/>
                 </Link>
                 <div>
                 {/* Hydration failed because the initial UI does not match what was rendered on the server. */}

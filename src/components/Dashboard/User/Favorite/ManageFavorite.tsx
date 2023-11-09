@@ -38,7 +38,7 @@ function ManageFavorite() {
     }
     const {data, isLoading} = useGetAllFavoriteQuery({...query})
     // @ts-ignore
-    const favData = data?.fav;
+    const favData = data;
    
     // @ts-ignore
     const meta = data?.meta?.meta;
@@ -160,7 +160,7 @@ function ManageFavorite() {
         columns={columns}
         dataSource={favData}
         pageSize={size}
-        totalPages={meta?.total}
+        // totalPages={meta?.total}
         showSizeChanger={true}
         onPaginationChange={onPaginationChange}
         onTableChange={onTableChange}
