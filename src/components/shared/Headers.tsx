@@ -60,8 +60,8 @@ function Headers() {
       <ul className="menu flex [&>li]:pl-8 [&>li>a]:text-center [&>li>a]:relative [&>li>a]:transition [&>li>a]:duration-200 [&>li>a]:ease-in-out [&>li>a]:font-medium [&>li>a]:text-lg">
         {renderNavLinks()}
         
-      </ul>
         <label htmlFor="check" className="close-menu">X</label>
+      </ul>
       <div className="flex md:gap-6 sm:pr-20">
               <div className="flex xs:flex items-center gap-4 md:gap-10 lg:gap-10">
                 <Link href={`/user/favorite`}>
