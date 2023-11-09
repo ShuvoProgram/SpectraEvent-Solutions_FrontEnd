@@ -14,7 +14,7 @@ function CreateVanue() {
     const onSubmit = async (data: any) => {
         message.loading("Creating...");
         try {
-          const res = await createVanue(data).unwrap();
+          const res = await createVanue({body: data}).unwrap();
           if(res.id){
               message.success("Vanue created successfully!");
               router.push("/admin/manage-vanue");

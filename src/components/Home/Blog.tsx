@@ -16,12 +16,19 @@ function Blog() {
    // @ts-ignore
    const blogs = data?.blog?.data;
    // @ts-ignore
-  console.log(data?.blog?.data);
+  console.log(data);
+
+  // if(blogs.length === 0) {
+  //   return (
+  //     <div>Blogs Are Not Available</div>
+  //   )
+  // }
   return (
     <section className="py-14">
      <div className="container">
       <SectionTitle title='Blog'/>
       <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-10">
+      
       {!isError ? (
             blogs?.slice(0, 3)
               .map((blog: any) => (
@@ -45,6 +52,7 @@ function Blog() {
             <p>Failed to fetch event list.</p>
           )}
       </div>
+     
       <div className='w-full flex items-center justify-center mt-5'>
      <Link href={`/blog`} className='p-4 bg-[#FF5B22] rounded-md text-white hover:text-white font-serif'>Get All BLogs</Link>
      </div>

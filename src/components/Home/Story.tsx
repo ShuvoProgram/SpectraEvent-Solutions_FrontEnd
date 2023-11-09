@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import React from 'react'
-import StoryImg from '../../../public/images/ali-morshedlou-WMD64tMfc4k-unsplash.jpg';
 
 function Story() {
   return (
     <section className='pt-[80px] pb-[70px]'>
         <div className='flex flex-row justify-center items-center container'>
-            <Image src={StoryImg} width={315} alt='story' height={200} className='hidden lg:block mr-10 rounded-lg'/>
+            <Image src='https://i.ibb.co/GW3tjT2/ali-morshedlou-WMD64t-Mfc4k-unsplash.jpg' width={315} alt='story' height={200} className='hidden lg:block mr-10 rounded-lg'/>
             <div className='flex flex-col'>
                 <div className='font-serif'>
                     <div className='text-xl font-medium'>

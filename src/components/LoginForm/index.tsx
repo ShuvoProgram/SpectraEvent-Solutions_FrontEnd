@@ -29,10 +29,13 @@ export default function LoginFrom() {
             if (res?.accessToken) {
                 router.push("/");
                 message.success("User logged in successfully")
+                storeUserInfo({ accessToken: res?.accessToken });
+            } 
+            else {
+                message.error("User is not register or can't match password")
             }
-            storeUserInfo({ accessToken: res?.accessToken });
         } catch (error: any) {
-            console.error(error.message);
+            message.error(error.message);
         }
     }
     return (

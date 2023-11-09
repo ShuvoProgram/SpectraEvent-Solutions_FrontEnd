@@ -46,25 +46,25 @@ function Headers() {
         ));
       };
   return (
-    <header>
   <nav className="bg-white fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600 bg-gradient-to-b from-zinc-200 backdrop-blur-2xl dark:bg-zinc-800/30 dark:from-inherit lg:static lg:border lg:bg-gray-200 lg:dark:bg-zinc-800/30">
-    <ul className="navigation max-w-[90vw] flex flex-wrap justify-between items-center relative mx-auto py-4">
+    <div className="navigation max-w-[90vw] flex flex-wrap justify-between items-center relative mx-auto py-4">
     <a href="/" className="flex gap-1 font-bold text-gray-700 items-center">
                   <Image src="https://i.ibb.co/tbYktFp/logo-removebg-preview.png" width={250} height={100} alt="SpectraEventSolutions" />
                 </a>
       <input type="checkbox" id="check" />
      
-      <span className="menu flex [&>li]:pl-8 [&>li>a]:text-center [&>li>a]:relative [&>li>a]:transition [&>li>a]:duration-200 [&>li>a]:ease-in-out [&>li>a]:font-medium [&>li>a]:text-lg">
+      <ul className="menu flex [&>li]:pl-8 [&>li>a]:text-center [&>li>a]:relative [&>li>a]:transition [&>li>a]:duration-200 [&>li>a]:ease-in-out [&>li>a]:font-medium [&>li>a]:text-lg">
         {renderNavLinks()}
         
+      </ul>
         <label htmlFor="check" className="close-menu">X</label>
-      </span>
       <div className="flex md:gap-6 sm:pr-20">
               <div className="flex xs:flex items-center gap-4 md:gap-10 lg:gap-10">
                 <Link href={`/user/favorite`}>
                 <Favorite count={data?.fav?.length}/>
                 </Link>
                 <div>
+                {/* Hydration failed because the initial UI does not match what was rendered on the server. */}
                   {userLoggedIn ? (
                     <AvatarProfile role={role} />
                   ) : (
@@ -80,9 +80,8 @@ function Headers() {
       <label htmlFor="check" className="open-menu">
         <MenuFoldOutlined className='h-12 w-12'/>
       </label>
-    </ul>
+    </div>
   </nav>
-</header>
   )
 }
 

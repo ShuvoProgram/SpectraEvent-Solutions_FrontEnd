@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   icons: 'https://i.ibb.co/mySk1YY/logo-removebg-preview-modified.png',
 };
 
-export default function RootLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode;
@@ -19,6 +19,5 @@ export default function RootLayout({
           </body>
         </html>
       </Providers>
-    
   );
 }
