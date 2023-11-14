@@ -4,14 +4,14 @@ import Form from '../Form/Form'
 import FormInput from '../Form/FormInput'
 import FormTextArea from '../Form/FormTextArea';
 import { Button, message } from 'antd';
-import { getBaseUrl } from '@/helpers/config/envConfig';
+import { baseurl } from '@/helpers/config/envConfig';
 import axios from 'axios';
 
 function ContactPage() {
   const handleContact = async (values: any) => {
     try {
         console.log(values);
-        const url = `${getBaseUrl}/api/contact`;
+        const url = `${baseurl}/api/contact`;
         // const payload = {...values}
         const res = await axios.post(url, values);
         console.log(res)
