@@ -201,3 +201,9 @@ export type IBlogCard = {
   description: string;
   contentType: string;
 }
+
+export type IEmail = {
+  name: string;
+  email: string;
+  messages: string;
+}

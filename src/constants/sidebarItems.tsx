@@ -1,23 +1,12 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 'use client'
-
-import { Button, MenuProps, message } from "antd";
-import {CommentOutlined, LogoutOutlined, TableOutlined, UserOutlined, UserSwitchOutlined} from "@ant-design/icons"
+import { MenuProps } from "antd";
+import {CommentOutlined, TableOutlined, UserOutlined, UserSwitchOutlined} from "@ant-design/icons"
 import Link from "next/link";
-import { useAppDispatch } from "@/redux/hooks";
-import { useRouter } from "next/navigation";
 import { USER_ROLE } from "./role";
 // role: string
 export const sidebarItems = (role: string) => {
 
-  const handleLogout = async ()=> {
-    // await signOut(auth).then(() => {
-    //   dispatch(setUser(null))
-    //   message.success('Logout Success')
-    //   router.push('/')
-    // })
-  }
-  
 
   const defaultSidebarItems: MenuProps["items"] = [
     {
