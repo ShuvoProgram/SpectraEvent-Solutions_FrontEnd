@@ -28,11 +28,6 @@ export default function AvatarProfile({ role }: any) {
             icon: <ProfileOutlined />,
         },
         {
-            label: <Link href={`/${role}/`}>Dashboard</Link>,
-            key: `/${role}/`,
-            icon: <AppstoreOutlined />,
-        },
-        {
             label: <Button onClick={logOut} type='text' danger>Log Out</Button>,
             key: "0",
             icon: <LogoutOutlined />,

@@ -17,6 +17,13 @@ import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import { useAdminQuery } from '@/redux/api/adminApi';
 
+function getFullName(adminData: any) {
+    const conditionFirstName = adminData?.firstName || '';
+    const conditionLastName = adminData?.lastName || '';
+    const fullName = `${conditionFirstName} ${conditionLastName}`.trim();
+    return fullName !== '' ? fullName : 'admin';
+}
+
 function ManageBlog() {
     const query: Record<string, any> = {};
     const [adminId, setAdminId] = useState<string>("")
@@ -75,7 +82,7 @@ function ManageBlog() {
             title: "Author",
             // dataIndex: "user",
             render: function (data: Record<string, string>) {
-                const fullName = `${adminData?.firstName} ${adminData?.lastName}`;
+                const fullName = getFullName(adminData);
                 return <>{fullName}</>;
             },
         },

@@ -4,7 +4,7 @@ import React from 'react'
 function HeroSection() {
   return (
     <div
-    className="flex flex-1 w-full flex-col items-center justify-center text-center font-serif px-4 py-20">
+    className="flex flex-1 w-full flex-col items-center justify-center text-center font-serif px-4 py-10">
     <Link href=""
       className="border border-white-700 dark:border-gray-300 rounded-lg py-2 px-4 text-[#FF5B22] dark:text-gray-300 text-sm mb-5 transition duration-300 ease-in-out hover:text-gray-500 dark:hover:text-gray-400">
       Forget about spending hundreds $

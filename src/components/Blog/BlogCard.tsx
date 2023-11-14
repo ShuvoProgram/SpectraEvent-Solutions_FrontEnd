@@ -6,20 +6,25 @@ import dayjs from "dayjs";
 import Spinner from '../Loading/Spinner';
 import { IBlogCard } from '@/types';
 
+function getFullName(adminData: any) {
+    const conditionFirstName = adminData?.firstName || '';
+    const conditionLastName = adminData?.lastName || '';
+    const fullName = `${conditionFirstName} ${conditionLastName}`.trim();
+    return fullName !== '' ? fullName : 'admin';
+}
+
 function BlogCard({adminId, title, date, img, description, contentType, id}: IBlogCard) {
     const {data: adminData, isLoading} = useAdminQuery(adminId);
     if(isLoading) {
         return <Spinner/>;
     }
     const publishedDate = dayjs(date).format("MMM D");
-    const conditionFirstName = adminData?.firstName === null ? "" : adminData.firstName;
-    const conditionLastName = adminData?.LastName === null ? "" : adminData.LastName;
-    const fullName =  conditionFirstName + " " + conditionLastName;
-    const isFullName = fullName === "undefined" ? "admin" : fullName;
-    console.log(isFullName);
+    const fullName = getFullName(adminData);
+    const desc = description ? description.slice(0, 137) : "";
+    const shortTitle = title ? title.slice(0, 33) : "";
   return (
     <div className="rounded overflow-hidden shadow-lg font-serif">
-            {/* <Link href={`/blog/${id}`}></Link>
+            <Link href={`/blog/${id}`}></Link>
             <div className="relative">
                 <Link href={`/blog/${id}`}>
                     <Image width={100} height={100} className="w-full"
@@ -47,13 +52,13 @@ function BlogCard({adminId, title, date, img, description, contentType, id}: IBl
             <div className="px-6 py-4">
 
                 <Link href={`/blog/${id}`}
-                    className="font-semibold text-lg inline-block hover:text-[#FF5B22] transition duration-500 ease-in-out">{title}</Link>
-                <p className="text-gray-500 text-sm" dangerouslySetInnerHTML={{__html: description}}/>
+                    className="font-semibold text-lg inline-block hover:text-[#FF5B22] transition duration-500 ease-in-out">{shortTitle}</Link>
+                <p className="text-gray-500 text-sm" dangerouslySetInnerHTML={{__html: desc}}/>
             </div>
             <div className="flex items-center px-6 py-2">
                     <a
                         href="#">
-                          <Image width={100} height={100} className="w-10 h-10 rounded-full mr-4" src={adminData?.profileImage} alt="Avatar of Jonathan Reinink"/>
+                          <Image width={100} height={100} className="w-10 h-10 rounded-full mr-4" src={adminData?.profileImage ? adminData?.profileImage : `https://i.ibb.co/VWWbFMv/u3.jpg`} alt="Avatar of Jonathan Reinink"/>
                           </a>
                     <div className="text-sm">
                         <a href="#" className="text-gray-900 font-semibold leading-none hover:text-[#FF5B22]">{fullName}</a>
@@ -74,7 +79,7 @@ function BlogCard({adminId, title, date, img, description, contentType, id}: IBl
                         </g>
                     </svg>
                     <span className="ml-1">6 mins ago</span></Link>
-            </div> */}
+            </div>
         </div>
   )
 }
