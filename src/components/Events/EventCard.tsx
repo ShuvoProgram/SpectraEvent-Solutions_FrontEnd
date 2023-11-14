@@ -2,14 +2,12 @@
 import { useGetSingleCategoryQuery } from '@/redux/api/categoryApi';
 import { useCreateFavoriteMutation } from '@/redux/api/favorite';
 import { isLoggedIn } from '@/services/auth.service';
-// import { decodedToken } from '@/utils/jwt';
-// import { getFromLocalStorage } from '@/utils/local-storage';
 import { Rate, message } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import internal from 'stream';
 import Spinner from '../Loading/Spinner';
+import { useGetSingleVanueQuery } from '@/redux/api/vanueApi';
 
 type Event = {
     title: string;
@@ -28,12 +26,13 @@ function EventCard({title, CategoryId, imageUrl, price, description, review, van
     const userLoggedIn = isLoggedIn();
     const [createFavorite] = useCreateFavoriteMutation();
     const {data: category, isLoading} = useGetSingleCategoryQuery(CategoryId);
+    const {data: vanueData, isFetching} = useGetSingleVanueQuery(vanue)
 
-    if(isLoading) {
+    if(isLoading && isFetching) {
         return <Spinner/>
     }
-
-   const desc = description ? description.slice(0, 437) : "";
+// console.log()
+   const desc = description ? description.slice(0, 137) : "";
    const totalReview = Array.isArray(review) ? review.length : 0;
     // Calculate the sum of ratings
     const sumOfRatings = Array.isArray(review)
@@ -69,14 +68,26 @@ function EventCard({title, CategoryId, imageUrl, price, description, review, van
     <div className="absolute mt-3 ml-3">
         <button className="h-6 bg-[#FF5B22] text-white px-2 text-xs rounded font-medium">{category?.name}</button>
     </div>
-
-    <button className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.7rem]" onClick={() => handleFavorite(id)}>
+{
+    isComing === true ? (
+<button className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.7rem]" onClick={() => message.warning(`Event is Coming Soon`)}>
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
             className="h-6 w-6">
             <path strokeLinecap="round" strokeLinejoin="round"
                 d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
         </svg>
     </button>
+    ) : (
+        <button className="absolute ml-48 mt-3 max-w-fit rounded-full bg-white p-2 text-[#E74040] right-[1.7rem]" onClick={() => handleFavorite(id)}>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor"
+            className="h-6 w-6">
+            <path strokeLinecap="round" strokeLinejoin="round"
+                d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+        </svg>
+    </button>
+    )
+}
+    
     <div className="rounded-md">
         <Image src={imageUrl} width={270} height={150} alt='test'/>
     </div>
@@ -91,16 +102,12 @@ function EventCard({title, CategoryId, imageUrl, price, description, review, van
         </Link>
 
         <div className="flex justify-between">
-            <span className="text-base">Venue: {vanue}</span>
-            <span className="text-base">Price: $ {isComing === true ? `Coming Soon` : price}</span>
+            <span className="text-base">Venue: {isComing === true ? `?` : vanueData?.title}</span>
+            <span className="text-base">Price: $ {isComing === true ? `?` : price}</span>
         </div>
 
         <div className="max-w-fit">
         <span dangerouslySetInnerHTML={{__html: desc}} className='text-sm'/>
-        </div>
-
-        <div className="max-w-fit">
-            
         </div>
     </div>
 </div>

@@ -68,9 +68,11 @@ function MyBooking() {
         },
         {
           title: "Event Price",
+          responsive: ['lg'],
           render: function (data: any) {
             return <>{data?.Event?.price}</>;
           },
+         
         },
         {
           title: "Booking Status",
@@ -110,6 +112,7 @@ function MyBooking() {
         {
           title: "CreatedAt",
           dataIndex: "createdAt",
+          responsive: ['lg'],
           render: function (data: any) {
             return data && dayjs(data).format("MMM D, YYYY hh:mm A");
           },
@@ -158,13 +161,12 @@ function MyBooking() {
 
 
   return (
-    <div
+    <div className='user_Dashboard'
     style={{
       border: "1px solid #d9d9d9",
       borderRadius: "5px",
       padding: "15px",
       marginBottom: "10px",
-      marginTop: "10px",
     }}
     >
        <BreadCrumb

@@ -12,10 +12,14 @@ function BlogCard({adminId, title, date, img, description, contentType, id}: IBl
         return <Spinner/>;
     }
     const publishedDate = dayjs(date).format("MMM D");
-    const fullName = adminData?.firstName + " " + adminData?.lastName
+    const conditionFirstName = adminData?.firstName === null ? "" : adminData.firstName;
+    const conditionLastName = adminData?.LastName === null ? "" : adminData.LastName;
+    const fullName =  conditionFirstName + " " + conditionLastName;
+    const isFullName = fullName === "undefined" ? "admin" : fullName;
+    console.log(isFullName);
   return (
     <div className="rounded overflow-hidden shadow-lg font-serif">
-            <Link href={`/blog/${id}`}></Link>
+            {/* <Link href={`/blog/${id}`}></Link>
             <div className="relative">
                 <Link href={`/blog/${id}`}>
                     <Image width={100} height={100} className="w-full"
@@ -36,7 +40,7 @@ function BlogCard({adminId, title, date, img, description, contentType, id}: IBl
                     <div
                         className="text-sm absolute top-0 right-0 bg-[#FF5B22] px-4 text-white rounded-full h-16 w-16 flex flex-col items-center justify-center mt-3 mr-3 hover:bg-white hover:text-[#FF5B22] transition duration-500 ease-in-out">
                         <span className="font-bold">{publishedDate}</span>
-                        {/* <small>March</small> */}
+                        
                     </div>
                 </Link>
             </div>
@@ -70,7 +74,7 @@ function BlogCard({adminId, title, date, img, description, contentType, id}: IBl
                         </g>
                     </svg>
                     <span className="ml-1">6 mins ago</span></Link>
-            </div>
+            </div> */}
         </div>
   )
 }

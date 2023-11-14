@@ -20,7 +20,7 @@ function UpcommingEvents() {
             events?.filter((event: any) => {
               return event.isComingSoon === true;
             })
-              .slice(0, 3)
+              .slice(0, 4)
               .map((event: any) => (
                 <div key={event.id}>
                   {!isLoading ? (
@@ -28,7 +28,7 @@ function UpcommingEvents() {
                       title={event?.title || ""}
                       CategoryId={event?.CategoryId|| ""}
                       description={event?.description || ""}
-                      vanue={event?.Vanue?.title || ""}
+                      vanue={event?.vanueId || ""}
                       price={event?.price || ""}
                       review={event?.Review || ""}
                       imageUrl={event?.eventImg || ""}

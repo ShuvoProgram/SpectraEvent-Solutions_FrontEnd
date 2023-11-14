@@ -71,8 +71,7 @@ data?.profileImage ? (
               <div className="w-full lg:w-9/12 px-4">
               <table className="text-sm">
                     <tbody>
-                        <div>
-                            <tr>
+                    <tr>
                                 <td className="px-10 py-2 text-gray-700 font-bold">ID</td>
                                 <td className="px-10 py-2">{data?.id || ""}</td>
                             </tr>
@@ -100,7 +99,6 @@ data?.profileImage ? (
                                 <td className="px-10 py-2 text-gray-700 font-bold">Blood Group</td>
                                 <td className="px-10 py-2">{data?.bloodGroup || ""}</td>
                             </tr>
-                        </div>
                     </tbody>
                 </table>
               </div>
