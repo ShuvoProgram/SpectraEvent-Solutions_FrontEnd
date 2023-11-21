@@ -1,10 +1,11 @@
+"use client"
 import Link from 'next/link'
 import React from 'react'
 
 function HeroSection() {
   return (
     <div
-    className="flex flex-1 w-full flex-col items-center justify-center text-center font-serif px-4 py-10">
+    className="flex flex-1 w-full flex-col items-center justify-center text-center font-serif px-4 py-10 md:py-2">
     <Link href=""
       className="border border-white-700 dark:border-gray-300 rounded-lg py-2 px-4 text-[#FF5B22] dark:text-gray-300 text-sm mb-5 transition duration-300 ease-in-out hover:text-gray-500 dark:hover:text-gray-400">
       Forget about spending hundreds $
@@ -26,7 +27,7 @@ function HeroSection() {
     <h2 className="mx-auto mt-12 max-w-xl text-lg sm:text-white-400 text-white-500 dark:text-gray-300 leading-7">
     We provide the best events to boost your knowledge and experience
     </h2>
-    <Link className="bg-[#FF5B22] dark:bg-gray-800 rounded-xl text-white dark:text-gray-300 font-medium px-4 py-3 sm:mt-10 mt-8 hover:bg-orange-500 hover:text-white dark:hover:bg-gray-600 transition"
+    <Link className="bg-[#FF5B22] dark:bg-gray-800 rounded-xl text-white dark:text-gray-300 font-medium px-4 py-3 sm:mt-10 mt-6 hover:bg-orange-500 hover:text-white dark:hover:bg-gray-600 transition"
       href="">Get started</Link>
   </div>
   )

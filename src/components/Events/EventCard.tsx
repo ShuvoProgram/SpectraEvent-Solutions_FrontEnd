@@ -2,7 +2,7 @@
 import { useGetSingleCategoryQuery } from '@/redux/api/categoryApi';
 import { useCreateFavoriteMutation } from '@/redux/api/favorite';
 import { isLoggedIn } from '@/services/auth.service';
-import { Rate, message } from 'antd';
+import { Rate, Skeleton, message } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -29,7 +29,7 @@ function EventCard({title, CategoryId, imageUrl, price, description, review, van
     const {data: vanueData, isFetching} = useGetSingleVanueQuery(vanue)
 
     if(isLoading && isFetching) {
-        return <Spinner/>
+        return <Skeleton avatar paragraph={{ rows: 4 }} />
     }
 // console.log()
    const desc = description ? description.slice(0, 137) : "";

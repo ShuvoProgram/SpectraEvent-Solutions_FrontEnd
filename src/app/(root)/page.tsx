@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className='mt-16'>
+    <div className='mt-16 md:5'>
       <HeroSection/>
       <Category/>
       <FeatureEvent/>

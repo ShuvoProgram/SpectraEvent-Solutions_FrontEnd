@@ -26,7 +26,7 @@ function Events() {
   }
   query["Vanue"] = venueSelect;
 
-  //condtion implement
+  //condition implement
   if (maxPrice > 0) {
     query["minPrice"] = minPrice;
   }

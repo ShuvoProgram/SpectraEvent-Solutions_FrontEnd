@@ -13,7 +13,7 @@ function FeatureEvent() {
   const events = data?.event?.data;
 
   return (
-    <section className="py-14">
+    <section className="py-4">
       <div className="container">
         <SectionTitle title='Our Events' />
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 gap-10 mt-10">

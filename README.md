@@ -26,11 +26,10 @@ https://github.com/hasanulhasan/teaching-torch
 
 https://spectra-event-solutions-backend.vercel.app/
 
-<!-- </br></br>
-## Try as Admin  </br>
-Email: hasanulkarimh@gmail.com </br>
-Password: 123456 </br>
+//Note to bug fix
 
-## Try as User  </br>
-Email: gdbd1971@gmail.com </br>
-Password: 123456 </br> -->
+1. logo with to customize hd
+2. Hero Section Text slider animation
+3. category, event and upcoming event button mt more section
+4. card equal height on event and upcoming event
+5.
