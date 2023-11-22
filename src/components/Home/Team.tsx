@@ -52,7 +52,6 @@ function Team() {
       };
 
 
-
     return (
         <section className="bg-gray-100">
            <div className="relative py-10 container mx-auto">
