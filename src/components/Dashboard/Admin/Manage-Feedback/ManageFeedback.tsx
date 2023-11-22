@@ -56,7 +56,7 @@ function ManageFeedback() {
             return (
               <>
                  <Link href={`/admin/manage-feedback/update/${data.id}`}>
-                <Button onClick={() => console.log(data)} style={{margin: "0px 10px"}}>
+                <Button onClick={() => console.log(`🔥`)} style={{margin: "0px 10px"}}>
                 <EditOutlined />
                 </Button>
               </Link>

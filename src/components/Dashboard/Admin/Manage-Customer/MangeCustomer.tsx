@@ -90,13 +90,13 @@ function MangeCustomer() {
                 return (
                     <>
                         <Link href={`/admin/manage-customer/customer-details/${data.id}`}>
-                        <Button onClick={() => console.log(data)}>
+                        <Button onClick={() => console.log(`🔥`)}>
                   <EyeOutlined />
                 </Button>
                         </Link>
                         <Link href={`/admin/manage-customer/update/${data.id}`}>
                         <Button
-                  onClick={() => console.log(data)}
+                  onClick={() => console.log(`🔥`)}
                 >
                   <EditOutlined />
                 </Button>

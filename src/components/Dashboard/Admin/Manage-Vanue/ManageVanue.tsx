@@ -82,7 +82,7 @@ function ManageVanue() {
                     margin: "0px 5px",
                    
                   }}
-                  onClick={() => console.log(data)}
+                  onClick={() => console.log(`🔥`)}
                 
                 >
                   <EditOutlined />

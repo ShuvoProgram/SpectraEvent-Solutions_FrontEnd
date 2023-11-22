@@ -83,7 +83,7 @@ function CreateEvent() {
         values.people = parseInt(values.people);
         message.loading("Creating...");
         try {
-            console.log(values)
+          
             const res = await createEvent({body: values}).unwrap();
 
             if (res?.id) {

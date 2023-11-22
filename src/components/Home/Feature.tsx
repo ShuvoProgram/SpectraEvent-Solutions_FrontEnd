@@ -47,7 +47,7 @@ function FeatureEvent() {
           )}
 
         </div>
-        <div className='w-full flex items-center justify-center mt-5'>
+        <div className='w-full flex items-center justify-center mt-8'>
      <Link href={`/events`} className='p-4 bg-[#FF5B22] rounded-md text-white hover:text-white font-serif'>Get All Events</Link>
      </div>
       </div>

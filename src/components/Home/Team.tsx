@@ -5,28 +5,26 @@ import SectionTitle from '../shared/SectionTitle'
 import Slider, { Settings } from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import { NextArrow, PrevArrow } from '../shared/CaroselArrow';
 
 function Team() {
 
     const reviewSettings: Settings = {
         dots: false,
-        className: `center`,
-        centerMode: true,
         infinite: true,
-        centerPadding: "60px",
-        slidesToShow: 3,
+        slidesToShow: 4,
         slidesToScroll: 1,
         speed: 1000,
         autoplay: true,
         swipeToSlide: true,
-        arrows: false,
+        prevArrow: <PrevArrow />,
+        nextArrow: <NextArrow />,
         responsive: [
           {
             breakpoint: 1324,
             settings: {
-              slidesToShow: 3,
-              slidesToScroll: 3,
+              slidesToShow: 4,
+              slidesToScroll: 4,
             },
           },
           {
@@ -53,28 +51,22 @@ function Team() {
         ],
       };
 
+
+
     return (
-        <section>
-            <div className="bg-gray-100 ">
-                <div className="py-10 max-w-screen-lg mx-auto">
+        <section className="bg-gray-100">
+           <div className="relative py-10 container mx-auto">
                    <SectionTitle title='Our Team'/>
                    <Slider {...reviewSettings}>
-                    <div className="">
-                    <TeamCard name='Shuvo' position='Manager' img='https://images.pexels.com/photos/1587014/pexels-photo-1587014.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500'/>
-                    </div>
-                    <div className="">
-                    <TeamCard name='Shuvo' position='Manager' img='https://images.pexels.com/photos/1587014/pexels-photo-1587014.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500'/>
-                    </div>
-                    <div className="">
-                    <TeamCard name='Shuvo' position='Manager' img='https://images.pexels.com/photos/1587014/pexels-photo-1587014.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500'/>
-                    </div>
-                    <div className="">
-                    <TeamCard name='Shuvo' position='Manager' img='https://images.pexels.com/photos/1587014/pexels-photo-1587014.jpeg?auto=compress&amp;cs=tinysrgb&amp;dpr=1&amp;w=500'/>
-                    </div>
+                   <TeamCard name='Hasan' position='Photographer' img='https://i.ibb.co/SBzrSDj/joseph-gonzalez-i-Fg-Rcq-Hznqg-unsplash.jpg'/>
+                    <TeamCard name='Imran' position='Event Planer' img='https://i.ibb.co/5Mm6yyR/vince-fleming-j3lf-Jn6deo-unsplash.jpg'/>
+                    <TeamCard name='Jakaria' position='Team Leader' img='https://i.ibb.co/r02nZVW/philip-martin-5a-GUy-CW-PJw-unsplash.jpg'/>
+                    <TeamCard name='Limon' position='Manager' img='https://i.ibb.co/qsgzG59/darshan-patel-QJEVpydul-Gs-unsplash.jpg'/>
+                    <TeamCard name='Limon' position='Manager' img='https://i.ibb.co/qsgzG59/darshan-patel-QJEVpydul-Gs-unsplash.jpg'/>
                    </Slider>
-
+                   <div>
                 </div>
-            </div>
+                </div>
         </section>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 
 function Intro() {
   return (
-    <section id="pricing" aria-label="Pricing" className="py-32 md:py-20">
+    <section id="pricing" aria-label="Pricing" className="py-32 md:py-10">
     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl md:text-center font-serif">
             <h2 className="font-display text-3xl tracking-tight text-[#FF5B22] sm:text-4xl">

@@ -14,8 +14,6 @@ function Blog() {
   }
    // @ts-ignore
    const blogs = data?.blog?.data;
-   // @ts-ignore
-  console.log(data?.blog?.data);
   return (
     <div className='container mt-24 md:mt-16'>
         <h1

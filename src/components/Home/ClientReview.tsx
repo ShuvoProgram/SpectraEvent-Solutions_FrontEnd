@@ -4,13 +4,12 @@ import SectionTitle from '../shared/SectionTitle';
 import Slider, { Settings } from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { NextArrow, PrevArrow } from '../shared/CaroselArrow';
 
 function ClientReview() {
 
   const reviewSettings: Settings = {
     dots: false,
-    className: `center`,
-    centerMode: true,
     infinite: true,
     centerPadding: "60px",
     slidesToShow: 3,
@@ -18,7 +17,7 @@ function ClientReview() {
     speed: 1000,
     autoplay: true,
     swipeToSlide: true,
-    arrows: false,
+    arrows: true,
     responsive: [
       {
         breakpoint: 1324,
@@ -52,7 +51,7 @@ function ClientReview() {
   };
 
   return (
-    <div className='py-14'>
+    <div className='py-4'>
       <div className='container'>
         <SectionTitle title='Client Review' />
         <Slider {...reviewSettings}>

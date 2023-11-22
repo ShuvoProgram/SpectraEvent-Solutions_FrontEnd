@@ -52,7 +52,6 @@ function ManageBlog() {
     const {data: adminData} = useAdminQuery(adminId)
     // @ts-ignore
     const blog = data?.blog?.data;
-    // console.log(blog)
     // @ts-ignore
     const meta = data?.blog?.meta;
 
@@ -107,12 +106,12 @@ function ManageBlog() {
                 return (
                     <>
                         <Link href={`/blog/details/${data.id}`}>
-                        <Button onClick={() => console.log(data)}>
+                        <Button onClick={() => console.log(`🔥`)}>
                   <EyeOutlined />
                 </Button>
                         </Link>
                         <Link href={`/admin/manage-blog/update/${data.id}`}>
-                        <Button onClick={() => console.log(data)}>
+                        <Button onClick={() => console.log(`🔥`)}>
                 <EditOutlined />
               </Button>
                         </Link>

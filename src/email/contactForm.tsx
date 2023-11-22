@@ -5,7 +5,6 @@ import { message } from "antd";
 export const contactFormEmail = async (name: any,
 	email: any,
 	messages: any) => {
-	// console.log(user.email)
 	const data = {
 		to: "shabbir@hibootstrap.com",
 		from: "Edmy Online Courses <hello@hibootstrap.com>",

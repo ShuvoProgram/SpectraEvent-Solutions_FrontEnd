@@ -17,9 +17,9 @@ function Blog() {
    const blogs = data?.blog?.data;
 
   return (
-    <section className="py-14">
+    <section className="py-4">
      <div className="container">
-      <SectionTitle title='Blog'/>
+      <SectionTitle title='Event Related Articles'/>
       <div className="grid grid-cols-1 md:grid-cols-3 sm:grid-cols-2 gap-10">
       
       {!isError ? (

@@ -10,11 +10,9 @@ import axios from 'axios';
 function ContactPage() {
   const handleContact = async (values: any) => {
     try {
-        console.log(values);
         const url = `${baseurl}/api/contact`;
-        // const payload = {...values}
         const res = await axios.post(url, values);
-        console.log(res)
+ 
     } catch (error: any) {
         message.error(error.message)
     }

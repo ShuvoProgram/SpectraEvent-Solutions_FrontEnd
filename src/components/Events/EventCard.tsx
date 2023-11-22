@@ -31,7 +31,6 @@ function EventCard({title, CategoryId, imageUrl, price, description, review, van
     if(isLoading && isFetching) {
         return <Skeleton avatar paragraph={{ rows: 4 }} />
     }
-// console.log()
    const desc = description ? description.slice(0, 137) : "";
    const totalReview = Array.isArray(review) ? review.length : 0;
     // Calculate the sum of ratings
@@ -89,7 +88,7 @@ function EventCard({title, CategoryId, imageUrl, price, description, review, van
 }
     
     <div className="rounded-md">
-        <Image src={imageUrl} width={270} height={150} alt='test'/>
+        <Image src={imageUrl} width={270} height={150} alt='test' className='w-[270px] h-[200px]'/>
     </div>
 
     <div className="flex flex-col space-y-2.5 mt-4 px-2">

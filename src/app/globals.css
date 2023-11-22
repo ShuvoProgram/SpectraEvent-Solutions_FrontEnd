@@ -664,3 +664,45 @@ a:hover {
     right: 0;
   }
 }
+
+.slick-slide > div {
+  margin: 0 10px;
+}
+
+.slick-prev .slick-next {
+  padding: 14px;
+  width: 2vw;
+  height: 2vw;
+  cursor: pointer;
+  border: none;
+  border-radius: 5vw;
+  background-color: #fff;
+  z-index: 99 !important;
+  box-shadow: rgb(35 35 35 / 50%) 0px 0px 20px 5px;
+  top: 40%;
+}
+
+.slick-dots li button::before {
+  font-size: 12px !important;
+}
+
+.slick-prev.slick-disabled:before,
+.slick-next.slick-disabled:before {
+  opacity: 0.45 !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  opacity: 9 !important;
+  content: "" !important;
+}
+
+@media (min-width: 1024px) {
+  .slick-dots li button:before {
+      font-size: 12px;
+  }
+
+  .slick-dots {
+      padding-bottom: 40px !important;
+  }
+}
