@@ -11,7 +11,7 @@ interface ITeamCard {
 function TeamCard({name, img, position}: ITeamCard) {
     return (
         <div className="text-center bg-white w-[90%]">
-            <Image width={400} height={400} alt={`${name}`} className="w-full h-[200px]" src={img}/>
+            <Image width={100} height={100} alt={`${name}`} className="w-full h-[200px]" src={img}/>
             <div className="p-4">
                 <div className="text-md">
                     <a href="#"
