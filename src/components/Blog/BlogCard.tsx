@@ -10,7 +10,7 @@ function getFullName(adminData: any) {
     const conditionFirstName = adminData?.firstName || '';
     const conditionLastName = adminData?.lastName || '';
     const fullName = `${conditionFirstName} ${conditionLastName}`.trim();
-    return fullName !== '' ? fullName : 'admin';
+    return fullName !== '' ? fullName : 'Shuvo';
 }
 
 function BlogCard({adminId, title, date, img, description, contentType, id}: IBlogCard) {
@@ -78,7 +78,7 @@ function BlogCard({adminId, title, date, img, description, contentType, id}: IBl
                             </g>
                         </g>
                     </svg>
-                    <span className="ml-1">6 mins ago</span></Link>
+                    <span className="ml-1">6 days ago</span></Link>
             </div>
         </div>
   )
