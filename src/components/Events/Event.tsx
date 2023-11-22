@@ -27,7 +27,7 @@ function Event({data}: any) {
     </div>
     <div className="mt-10">
     <div className="overflow-hidden rounded-xl">
-            <Image src={data?.eventImg} height={320} width={280} layout="responsive" alt={data?.title} />
+            <Image src={data?.eventImg} height={300} width={400} className='w-full h-[450px]' alt={data?.title} />
           </div>
     </div>
     <Row className="my-10">
