@@ -1,27 +1,32 @@
+import img1 from '../../public/images/darshan-patel-QJEVpydulGs-unsplash.jpg';
+import img2 from '../../public/images/joseph-gonzalez-iFgRcqHznqg-unsplash.jpg';
+import img3 from '../../public/images/philip-martin-5aGUyCW_PJw-unsplash.jpg';
+import img4 from '../../public/images/vince-fleming-j3lf-Jn6deo-unsplash.jpg';
+
 export const TeamData = [
     {
       name: 'Hasan',
       position: 'Photographer',
-      img: "https://i.ibb.co/SBzrSDj/joseph-gonzalez-i-Fg-Rcq-Hznqg-unsplash.jpg"
+      img: img1
     },
     {
       name: 'Imran',
       position: 'Event Planer',
-      img: "https://i.ibb.co/5Mm6yyR/vince-fleming-j3lf-Jn6deo-unsplash.jpg"
+      img: img2
     },
     {
       name: 'Jakaria',
       position: 'Team Leader',
-      img: "https://i.ibb.co/r02nZVW/philip-martin-5a-GUy-CW-PJw-unsplash.jpg"
+      img: img3
     },
     {
       name: 'Limon',
       position: 'Manager',
-      img: "https://i.ibb.co/qsgzG59/darshan-patel-QJEVpydul-Gs-unsplash.jpg"
+      img: img4
     },
     {
       name: 'Limon',
       position: 'Manager',
-      img: "https://i.ibb.co/qsgzG59/darshan-patel-QJEVpydul-Gs-unsplash.jpg"
+      img: img4
     },
   ]
