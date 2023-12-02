@@ -1,18 +1,30 @@
 "use client";
 import Spinner from '@/components/Loading/Spinner';
+import {
+  ActionType,
+  ProTable,
+  ProColumns,
+  RequestData,
+  TableDropdown,
+  ProDescriptions,
+} from '@ant-design/pro-components';
 import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import UMTable from '@/components/shared/UMTable';
 import { useCancelBookingMutation, useGetAllBookingForUserQuery} from '@/redux/api/bookingApi';
 import { useDebounced } from '@/redux/hooks';
+import { FiUsers } from 'react-icons/fi';
 import dayjs from "dayjs";
 import { DeleteOutlined, ReloadOutlined, SearchOutlined } from '@ant-design/icons';
 import { Button, Input, message } from 'antd';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import Link from 'next/link';
+import { IBooking } from '@/types';
+import { handleErrorResponse } from '@/utils/handleErrorResponse';
 
 function MyBooking() {
     const query: Record<string, any> = {};
+    const actionRef = useRef<ActionType>();
 
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
@@ -59,9 +71,13 @@ function MyBooking() {
       }
      
 
-      const columns = [
+      const columns: ProColumns[] = [
         {
           title: "Event Name",
+          dataIndex: "title",
+          sorter: false,
+          align: 'center',
+          ellipsis: true,
           render: function (data: any) {
             return <>{data?.Event?.title}</>;
           },
@@ -114,7 +130,7 @@ function MyBooking() {
           dataIndex: "createdAt",
           responsive: ['lg'],
           render: function (data: any) {
-            return data && dayjs(data).format("MMM D, YYYY hh:mm A");
+            return data && dayjs(data).format("MMM D, YYYY");
           },
           sorter: true,
         },
@@ -194,16 +210,34 @@ function MyBooking() {
                     </button>
                 )}
             </ActionBar>
-            <UMTable
-        loading={isLoading}
+            <ProTable
         columns={columns}
-        dataSource={bookingData}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'Users',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={bookingData}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
       />
     </div>
   )

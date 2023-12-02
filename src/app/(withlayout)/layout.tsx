@@ -1,10 +1,12 @@
 "use client"
+import BasePageContainer from '@/components/layout/PageContainer';
 import Contents from '@/components/shared/Contents';
 import Footer from '@/components/shared/Footer';
 import Headers from '@/components/shared/Headers';
 import Sidebar from '@/components/shared/Sidebar';
+import { antdConfig } from '@/constants/antConfig';
 import { isLoggedIn } from '@/services/auth.service';
-import { Layout } from 'antd';
+import { ConfigProvider, Layout } from 'antd';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 
@@ -21,6 +23,8 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
         setIsLoading(true);
       }, [router, isLoading, userLoggedIn]);
   return (
+    <ConfigProvider {...antdConfig}>
+      {/* <BasePageContainer> */}
     <Layout>
       <Headers />
       <Layout hasSider>
@@ -28,6 +32,8 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
       <Contents>{children}</Contents>
       </Layout>
     </Layout>
+      {/* </BasePageContainer> */}
+    </ConfigProvider>
   )
 }
 

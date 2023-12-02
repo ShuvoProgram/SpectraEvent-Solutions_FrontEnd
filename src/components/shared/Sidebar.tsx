@@ -29,7 +29,7 @@ const Sidebar = () => {
       <p
         style={{
           color: '#F76F01',
-          margin: '25px 0',
+          margin: '15px 0',
           textTransform: 'uppercase',
           fontSize: '1rem',
         }}

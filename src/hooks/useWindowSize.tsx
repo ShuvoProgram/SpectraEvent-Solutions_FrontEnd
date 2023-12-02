@@ -2,22 +2,17 @@
 
 import { useState, useEffect } from "react";
 
-export const useWindowSize = () => {
-  const [windowSize, setWindowSize] = useState(0);
-
-  const updateWindowSize = () => {
-    const size = window.innerWidth;
-    setWindowSize(size);
-  }
+const useBreakpoint = (breakPoint = 768) => {
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
-    window.addEventListener('resize', updateWindowSize);
-    updateWindowSize();
-    
-    return () => {
-      window.removeEventListener('resize', updateWindowSize);
-    }
+    const handleWindowResize = () => setWidth(window.innerWidth);
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => window.removeEventListener('resize', handleWindowResize);
   }, []);
 
-  return windowSize;
+  return width < breakPoint;
 };
+
+export default useBreakpoint;
