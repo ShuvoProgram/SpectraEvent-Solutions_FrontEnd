@@ -45,13 +45,12 @@ function Category() {
         <SectionTitle title='Event Category' />
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-4">
           {data?.Category?.map((category: any) => (
-            <div key={category.id}>
-              <CategoryCard
-                href={`/category/${category.id}`}
-                categoryImg={category.image}
-                name={category.name}
-              />
-            </div>
+            <CategoryCard
+            href={`/category/${category.id}`}
+            categoryImg={category.image}
+            name={category.name}
+            key={category.id}
+          />
           ))}
         </div>
         <div className='w-full flex items-center justify-center mt-4'>

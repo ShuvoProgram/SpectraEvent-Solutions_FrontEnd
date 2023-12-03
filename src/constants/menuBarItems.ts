@@ -1,15 +1,8 @@
-import { useRouter } from "next/navigation";
 import { USER_ROLE } from "./role";
-import { removeUserInfo } from "@/services/auth.service";
-import { authKey } from "./storageKey";
 
 
 export const MenuBarItems = (role: string) => {
-  const router = useRouter();
-  const logOut = () => {
-      removeUserInfo(authKey);
-      router.push("/login");
-  };
+
     const DefaultLinkItems = [
         {
           name: 'Home',
@@ -65,8 +58,12 @@ export const MenuBarItems = (role: string) => {
     ]
 
     if(role === USER_ROLE.CUSTOMER) {
-        return UserLinksItems
+        return UserLinksItems;
+    } else if (role === USER_ROLE.ADMIN) {
+      return UserLinksItems;
+    } else if(role === USER_ROLE.SUPER_ADMIN) {
+      return UserLinksItems;
     } else {
-        return DefaultLinkItems
+        return DefaultLinkItems;
     }
 }

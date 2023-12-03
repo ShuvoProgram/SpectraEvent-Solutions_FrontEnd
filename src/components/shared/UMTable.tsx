@@ -6,6 +6,7 @@ type UMTableProps = {
   loading?: boolean;
   columns: any;
   dataSource: any;
+  fixed?: any,
   pageSize?: number;
   totalPages?: number;
   showSizeChanger?: boolean;
@@ -18,6 +19,7 @@ const UMTable = ({
   loading = false,
   columns,
   dataSource,
+  fixed,
   pageSize,
   totalPages,
   showSizeChanger = true,

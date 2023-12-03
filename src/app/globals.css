@@ -404,8 +404,8 @@ a:hover {
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-  width: 10px;
-  width: 10px;
+  width: 5px;
+  width: 5px;
 }
 
 *::-webkit-scrollbar-track {
@@ -422,7 +422,7 @@ a:hover {
 }
 
 *::-webkit-scrollbar-thumb {
-  border-radius: 20px;
+  border-radius: 10px;
   background-color: #FF5B22;
 }
 
@@ -466,7 +466,7 @@ a:hover {
   text-shadow: 0 2px 2px rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 30%;
-  left: 10%;
+  /* left: 10%; */
   z-index: 2;
   display: inline-block;
   padding: 15px 20px;

@@ -8,7 +8,6 @@ import { useGetAllFavoriteQuery } from '@/redux/api/favorite';
 import dynamic from 'next/dynamic';
 import { MenuFoldOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
-import { menuBarItems } from '@/constants/menuBarItems';
 const AvatarProfile = dynamic(() => import('./Avater'), { ssr: false });
 
 

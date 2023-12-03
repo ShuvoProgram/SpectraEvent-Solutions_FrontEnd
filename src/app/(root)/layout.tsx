@@ -8,7 +8,6 @@ function RootLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <Layout>
-      {/* <Headers /> */}
       <Navber/>
       {children}
       <Footer />

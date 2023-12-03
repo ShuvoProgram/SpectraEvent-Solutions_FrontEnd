@@ -10,7 +10,7 @@ interface ICategory {
 
 function CategoryCard({href, categoryImg, name}: ICategory) {
     return (
-        <div className="item h-[250px] w-[350px]">
+        <div className="item h-[250px] w-[320px] md:w-[350px]">
         <Link href={href}>
           <div style={{
             height: "100%",

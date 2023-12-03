@@ -2,7 +2,6 @@
 import React from 'react';
 import { Avatar, Button, Dropdown, Menu, Popover } from 'antd';
 import type { MenuProps } from 'antd';
-// import { MenuBarItem } from '@/constants/menuBarItem';
 import {
     UserOutlined,
     ProfileOutlined,
@@ -53,7 +52,7 @@ export default function AvatarProfile({ role }: any) {
 
     return (
         <Dropdown overlay={menu} placement="bottom" className='cursor-pointer'>
-            <Avatar size="large" icon={<UserOutlined />} />
+            <Avatar size={30} icon={<UserOutlined />} />
         </Dropdown>
     );
 }

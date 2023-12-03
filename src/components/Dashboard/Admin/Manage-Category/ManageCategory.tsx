@@ -4,19 +4,35 @@ import BreadCrumb from '@/components/shared/BreadCrumb';
 import UMTable from '@/components/shared/UMTable';
 import { useDeleteCategoryMutation, useGetAllCategoryQuery } from '@/redux/api/categoryApi';
 import { useDebounced } from '@/redux/hooks';
-import {
+import Icon, {
   DeleteOutlined,
   EditOutlined,
   SearchOutlined,
   ReloadOutlined,
 } from "@ant-design/icons";
-import { Avatar, Button, Input, message } from 'antd';
+import {
+  ActionType,
+  ProTable,
+  ProColumns,
+  RequestData,
+  TableDropdown,
+  ProDescriptions,
+} from '@ant-design/pro-components';
+import { CiCircleMore } from 'react-icons/ci';
+import { Avatar, Button, Input, Space, message } from 'antd';
 import dayjs from "dayjs";
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { FiUsers } from 'react-icons/fi';
+
+enum ActionKey {
+  DELETE = 'delete',
+  UPDATE = 'update'
+}
 
 function ManageCategory() {
   const query: Record<string, any> = {};
+  const actionRef = useRef<ActionType>();
 
   const [page, setPage] = useState<number>(1);
   const [size, setSize] = useState<number>(10);
@@ -56,7 +72,7 @@ const categories = data?.Category;
 }
 };
 
-const columns = [
+const columns: ProColumns[] = [
   {
       title: "Category Name",
       dataIndex: "name",
@@ -78,32 +94,44 @@ const columns = [
   },
   {
       title: "Actions",
-      render: function (data: any) {
-          return (
-              <div className="flex">
-                  <Link href={`/admin/manage-category/update/${data.id}`}>
-                  <Button
-                  style={{
-                    margin: "0px 5px",
-                   
-                  }}
-                  onClick={() => console.log(`🔥`)}
-                
-
-                >
-                  <EditOutlined />
-                </Button>
-                  </Link>
-                  <Button
+      align: 'center',
+      key: 'option',
+      fixed: 'right',
+      render: (data: any) => [
+        <TableDropdown
+        key="actionGroup"
+        // onSelect={() => handleDelete(data?.id)}
+        menus={[
+          {
+            key: ActionKey.DELETE,
+            name: (
+              <Space>
+              <Button
                 onClick={() => handleDelete(data?.id)}
-                type="primary"
-                danger
+               
               >
                 <DeleteOutlined />
+                Delete
               </Button>
-              </div>
-          );
-      },
+            </Space>
+            )
+          },
+          {
+            key: ActionKey.UPDATE,
+            name: (
+              <Space>
+             <Link href={`/admin/manage-category/update/${data.id}`}>
+                 <EditOutlined />
+                 Update
+              </Link>
+            </Space>
+            )
+          }
+        ]}
+        >
+           <Icon component={CiCircleMore} className="text-primary text-xl" />
+        </TableDropdown>
+      ],
   },
 ];
 
@@ -164,17 +192,35 @@ setSearchTerm("");
             }}>Create</Button>
                 </Link>
             </ActionBar>
-            <UMTable
-                loading={isLoading}
-                columns={columns}
-                dataSource={categories}
-                pageSize={size}
-                totalPages={meta?.total}
-                showSizeChanger={true}
-                onPaginationChange={onPaginationChange}
-                onTableChange={onTableChange}
-                showPagination={true}
-            />
+            <ProTable
+        columns={columns}
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'Users',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={categories}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
+      />
     </div>
   )
 }

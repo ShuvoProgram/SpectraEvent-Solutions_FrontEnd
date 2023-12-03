@@ -4,11 +4,11 @@ import { MenuFoldOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { MenuBarItems } from '@/constants/menuBarItems';
 import { getUserInfo, isLoggedIn } from '@/services/auth.service';
 import Favorite from '../Favorite';
 import { useGetAllFavoriteQuery } from '@/redux/api/favorite';
 import dynamic from 'next/dynamic';
+import { MenuBarItems } from '@/constants/menuBarItems';
 
 const AvatarProfile = dynamic(() => import('../Avater'), { ssr: false });
 // Other imports...
@@ -79,13 +79,13 @@ function Navbar() {
           {renderDesktopNavLinks()}
 
           
-            <div className="flex xs:flex items-center gap-4 md:gap-10 lg:gap-10">
+            <div className="flex xs:flex items-center gap-2 md:gap-10 lg:gap-10">
             <Link href={`/user/favorite`}>
                 <Favorite count={data?.length}/>
                 </Link>
                 {
                   userLoggedIn 
-                  === true ? (<AvatarProfile/>) : ''
+                  === true ? (<AvatarProfile role={role}/>) : ''
                 }
           {/* Button to trigger drawer on mobile */}
           <div className='md:hidden'>

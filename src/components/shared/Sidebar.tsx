@@ -1,30 +1,23 @@
-"use client"
 import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
-import { DashboardOutlined } from '@ant-design/icons';
+import { Drawer, Button, Menu } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
 import { sidebarItems } from '@/constants/sidebarItems';
 import { getUserInfo } from '@/services/auth.service';
-import { IHasSider } from '@/types';
-
-const { Sider } = Layout;
 
 const Sidebar = () => {
-  const [collapsed, setCollapsed] = useState(false);
+  const [visible, setVisible] = useState(false);
+
   const { role } = getUserInfo() as any;
 
-  const renderLogo = () => {
-    if (collapsed) {
-      return (
-        <DashboardOutlined
-          style={{
-            fontWeight: 'bold',
-            background: '#ffff',
-            color: 'orange',
-          }}
-        />
-      );
-    }
+  const showDrawer = () => {
+    setVisible(true);
+  };
 
+  const onClose = () => {
+    setVisible(false);
+  };
+
+  const renderLogo = () => {
     return (
       <p
         style={{
@@ -40,44 +33,40 @@ const Sidebar = () => {
   };
 
   return (
-    <Sider
-      style={{
-        background: '#ffff',
-        overflow: 'auto',
-        height: '100vh',
-        position: 'sticky',
-        left: 0,
-        top: 0,
-        bottom: 0,
-      }}
-      // trigger={null}
-      width={280}
-      collapsible
-      collapsed={collapsed}
-      onCollapse={(value) => setCollapsed(value)}
-    >
-      <div className="demo-logo-vertical" />
-      <div
+    <>
+      <Button
+        shape="circle"
+        icon={<MenuOutlined />}
+        onClick={showDrawer}
         style={{
-          color: 'white',
-          fontSize: '1.5rem',
-          textAlign: 'center',
-          fontWeight: 'bold',
-          marginTop: '1rem',
-        }}
-      >
-        {renderLogo()}
-      </div>
-      <Menu
-        defaultSelectedKeys={['1']}
-        mode="inline"
-        items={sidebarItems(role)}
-        style={{
-          background: '#ffff',
-          color: 'GrayText',
+          display: 'block',
+          position: 'fixed',
+          top: '80px',
+          left: '20px',
+          zIndex: 999,
         }}
       />
-    </Sider>
+
+      <Drawer
+        title={renderLogo()}
+        placement="left"
+        closable={false}
+        onClose={onClose}
+        visible={visible}
+        width={280}
+        bodyStyle={{ padding: 0 }}
+      >
+        <Menu
+          defaultSelectedKeys={['1']}
+          mode="inline"
+          items={sidebarItems(role)}
+          style={{
+            background: '#ffff',
+            color: 'GrayText',
+          }}
+        />
+      </Drawer>
+    </>
   );
 };
 
