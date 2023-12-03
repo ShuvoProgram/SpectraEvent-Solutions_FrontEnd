@@ -625,6 +625,7 @@ a:hover {
   display: none;
 }
 
+
 @media (max-width: 800px) {
   .menu {
     flex-direction: column;
@@ -706,3 +707,62 @@ a:hover {
       padding-bottom: 40px !important;
   }
 }
+
+
+/* Styles for drawer menu */
+.drawer-menu {
+  margin: 10px 0px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.drawer-menu li {
+  margin-top: 40px;
+}
+
+.drawer-menu li a {
+  padding: 10px;
+  color: #FF5B22;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: 500;
+}
+
+/* Styles for drawer toggle button */
+.drawer-toggle {
+  display: none; /* Hide by default */
+}
+
+/* Media query for showing drawer toggle button on small screens */
+@media screen and (max-width: 767px) {
+  .drawer-toggle {
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  }
+}
+
+/* Styles for custom drawer */
+
+.custom-drawer {
+  backdrop-filter: blur(16px) saturate(180%) !important;
+    -webkit-backdrop-filter: blur(16px) saturate(180%) !important;
+    background-color: rgba(255, 255, 255, 0.75) !important;
+    border-radius: 12px;
+      border: 1px solid rgba(209, 213, 219, 0.3);
+      text-transform: uppercase;
+      transition: all 0.5s ease-in-out;
+  .ant-drawer-body {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+      
+  }
+}
+
+/* Additional styles for the drawer content or customization */
