@@ -732,6 +732,7 @@ a:hover {
 /* Styles for drawer toggle button */
 .drawer-toggle {
   display: none; /* Hide by default */
+  padding: 0 !important;
 }
 
 /* Media query for showing drawer toggle button on small screens */
@@ -739,8 +740,8 @@ a:hover {
   .drawer-toggle {
     display: block;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    /* top: 10px; */
+    /* right: 10px; */
     z-index: 999;
   }
 }

@@ -4,41 +4,28 @@ import { MenuFoldOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { menuBarItems } from '@/constants/menuBarItems';
-import { getUserInfo } from '@/services/auth.service';
+import { MenuBarItems } from '@/constants/menuBarItems';
+import { getUserInfo, isLoggedIn } from '@/services/auth.service';
+import Favorite from '../Favorite';
+import { useGetAllFavoriteQuery } from '@/redux/api/favorite';
+import dynamic from 'next/dynamic';
+
+const AvatarProfile = dynamic(() => import('../Avater'), { ssr: false });
 // Other imports...
 
 // Existing code...
 
-const LinkItems = [
-    {
-      name: 'Home',
-      path: '/',
-    },
-    {
-      name: 'About',
-      path: '/about',
-    },
-    {
-      name: 'Events',
-      path: '/events',
-    },
-    {
-      name: 'Blog',
-      path: '/blog',
-    },
-    {
-      name: 'Contact',
-      path: '/contact',
-    },
-  ]; 
-
-function Headers() {
+function Navbar() {
   // Existing code...
   
 
   const [drawerVisible, setDrawerVisible] = useState(false);
+  const userLoggedIn = isLoggedIn();
   const { role } = getUserInfo() as any;
+
+  const {data, refetch, isLoading} = useGetAllFavoriteQuery({
+    pollingInterval: 3000,
+  })
 
   const showDrawer = () => {
     setDrawerVisible(true);
@@ -48,8 +35,7 @@ function Headers() {
     setDrawerVisible(false);
   };
 
-  const menu = menuBarItems(role);
-  console.log(menu);
+  const menu = MenuBarItems(role);
 
   const renderNavLinks = () => {
     return menu.map((item, index) => (
@@ -92,18 +78,23 @@ function Headers() {
           {/* Desktop navigation */}
           {renderDesktopNavLinks()}
 
-          <div className="flex md:gap-6 sm:pr-20">
+          
             <div className="flex xs:flex items-center gap-4 md:gap-10 lg:gap-10">
-              {/* ... Other existing code ... */}
-            </div>
-          </div>
-
+            <Link href={`/user/favorite`}>
+                <Favorite count={data?.length}/>
+                </Link>
+                {
+                  userLoggedIn 
+                  === true ? (<AvatarProfile/>) : ''
+                }
           {/* Button to trigger drawer on mobile */}
-          <div className='md:hidden my-auto'>
+          <div className='md:hidden'>
           <Button type='text' onClick={showDrawer} className="drawer-toggle">
             <MenuFoldOutlined className="h-12 w-12" />
           </Button>
           </div>
+            </div>
+
         </div>
       </nav>
 
@@ -123,4 +114,4 @@ function Headers() {
   );
 }
 
-export default Headers;
+export default Navbar;

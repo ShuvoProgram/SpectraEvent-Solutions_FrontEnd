@@ -1,7 +1,15 @@
+import { useRouter } from "next/navigation";
 import { USER_ROLE } from "./role";
+import { removeUserInfo } from "@/services/auth.service";
+import { authKey } from "./storageKey";
 
 
-export const menuBarItems = (role: string) => {
+export const MenuBarItems = (role: string) => {
+  const router = useRouter();
+  const logOut = () => {
+      removeUserInfo(authKey);
+      router.push("/login");
+  };
     const DefaultLinkItems = [
         {
           name: 'Home',
@@ -53,10 +61,6 @@ export const menuBarItems = (role: string) => {
           {
             name: 'Contact',
             path: '/contact',
-          },
-          {
-            name: 'Account Profile',
-            path: `${role}/profile`
           }
     ]
 

@@ -1,8 +1,7 @@
 "use client"
 import BasePageContainer from '@/components/layout/PageContainer';
 import Contents from '@/components/shared/Contents';
-import Footer from '@/components/shared/Footer';
-import Headers from '@/components/shared/Headers';
+import Navbar from '@/components/shared/Navber/Navbar';
 import Sidebar from '@/components/shared/Sidebar';
 import { antdConfig } from '@/constants/antConfig';
 import { isLoggedIn } from '@/services/auth.service';
@@ -26,7 +25,7 @@ function DashboardLayout({ children }: { children: React.ReactNode }) {
     <ConfigProvider {...antdConfig}>
       {/* <BasePageContainer> */}
     <Layout>
-      <Headers />
+      <Navbar/>
       <Layout hasSider>
       <Sidebar />
       <Contents>{children}</Contents>
