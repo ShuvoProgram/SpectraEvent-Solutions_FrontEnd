@@ -1,6 +1,6 @@
 "use client";
-import React, { useState } from 'react'
-import {
+import React, { useRef, useState } from 'react'
+import Icon, {
     DeleteOutlined,
     EditOutlined,
     ReloadOutlined,
@@ -9,16 +9,33 @@ import {
   } from "@ant-design/icons";
   import dayjs from "dayjs";
   import Link from 'next/link';
-  import { Button, Input, message } from 'antd';
+  import { Button, Input, message,  Space } from 'antd';
 import { useDebounced } from '@/redux/hooks';
 import { useDeleteEventMutation, useGetAllEventQuery } from '@/redux/api/eventApi';
 import { IEvent } from '@/types';
+import {
+  ActionType,
+  ProTable,
+  ProColumns,
+  RequestData,
+  TableDropdown,
+  ProDescriptions,
+} from '@ant-design/pro-components';
+import { CiCircleMore } from 'react-icons/ci';
+import { FiUsers } from 'react-icons/fi';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import ActionBar from '@/components/shared/ActionBar';
 import UMTable from '@/components/shared/UMTable';
 
+enum ActionKey {
+  DELETE = 'delete',
+  UPDATE = 'update',
+  READ = 'read'
+}
+
 function ManageEvent() {
     const query: Record<string, any> = {};
+    const actionRef = useRef<ActionType>();
 
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
@@ -58,10 +75,10 @@ function ManageEvent() {
     }
     };
   
-    const columns = [
+    const columns: ProColumns[] = [
       {
         title: "Title",
-        render: function (data: IEvent) {
+        render: function (data: any) {
           return <>{data.title}</>;
         },
       },
@@ -78,7 +95,7 @@ function ManageEvent() {
       },
       {
         title: "Is Booked",
-        render: function (data: IEvent) {
+        render: function (data: any) {
           return (
             <>
             {data.isBooked ? (
@@ -106,31 +123,43 @@ function ManageEvent() {
       },
       {
         title: "Action",
-        render: function (data: any) {
-          return (
-            <>
-              <Link href={`/admin/manage-event/view/${data.id}`}>
-                <Button onClick={() => console.log(`🔥`)}>
-                  <EyeOutlined />
-                </Button>
-              </Link>
-              <Link href={`/admin/manage-event/update/${data.id}`}>
+        align: 'center',
+      key: 'option',
+      fixed: 'right',
+        render: (data: any) => [
+          <TableDropdown
+          key="actionGroup"
+          menus={[
+            {
+              key: ActionKey.DELETE,
+              name: (
+                <Space>
                 <Button
-                  style={{
-                    margin: "0px 5px",
-                  }}
-                  onClick={() => console.log(`🔥`)}
-                  
+                  onClick={() => handleDelete(data?.id)}
+                 
                 >
-                  <EditOutlined />
+                  <DeleteOutlined />
+                  Delete
                 </Button>
-              </Link>
-              <Button onClick={() => handleDelete(data?.id)} type="primary" danger>
-                <DeleteOutlined />
-              </Button>
-            </>
-          );
-        },
+              </Space>
+              )
+            },
+            {
+              key: ActionKey.UPDATE,
+              name: (
+                <Space>
+               <Link href={`/admin/manage-category/update/${data.id}`}>
+                   <EditOutlined />
+                   Update
+                </Link>
+              </Space>
+              )
+            }
+          ]}
+          >
+             <Icon component={CiCircleMore} className="text-primary text-xl" />
+          </TableDropdown>
+        ],
       },
     ];
     const onPaginationChange = (page: number, pageSize: number) => {
@@ -168,7 +197,7 @@ function ManageEvent() {
             },
           ]}
         />
-        <ActionBar title="Event List">
+        <ActionBar>
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search ......"
@@ -193,16 +222,34 @@ function ManageEvent() {
                 
             </ActionBar>
 
-      <UMTable
-        loading={isLoading}
+            <ProTable
         columns={columns}
-        dataSource={events}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'Event List',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={events}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
       />
     </div>
   )

@@ -1,10 +1,10 @@
 "use client";
 import { useDeleteVanueMutation, useGetAllVanueQuery } from '@/redux/api/vanueApi';
 import { useDebounced } from '@/redux/hooks';
-import { Button, Input, message } from 'antd';
-import React, { useState } from 'react'
+import { Button, Input, Space, message } from 'antd';
+import React, { useRef, useState } from 'react'
 import dayjs from "dayjs";
-import {
+import Icon, {
     DeleteOutlined,
     EditOutlined,
     ReloadOutlined,
@@ -14,9 +14,19 @@ import Link from 'next/link';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import ActionBar from '@/components/shared/ActionBar';
 import UMTable from '@/components/shared/UMTable';
+import { ActionType, ProColumns, ProTable, TableDropdown } from '@ant-design/pro-components';
+import { CiCircleMore } from 'react-icons/ci';
+import { FiUsers } from 'react-icons/fi';
+
+enum ActionKey {
+  DELETE = 'delete',
+  UPDATE = 'update',
+}
+
 
 function ManageVanue() {
     const query: Record<string, any> = {};
+    const actionRef = useRef<ActionType>();
 
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
@@ -58,7 +68,8 @@ function ManageVanue() {
         message.error(err.message)
       }
     }
-    const columns = [
+
+    const columns: ProColumns[] = [
       {
         title: "Vanue Title",
         dataIndex: "title",
@@ -73,31 +84,44 @@ function ManageVanue() {
       },
       {
         title: "Action",
-        render: function (data: any) {
-          return (
-            <>
-              <Link href={`/admin/manage-vanue/update/${data?.id}`}>
+        align: 'center',
+          key: 'option',
+          fixed: 'right',
+        render: (data: any) => [
+          <TableDropdown
+          key="actionGroup"
+          // onSelect={() => handleDelete(data?.id)}
+          menus={[
+            {
+              key: ActionKey.DELETE,
+              name: (
+                <Space>
                 <Button
-                  style={{
-                    margin: "0px 5px",
-                   
-                  }}
-                  onClick={() => console.log(`🔥`)}
-                
+                  onClick={() => handleDelete(data?.id)}
+                 
                 >
-                  <EditOutlined />
+                  <DeleteOutlined />
+                  Delete
                 </Button>
-              </Link>
-              <Button
-                onClick={() => handleDelete(data?.id)}
-                type="primary"
-                danger
-              >
-                <DeleteOutlined />
-              </Button>
-            </>
-          );
-        },
+              </Space>
+              )
+            },
+            {
+              key: ActionKey.UPDATE,
+              name: (
+                <Space>
+               <Link href={`/admin/manage-category/update/${data.id}`}>
+                   <EditOutlined />
+                   Update
+                </Link>
+              </Space>
+              )
+            }
+          ]}
+          >
+             <Icon component={CiCircleMore} className="text-primary text-xl" />
+          </TableDropdown>
+        ],
       },
     ];
   
@@ -159,16 +183,34 @@ function ManageVanue() {
                 
             </ActionBar>
 
-      <UMTable
-        loading={isLoading}
+            <ProTable
         columns={columns}
-        dataSource={Vanue}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'category List',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={Vanue}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
       />
     </div>
   )

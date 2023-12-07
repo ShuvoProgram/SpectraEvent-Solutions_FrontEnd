@@ -3,23 +3,44 @@ import Spinner from '@/components/Loading/Spinner';
 import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import UMTable from '@/components/shared/UMTable';
-import { useGetAllFeedbackQuery, useUpdateFeedbackMutation } from '@/redux/api/feedbackApi';
+import { useDeleteFeedbackMutation, useGetAllFeedbackQuery, useUpdateFeedbackMutation } from '@/redux/api/feedbackApi';
 import { isConfirm } from '@/types';
-import { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
-import { Button, message } from 'antd';
+import Icon, { DeleteOutlined, EditOutlined, EyeOutlined } from '@ant-design/icons';
+import { ActionType, ProColumns, ProTable, TableDropdown } from '@ant-design/pro-components';
+import { Button, Space, message } from 'antd';
 import dayjs from "dayjs";
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react';
+import { CiCircleMore } from 'react-icons/ci';
+import { FiUsers } from 'react-icons/fi';
+
+enum ActionKey {
+  DELETE = 'delete',
+  UPDATE = 'update',
+}
 
 function ManageFeedback() {
-    const [id, setId] = useState<string>()
+    const [id, setId] = useState<string>();
+    const actionRef = useRef<ActionType>();
+    const [deleteFeedback] = useDeleteFeedbackMutation();
+    
     const {data, isLoading} = useGetAllFeedbackQuery({});
   
     if(isLoading) {
         return <Spinner/>
     };
 
-    const columns = [
+    const handleDelete = async (id: string) => {
+      message.loading("Deleting.....");
+      try {
+        await deleteFeedback(id);
+        message.success("Feedback Deleted successfully");
+    } catch (err: any) {
+        message.error(err.message);
+    }
+    };
+
+    const columns: ProColumns[] = [
         {
           title: "Name",
           dataIndex: "name",
@@ -52,24 +73,44 @@ function ManageFeedback() {
         },
         {
           title: "Action",
-          render: function (data: any) {
-            return (
-              <>
-                 <Link href={`/admin/manage-feedback/update/${data.id}`}>
-                <Button onClick={() => console.log(`🔥`)} style={{margin: "0px 10px"}}>
-                <EditOutlined />
-                </Button>
-              </Link>
-                <Button
-                //   onClick={() => handleDelete(data?.id)}
-                  type="primary"
-                  danger
-                >
-                  <DeleteOutlined />
-                </Button>
-              </>
-            );
-          },
+          align: 'center',
+          key: 'option',
+          fixed: 'right',
+          render: (data: any) => [
+            <TableDropdown
+            key="actionGroup"
+            // onSelect={() => handleDelete(data?.id)}
+            menus={[
+              {
+                key: ActionKey.DELETE,
+                name: (
+                  <Space>
+                  <Button
+                    onClick={() => handleDelete(data?.id)}
+                   
+                  >
+                    <DeleteOutlined />
+                    Delete
+                  </Button>
+                </Space>
+                )
+              },
+              {
+                key: ActionKey.UPDATE,
+                name: (
+                  <Space>
+                 <Link href={`/admin/manage-category/update/${data.id}`}>
+                     <EditOutlined />
+                     Update
+                  </Link>
+                </Space>
+                )
+              }
+            ]}
+            >
+               <Icon component={CiCircleMore} className="text-primary text-xl" />
+            </TableDropdown>
+          ],
         },
       ];
 
@@ -94,17 +135,34 @@ function ManageFeedback() {
         />
          <ActionBar title="User Feedback">
             </ActionBar>
-
-            <UMTable
-        loading={isLoading}
+            <ProTable
         columns={columns}
-        dataSource={data}
-        // pageSize={size}
-        // totalPages={meta?.total}
-        showSizeChanger={true}
-        // onPaginationChange={onPaginationChange}
-        // onTableChange={onTableChange}
-        // showPagination={true}
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'User Feedback',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={data}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
       />
     </div>
   )

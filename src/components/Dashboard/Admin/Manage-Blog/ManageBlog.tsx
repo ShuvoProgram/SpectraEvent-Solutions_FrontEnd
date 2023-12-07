@@ -1,21 +1,23 @@
 "use client";
 import { useDeleteBlogMutation, useGetAllBlogQuery } from '@/redux/api/blogApi';
 import { useDebounced } from '@/redux/hooks';
-import { Button, Input, message } from 'antd';
+import { Button, Input, Space, message } from 'antd';
 import Link from 'next/link';
 import dayjs from "dayjs";
-import React, { useState } from 'react';
-import {
+import React, { useRef, useState } from 'react';
+import Icon, {
     DeleteOutlined,
     EditOutlined,
     SearchOutlined,
     ReloadOutlined,
     EyeOutlined,
 } from "@ant-design/icons";
-import UMTable from '@/components/shared/UMTable';
+import { CiCircleMore } from 'react-icons/ci';
 import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import { useAdminQuery } from '@/redux/api/adminApi';
+import { ActionType, ProColumns, ProTable, TableDropdown } from '@ant-design/pro-components';
+import { FiUsers } from 'react-icons/fi';
 
 function getFullName(adminData: any) {
     const conditionFirstName = adminData?.firstName || '';
@@ -24,8 +26,14 @@ function getFullName(adminData: any) {
     return fullName !== '' ? fullName : 'admin';
 }
 
+enum ActionKey {
+    DELETE = 'delete',
+    UPDATE = 'update'
+  }
+
 function ManageBlog() {
     const query: Record<string, any> = {};
+    const actionRef = useRef<ActionType>();
     const [adminId, setAdminId] = useState<string>("")
 
     const [page, setPage] = useState<number>(1);
@@ -55,7 +63,7 @@ function ManageBlog() {
     // @ts-ignore
     const meta = data?.blog?.meta;
 
-    const onDelete = async (id: string) => {
+    const handleDelete = async (id: string) => {
         message.loading("Deleting.....");
         try {
             
@@ -68,7 +76,7 @@ function ManageBlog() {
         }
     }
 
-    const columns = [
+    const columns: ProColumns[] = [
         {
             title: "Title",
             dataIndex: "title",
@@ -80,14 +88,14 @@ function ManageBlog() {
         {
             title: "Author",
             // dataIndex: "user",
-            render: function (data: Record<string, string>) {
+            render: function (data: any) {
                 const fullName = getFullName(adminData);
                 return <>{fullName}</>;
             },
         },
         {
             title: "Author Email",
-            render: function (data: Record<string, string>) {
+            render: function (data: any) {
                 setAdminId(data?.adminId)
                 return <>{adminData?.email}</>;
             },
@@ -102,27 +110,44 @@ function ManageBlog() {
         },
         {
             title: "Actions",
-            render: function (data: any) {
-                return (
-                    <>
-                        <Link href={`/blog/details/${data.id}`}>
-                        <Button onClick={() => console.log(`🔥`)}>
-                  <EyeOutlined />
-                </Button>
-                        </Link>
-                        <Link href={`/admin/manage-blog/update/${data.id}`}>
-                        <Button onClick={() => console.log(`🔥`)}>
-                <EditOutlined />
-              </Button>
-                        </Link>
-                        <Button 
-                        onClick={() => onDelete(data?.id)}
-                         type="primary" danger>
-                <DeleteOutlined />
-              </Button>
-                    </>
-                );
-            },
+            align: 'center',
+            key: 'option',
+            fixed: 'right',
+            render: (data: any) => [
+                <TableDropdown
+                key="actionGroup"
+                // onSelect={() => handleDelete(data?.id)}
+                menus={[
+                  {
+                    key: ActionKey.DELETE,
+                    name: (
+                      <Space>
+                      <Button
+                        onClick={() => handleDelete(data?.id)}
+                       
+                      >
+                        <DeleteOutlined />
+                        Delete
+                      </Button>
+                    </Space>
+                    )
+                  },
+                  {
+                    key: ActionKey.UPDATE,
+                    name: (
+                      <Space>
+                     <Link href={`/admin/manage-category/update/${data.id}`}>
+                         <EditOutlined />
+                         Update
+                      </Link>
+                    </Space>
+                    )
+                  }
+                ]}
+                >
+                   <Icon component={CiCircleMore} className="text-primary text-xl" />
+                </TableDropdown>
+              ],
         },
     ];
     const onPaginationChange = (page: number, pageSize: number) => {
@@ -159,7 +184,7 @@ function ManageBlog() {
                     },
                 ]}
             />
-        <ActionBar title="Blog List">
+        <ActionBar>
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search ......"
@@ -183,17 +208,35 @@ function ManageBlog() {
           </Link>
                 
             </ActionBar>
-        <UMTable
-        loading={isLoading}
+            <ProTable
         columns={columns}
-        dataSource={blog}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
-        />
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'Blog List',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={blog}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
+      />
     </div>
   )
 }

@@ -10,4 +10,3 @@ export const getMorningOrEveningTime = (): string => {
       return 'Good Evening';
     }
   }
-  

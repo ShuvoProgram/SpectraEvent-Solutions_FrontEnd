@@ -40,6 +40,11 @@ export const sidebarItems = (role: string) => {
       icon: <UserOutlined />
     },
     {
+      label: <Link href={`/${role}/profile`}>Profile</Link>,
+      icon: <CommentOutlined />,
+      key: `/profile`,
+    },
+    {
       label: <Link href={`/${role}/manage-booking`}>Customer Booking</Link>,
       icon: <TableOutlined />,
       key: `/manage-booking`,

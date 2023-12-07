@@ -1,7 +1,6 @@
 "use client";
 import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
-import UMTable from '@/components/shared/UMTable';
 import { useDeleteCategoryMutation, useGetAllCategoryQuery } from '@/redux/api/categoryApi';
 import { useDebounced } from '@/redux/hooks';
 import Icon, {
@@ -169,7 +168,7 @@ setSearchTerm("");
             },
           ]}
         />
-         <ActionBar title="Event Category List">
+         <ActionBar>
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search Category ......"
@@ -196,7 +195,7 @@ setSearchTerm("");
         columns={columns}
         cardBordered={false}
         cardProps={{
-          subTitle: 'Users',
+          subTitle: 'Event Category List',
           tooltip: {
             className: 'opacity-60',
             title: 'Mocked data',

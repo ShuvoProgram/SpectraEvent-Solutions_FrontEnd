@@ -1,9 +1,9 @@
 "use client";
 import { useDeleteCustomerMutation, useGetAllCustomerQuery } from '@/redux/api/userApi';
 import { useDebounced } from '@/redux/hooks';
-import { Button, Input, message } from 'antd';
+import { Button, Input, message, Space } from 'antd';
 import Link from 'next/link';
-import {
+import Icon, {
     DeleteOutlined,
     EditOutlined,
     SearchOutlined,
@@ -11,14 +11,24 @@ import {
     EyeOutlined,
 } from "@ant-design/icons";
 import dayjs from "dayjs";
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { FiUsers } from 'react-icons/fi';
 import ActionBar from '@/components/shared/ActionBar';
-import UMTable from '@/components/shared/UMTable';
+import { CiCircleMore } from 'react-icons/ci';
 import BreadCrumb from '@/components/shared/BreadCrumb';
 import { getUserInfo } from '@/services/auth.service';
+import { ActionType, ProColumns, ProTable,  TableDropdown, } from '@ant-design/pro-components';
+
+enum ActionKey {
+    DELETE = 'delete',
+    UPDATE = 'update',
+    READ = 'read'
+  }
 
 function MangeCustomer() {
     const query: Record<string, any> = {};
+    const actionRef = useRef<ActionType>();
+    
     const { role } = getUserInfo() as any;
     const [page, setPage] = useState<number>(1);
     const [size, setSize] = useState<number>(10);
@@ -55,7 +65,7 @@ function MangeCustomer() {
         }
     };
 
-    const columns = [
+    const columns: ProColumns[] = [
         {
             title: "Name",
             dataIndex: "firstName",
@@ -86,32 +96,55 @@ function MangeCustomer() {
         },
         {
             title: "Actions",
-            render: function (data: any) {
-                return (
-                    <>
-                        <Link href={`/admin/manage-customer/customer-details/${data.id}`}>
-                        <Button onClick={() => console.log(`🔥`)}>
-                  <EyeOutlined />
-                </Button>
-                        </Link>
-                        <Link href={`/admin/manage-customer/update/${data.id}`}>
-                        <Button
-                  onClick={() => console.log(`🔥`)}
-                >
-                  <EditOutlined />
-                </Button>
-                        </Link>
-                        <Button
-                onClick={() => deleteHandler(data?.id)}
-                type="primary"
-                danger
-              >
-                <DeleteOutlined />
-              </Button>
+            align: 'center',
+            key: 'option',
+            fixed: 'right',
+            render: (data: any) => [
+                <TableDropdown
+                key="actionGroup"
+                // onSelect={() => handleDelete(data?.id)}
+                menus={[
+                  {
+                    key: ActionKey.DELETE,
+                    name: (
+                      <Space>
+                      <Button
+                        onClick={() => deleteHandler(data?.id)}
                        
-                    </>
-                );
-            },
+                      >
+                        <DeleteOutlined />
+                        Delete
+                      </Button>
+                    </Space>
+                    )
+                  },
+                  {
+                    key: ActionKey.UPDATE,
+                    name: (
+                      <Space>
+                     <Link href={`/admin/manage-customer/update/${data.id}`}>
+                         <EditOutlined />
+                         Update
+                      </Link>
+                    </Space>
+                    )
+                  },
+                  {
+                    key: ActionKey.READ,
+                    name: (
+                      <Space>
+                     <Link href={`/admin/manage-customer/customer-details/${data.id}`}>
+                         <EyeOutlined />
+                         View
+                      </Link>
+                    </Space>
+                    )
+                  }
+                ]}
+                >
+                   <Icon component={CiCircleMore} className="text-primary text-xl" />
+                </TableDropdown>
+              ],
         },
     ];
 
@@ -153,7 +186,7 @@ function MangeCustomer() {
                 },
             ]}
             />
-         <ActionBar title="Customer List">
+         <ActionBar>
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search User ......"
@@ -169,24 +202,36 @@ function MangeCustomer() {
                         <ReloadOutlined />
                     </button>
                 )}
-                {/* <Link href="/admin/user/create">
-                <Button type="primary" style={{
-              backgroundColor: "#54B435",
-              margin: "0px 10px"
-            }}>Create</Button>
-                </Link> */}
             </ActionBar>
-            <UMTable
-                loading={isLoading}
-                columns={columns}
-                dataSource={users}
-                pageSize={size}
-                totalPages={meta?.total}
-                showSizeChanger={true}
-                onPaginationChange={onPaginationChange}
-                onTableChange={onTableChange}
-                showPagination={true}
-            />
+            <ProTable
+        columns={columns}
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'Customer List',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={users}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
+      />
     </div>
   )
 }

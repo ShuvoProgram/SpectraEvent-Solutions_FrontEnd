@@ -1,19 +1,27 @@
 "use client"
 import ActionBar from '@/components/shared/ActionBar';
 import BreadCrumb from '@/components/shared/BreadCrumb';
-import UMTable from '@/components/shared/UMTable';
 import { useGetAllBookingQuery } from '@/redux/api/bookingApi';
 import { useDebounced } from '@/redux/hooks';
 import { getUserInfo } from '@/services/auth.service';
-import { EditOutlined, ReloadOutlined, SearchOutlined } from '@ant-design/icons';
-import { Button, Input } from 'antd';
+import Icon, { EditOutlined, ReloadOutlined, SearchOutlined } from '@ant-design/icons';
+import { Button, Input, Space } from 'antd';
+import { CiCircleMore } from 'react-icons/ci';
 import dayjs from "dayjs";
 import Link from 'next/link';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
+import { ActionType, ProColumns, ProTable, TableDropdown } from '@ant-design/pro-components';
+import { FiUsers } from 'react-icons/fi';
+
+enum ActionKey {
+  DELETE = 'delete',
+  UPDATE = 'update'
+}
 
 function ManageBooking() {
   const { role } = getUserInfo() as any;
     const query: Record<string, any> = {};
+    const actionRef = useRef<ActionType>();
 
     const [size, setSize] = useState<number>(10);
     const [page, setPage] = useState<number>(1);
@@ -42,7 +50,7 @@ const bookings = data?.booking?.data;
   const meta = data?.booking?.meta;
 
 
-  const columns = [
+  const columns: ProColumns[] = [
     {
       title: "Event Name",
       render: function (data: any) {
@@ -107,18 +115,30 @@ const bookings = data?.booking?.data;
     },
     {
       title: "Action",
-      render: function (data: any) {
-        return (
-          <div
-          >
-            <Link href={`/${role}/manage-booking/update/${data.id}`}>
-              <Button onClick={() => console.log(`🔥`)}>
-                <EditOutlined />
-              </Button>
-            </Link>
-          </div>
-        );
-      },
+      align: 'center',
+      key: 'option',
+      fixed: 'right',
+      render: (data: any) => [
+        <TableDropdown
+        key="actionGroup"
+        // onSelect={() => handleDelete(data?.id)}
+        menus={[
+          {
+            key: ActionKey.UPDATE,
+            name: (
+              <Space>
+             <Link href={`/${role}/manage-booking/update/${data.id}`}>
+                 <EditOutlined />
+                 Update
+              </Link>
+            </Space>
+            )
+          }
+        ]}
+        >
+           <Icon component={CiCircleMore} className="text-primary text-xl" />
+        </TableDropdown>
+      ],
     },
   ];
 
@@ -155,7 +175,7 @@ const resetFilters = () => {
                     },
                 ]}
             />
-             <ActionBar title="Customer Booking List">
+             <ActionBar>
                 <Input
                     addonBefore={<SearchOutlined style={{ fontSize: '18px', color: "#FFA33C" }} />}
                     placeholder="Search ......"
@@ -172,16 +192,34 @@ const resetFilters = () => {
                     </button>
                 )}
             </ActionBar>
-            <UMTable
-        loading={isLoading}
+            <ProTable
         columns={columns}
-        dataSource={bookings}
-        pageSize={size}
-        totalPages={meta?.total}
-        showSizeChanger={true}
-        onPaginationChange={onPaginationChange}
-        onTableChange={onTableChange}
-        showPagination={true}
+        cardBordered={false}
+        cardProps={{
+          subTitle: 'Customer Booking List',
+          tooltip: {
+            className: 'opacity-60',
+            title: 'Mocked data',
+          },
+          title: <FiUsers className="opacity-60" />,
+        }}
+        bordered={true}
+        showSorterTooltip={false}
+        scroll={{ x: true }}
+        tableLayout={'fixed'}
+        rowSelection={false}
+        pagination={{
+          showQuickJumper: true,
+          pageSize: 10,
+        }}
+        actionRef={actionRef}
+       dataSource={bookings}
+        dateFormatter="string"
+        search={false}
+        rowKey="id"
+        options={{
+          search: false,
+        }}
       />
     </div>
   )
